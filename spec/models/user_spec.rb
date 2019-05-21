@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it 'relationships' do
+  describe 'relationships' do
 		it {should have_many :items}  
   end	
 	

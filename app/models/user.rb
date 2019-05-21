@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+	has_many :items
+
 	validates :email, presence: true
 	validates :password_digest, presence: true
 	validates :role, presence: true
