@@ -5,16 +5,15 @@ RSpec.describe 'As a visitor on the items index page' do
 		before :each do 
 			@merchant_1 = User.create!(email: "123@123.123", password_digest: "password", role: 1, active: true, name: "Bob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
 
-			@merchant_2 = User.create!(eate!(email: "123@123.123", password_digest: "password", role: 1, active: true, name: "Bob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
+			@merchant_2 = User.create!(email: "123@123.123", password_digest: "password", role: 1, active: true, name: "Bob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
 
-			@item_1 = @merchant_1.create!(name: "name_1", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
-			@item_2 = @merchant_1.create!(name: "name_2", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
-			@item_3 = @merchant_1.create!(name: "name_3", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
-			@item_4 = @merchant_2.create!(name: "name_4", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
-			@item_5 = @merchant_2.create!(name: "name_5", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
-			@item_6 = @merchant_2.create!(name: "name_6", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
-
-			@item_7 = @merchant_2.create!(name: "name_6", active: false, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
+			@item_1 = @merchant_1.items.create!(name: "name_1", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
+			@item_2 = @merchant_1.items.create!(name: "name_2", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
+			@item_3 = @merchant_1.items.create!(name: "name_3", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
+			@item_4 = @merchant_2.items.create!(name: "name_4", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
+			@item_5 = @merchant_2.items.create!(name: "name_5", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
+			@item_6 = @merchant_2.items.create!(name: "name_6", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
+			@item_7 = @merchant_2.items.create!(name: "name_6", active: false, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
 
 			@order_item_1a = @item_1.order_item.create!(quantity: 10, price: 5.00, fulfilled: true)
 			@order_item_1b = @item_1.order_item.create!(quantity: 10, price: 5.00, fulfilled: true)
