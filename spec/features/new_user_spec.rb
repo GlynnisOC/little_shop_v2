@@ -12,13 +12,12 @@ RSpec.describe "when I click on the 'register' link in the nav bar" do
     fill_in 'Email Address', with: 'bwilliams@gmail.com'
     fill_in 'Password', with: 'serena123'
     fill_in 'Confirm Password', with: 'serena123'
-    click_link("Register as a User")
+    click_on("Register as a User")
+
+    user = User.find_by(name: "Blair Williams")
+
+    expect(current_path).to eq('/profile')
+
+    expect(page).to have_content("You're logged in!")
   end
 end
-#
-# When I fill in this form completely,
-# And with a unique email address not already in the system
-# My details are saved in the database
-# Then I am logged in as a registered user
-# I am taken to my profile page ("/profile")
-# I see a flash message indicating that I am now registered and logged in

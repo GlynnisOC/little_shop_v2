@@ -16,6 +16,9 @@
     <%= link_to "Cart", root_path %>
     <%= link_to "Login", root_path %>
     <%= link_to "Register", root_path %>
+    <% flash.each do |key, value| %>
+      <%= value %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
