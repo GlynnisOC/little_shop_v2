@@ -1,9 +1,9 @@
 <% @active_items.each do |item| %>
-	<section id="item-<%= item.id %>" class="item-card">
-		<%= item.name %>
-		<%= item.price %>
-		<%= item.image %>
-		<%= item.user.name %>
-		<%= item.inventory %>
-	</section>
+	<ul id="item-<%= item.id %>" class="item-card">
+		<li>Item Name: <%= item.name %></li>
+		<li><img src=<%= item.image %> width=200 /></li>
+		<li>Price: <%= item.price %></li>
+		<li>Merchant Name: <%= item.user.name %></li>
+		<li>Inventory: <%= item.inventory %></li>
+	</ul>
 <% end %>
