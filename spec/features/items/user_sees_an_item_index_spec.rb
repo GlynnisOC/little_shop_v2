@@ -12,7 +12,7 @@ RSpec.describe 'As a user on the items index page' do
 
 		it 'shows the name, thumbnail, merchant, inventory stock, and current price' do
 			visit items_path
-			save_and_open_page
+
 			within "#item-#{@active_item.id}" do
 				expect(page).to have_content(@active_item.name)
 				expect(page).to have_content(@active_item.price)
