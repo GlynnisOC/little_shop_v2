@@ -19,7 +19,6 @@ RSpec.describe "as a user on the site" do
 
       visit root_path
 
-
       click_link("Items")
       expect(current_path).to eq(items_path)
 
