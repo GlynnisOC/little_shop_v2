@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 	has_many :items
 
-	validates :email, presence: true
+	validates :email, presence: true, uniqueness: true
 	validates :password_digest, presence: true
 	validates :role, presence: true
 	validates :active, presence: true
@@ -10,4 +10,9 @@ class User < ApplicationRecord
 	validates :city, presence: true
 	validates :state, presence: true
 	validates :zip, presence: true
+
+  has_secure_password
+
+	enum role: [:default, :merchant, :admin]
+
 end
