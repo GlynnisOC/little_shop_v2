@@ -1,19 +1,5 @@
 require 'rails_helper'
 
-# As any kind of user on the system
-# When I visit an item's show page from the items catalog
-# My URI route is something like "/items/18"
-# I see all information for this item, including:
-# - the name of the item
-# - the description of the item
-# - a larger image of the item
-# - the merchant name who sells the item
-# - how many of the item the merchant has in stock
-# - the merchant's current price for the item
-# - an average amount of time it takes this merchant to fulfill this item
-#
-# If I am a visitor or regular user, I also see a link to add this item to my cart
-
 RSpec.describe 'As any user' do
   describe 'when I visit an item show page' do
 		before :each do
@@ -47,6 +33,6 @@ RSpec.describe 'As any user' do
 
     it 'shows the average amount of time it takes this merchant to fulfill this item'
     it 'shows a link to add to cart if visitor or regular user'
-    
+
 	end
 end
