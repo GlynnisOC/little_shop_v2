@@ -14,6 +14,7 @@ RSpec.describe 'As a registered merchant on the site' do
 				expect(page).to have_content("Address: #{merchant.address}")
 				expect(page).to have_content("City: #{merchant.city}")
 				expect(page).to have_content("State: #{merchant.state}")
+				expect(page).to have_content("Zip Code: #{merchant.zip}")
 			end
 		end
 	end
