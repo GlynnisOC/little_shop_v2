@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   namespace :admin do
     get  '/dashboard',    to: "admin#dashboard"
   end
+
+  get '/carts', to: 'carts#index'
 end

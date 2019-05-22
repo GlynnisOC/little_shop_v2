@@ -16,15 +16,16 @@
     <%= link_to "Merchants", merchants_path %>
 
     <% if current_user == nil %>
-      <%= link_to "Cart", root_path %>
+      <%= link_to "Cart", carts_path %>
       <%= link_to "Login", root_path %>
       <%= link_to "Register", root_path %>
     <% end %>
 
     <% if current_user && current_user.default? %>
-      <%= link_to "Cart", root_path %>
-      <p><%= "#{@active_items.length}" %> items in cart</p>
-      <%= link_to "My Profile", user_path(current_user) %>
+      <%= link_to "Cart", carts_path %>
+      <p> Number of items in cart</p>
+      <%= link_to "My Profile", ("/profile") %>
+      <p>Logged in as <%= current_user.name %></p>
       <%= link_to "Logout", root_path %>
     <% end %>
 

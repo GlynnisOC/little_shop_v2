@@ -44,6 +44,8 @@ RSpec.describe "as a merchant on the site" do
 
       visit root_path
       expect(page).to have_link("Logout") #a link to log out ("/logout")
+      
+      click_link("Logout")
       expect(current_path).to eq(root_path)
     end
   end
