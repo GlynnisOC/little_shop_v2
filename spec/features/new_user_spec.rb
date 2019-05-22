@@ -23,23 +23,18 @@ RSpec.describe "when I click on the 'register' link in the nav bar" do
 
   it "doesn't let me partially fill out the form" do
     visit new_user_path
-    # save_and_open_page
 
     fill_in 'Name', with: 'Blair Williams'
     fill_in 'Street Address', with: '123 W. 6th Avenue'
     fill_in 'City', with: 'Denver'
     fill_in 'State', with: 'Colorado'
     fill_in 'Zip Code', with: '80221'
-    fill_in 'Email Address', with: 'bwilliams@gmail.com'
+    fill_in 'Email Address', with: ''
     fill_in 'Password', with: 'serena123'
+    fill_in 'Confirm Password', with: ''
     click_on("Register as a User")
 
-    expect(page).to have_xpath("//input[@required='required']")
+    expect(page).to have_content("You are missing required fields to register.")
+    expect(current_path).to eq(users_path)
   end
 end
-
-# As a visitor
-# When I visit the user registration page
-# And I do not fill in this form completely,
-# I am returned to the registration page
-# And I see a flash message indicating that I am missing required fields
