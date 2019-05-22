@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'welcome#index'
 
-  resources :merchants, only: [:index] 
+  resources :merchants, only: [:index]
 
 	namespace :dashboard do
 		resources :items, only: [:index]
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     get  '/dashboard',    to: "admin#dashboard"
   end
 
-  # resources :carts, only: [:create]
-  get '/carts', to: 'carts#index'
-  post '/carts', to: 'carts#create', as: 'add_to_cart'
+  # resources :cart, only: [:create]
+  get '/cart', to: 'cart#index'
+  post '/cart', to: 'cart#create', as: 'add_to_cart'
 end
