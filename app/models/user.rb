@@ -1,8 +1,10 @@
 class User < ApplicationRecord
+	has_secure_password
+
 	has_many :items
 
-	validates :email, presence: true
-	validates :password_digest, presence: true
+	validates :email, presence: true, uniqueness: true
+	validates :password, presence: true
 	validates :role, presence: true
 	validates :active, presence: true
 	validates :name, presence: true
@@ -10,4 +12,6 @@ class User < ApplicationRecord
 	validates :city, presence: true
 	validates :state, presence: true
 	validates :zip, presence: true
+	validates_confirmation_of :password_digest
+
 end

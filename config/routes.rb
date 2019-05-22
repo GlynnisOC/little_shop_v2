@@ -4,4 +4,7 @@ Rails.application.routes.draw do
 
   resources :items, only: [:index, :show]
   get '/merchants', to: 'merchants#index'
+  get '/profile', to: 'users#profile'
+
+  resources :users, only: [:index, :new, :create, :show]
 end
