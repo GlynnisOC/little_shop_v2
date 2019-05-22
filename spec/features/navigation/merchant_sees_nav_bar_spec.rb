@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "as a merchant on the site" do
   describe "a navigation bar is seen" do
     it "allows merchant to log in and see certain links" do
-      merchant_1 = User.create!(email: "Bob@bob.bob", password_digest: "password", role: 1, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
+      merchant_1 = User.create!(email: "Bob@bob.bob", password: "password", role: 1, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_1)
 
@@ -24,7 +24,7 @@ RSpec.describe "as a merchant on the site" do
     end
 
     it "allows merchant to navigate to /dashboard" do
-      merchant_1 = User.create!(email: "Bob@bob.bob", password_digest: "password", role: 1, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
+      merchant_1 = User.create!(email: "Bob@bob.bob", password: "password", role: 1, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_1)
 
@@ -36,7 +36,7 @@ RSpec.describe "as a merchant on the site" do
     end
 
     it "allows merchant to log out" do
-      merchant_1 = User.create!(email: "Bob@bob.bob", password_digest: "password", role: 1, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
+      merchant_1 = User.create!(email: "Bob@bob.bob", password: "password", role: 1, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_1)
 
