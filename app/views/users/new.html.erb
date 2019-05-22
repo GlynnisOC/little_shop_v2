@@ -4,25 +4,25 @@
   <%= f.text_field :name %>
 
   <%= f.label :address, "Street Address" %>
-  <%= f.text_field :address %>
+  <%= f.text_field :address, :required => 'required' %>
 
   <%= f.label :city %>
-  <%= f.text_field :city %>
+  <%= f.text_field :city, :required => 'required' %>
 
   <%= f.label :state %>
-  <%= f.text_field :state %>
+  <%= f.text_field :state, :required => 'required' %>
 
   <%= f.label :zip, "Zip Code" %>
-  <%= f.text_field :zip %>
+  <%= f.text_field :zip, :required => 'required' %>
 
   <%= f.label :email, "Email Address" %>
-  <%= f.text_field :email %>
+  <%= f.text_field :email, :required => 'required' %>
 
   <%= f.label :password, "Password" %>
-  <%= f.password_field :password %>
+  <%= f.password_field :password, :required => 'required' %>
 
   <%= f.label :password, "Confirm Password" %>
-  <%= f.password_field :password_confirmation %>
+  <%= f.password_field :password_confirmation, :required => 'required' %>
 
   <%= f.submit "Register as a User" %>
 

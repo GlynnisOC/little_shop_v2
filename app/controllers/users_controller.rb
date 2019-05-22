@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def create
     user = User.create!(user_params)
     redirect_to '/profile'
+
     if user.save
       flash[:registered] = "You're logged in!"
     end
