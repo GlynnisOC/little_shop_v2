@@ -1,0 +1,11 @@
+<main class="show-page">
+  <h1> <%= @item.name %> </h1>
+  <p> <%= @item.price %> </p>
+
+  <div class="show-page-image">
+    <img class="large-image" src="<%= @item.image %>"/>
+  </div>
+
+  <p> <%= @item.user.name %> </p>
+  <p> <%= @item.inventory %> </p>
+</main>
