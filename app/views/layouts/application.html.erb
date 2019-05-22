@@ -15,7 +15,7 @@
     <%= link_to "Items", items_path %>
     <%= link_to "Merchants", merchants_path %>
 
-    <% if current_user && !current_user.default? && !current_user.merchant? && !current_user.admin? %>
+    <% if current_user == nil %>
       <%= link_to "Cart", root_path %>
       <%= link_to "Login", root_path %>
       <%= link_to "Register", root_path %>
