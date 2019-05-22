@@ -13,9 +13,10 @@ class User < ApplicationRecord
 	validates :state, presence: true
 	validates :zip, presence: true
 
-	# validates_presence_of :name, :password, :email
-	# validates_uniqueness_of :email, 
-
 	enum role: [:default, :merchant, :admin]
+
+	def self.email_taken(email)
+		where(email: email) != []
+	end
 
 end
