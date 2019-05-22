@@ -37,29 +37,10 @@
       <%= link_to "Logout", root_path %>
     <% end %>
 
-
+    <% flash.each do |key, value| %>
+      <%= value %>
+    <% end %>
 
     <%= yield %>
   </body>
 </html>
-
-<!-- If not logged in,
-  items
-  merchants
-  home
-  Login
-  register
-
-Logged in as default:
-  items
-  merchants
-  home
-  cart
-  logout
-
-Logged in as merchant
-  items
-  merchants
-  home
-  merchant dashboard
-  logout -->

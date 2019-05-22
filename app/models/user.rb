@@ -1,8 +1,10 @@
 class User < ApplicationRecord
+	has_secure_password
+
 	has_many :items
 
 	validates :email, presence: true, uniqueness: true
-	validates :password_digest, presence: true
+	validates :password, presence: true
 	validates :role, presence: true
 	validates :active, presence: true
 	validates :name, presence: true
@@ -14,5 +16,7 @@ class User < ApplicationRecord
   has_secure_password
 
 	enum role: [:default, :merchant, :admin]
+
+	validates_confirmation_of :password_digest
 
 end
