@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create!(user_params)
+    user = User.create!(user_params)   ####### change to new and a save
     redirect_to '/profile'
     if user.save
       flash[:registered] = "You're logged in!"
@@ -20,6 +20,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password, :role, :active)
+    params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password) ##### , :role, :active)
   end
 end
