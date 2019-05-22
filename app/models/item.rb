@@ -5,4 +5,22 @@ class Item < ApplicationRecord
 		def self.where_active
 			Item.where(active: true)
 		end
+
+		def self.top_5
+			Item.select('DISTINCT(name), SUM(order_items.quantity)')
+						.joins(:order_items)
+						.where('order_items.fulfilled = true AND items.active = true')
+						.group(:id)
+						.order('sum DESC')
+						.limit(5)
+		end
+		
+		def self.bottom_5
+			Item.select('DISTINCT(name), SUM(order_items.quantity)')
+						.joins(:order_items)
+						.where('order_items.fulfilled = true')
+						.group(:id)
+						.order('sum')	
+						.limit(5)
+		end
 end
