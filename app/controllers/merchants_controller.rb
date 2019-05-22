@@ -3,5 +3,7 @@ class MerchantsController < ApplicationController
   end
 
   def dashboard
+		@merchant = User.find(current_user.id)
   end
+
 end
