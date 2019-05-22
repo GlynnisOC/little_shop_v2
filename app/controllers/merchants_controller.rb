@@ -1,4 +1,7 @@
 class MerchantsController < ApplicationController
   def index
-  end 
+  end
+
+  def dashboard
+  end
 end

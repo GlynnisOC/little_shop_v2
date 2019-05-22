@@ -12,6 +12,11 @@ class User < ApplicationRecord
 	validates :city, presence: true
 	validates :state, presence: true
 	validates :zip, presence: true
+
+  has_secure_password
+
+	enum role: [:default, :merchant, :admin]
+
 	validates_confirmation_of :password_digest
 
 end
