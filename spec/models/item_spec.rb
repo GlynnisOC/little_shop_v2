@@ -19,7 +19,7 @@ describe Item, type: :model do
 		end
 
 		it '.top_5' do
-			merchant_1 = User.create!(email: "123@123.123", password_digest: "password", role: 1, active: true, name: "Bob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
+			merchant_1 = User.create!(email: "123@123.123", password: "password", role: 1, active: true, name: "Bob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
 
 			item_1 = merchant_1.items.create!(name: "name_1", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
 			item_2 = merchant_1.items.create!(name: "name_2", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
@@ -45,7 +45,7 @@ describe Item, type: :model do
 		end
 	     	
 		it '.bottom_5' do
-			merchant_1 = User.create!(email: "123@123.123", password_digest: "password", role: 1, active: true, name: "Bob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
+			merchant_1 = User.create!(email: "123@123.123", password: "password", role: 1, active: true, name: "Bob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
 
 			item_1 = merchant_1.items.create!(name: "name_1", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
 			item_2 = merchant_1.items.create!(name: "name_2", active: true, price: 5.00, description: "does things n stuff", image: "https://www.kiplinger.com/kipimages/pages/18048.jpg", inventory: 100 )
