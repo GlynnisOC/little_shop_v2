@@ -22,4 +22,33 @@ RSpec.describe "When a user adds items to their cart" do
     expect(current_path).to eq(items_path)
     expect(page).to have_content("#{@active_item_1.name} has been added to your cart")
   end
+
+  it "displays the total number of items in the cart" do
+
+    visit item_path(@active_item_1.id)
+
+    expect(page).to have_content("Cart: 0")
+
+    within("#visitor-nav-cart") do
+      click_button "Add to Cart"
+    end
+
+    expect(page).to have_content("Cart: 1")
+
+    visit item_path(@active_item_1.id)
+
+    within("#visitor-nav-cart") do
+      click_button "Add to Cart"
+    end
+
+    expect(page).to have_content("Cart: 2")
+
+    visit item_path(@active_item_2.id)
+    
+    within("#visitor-nav-cart") do
+      click_button "Add to Cart"
+    end
+
+    expect(page).to have_content("Cart: 3")
+  end
 end

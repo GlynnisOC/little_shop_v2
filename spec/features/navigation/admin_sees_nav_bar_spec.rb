@@ -32,7 +32,7 @@ RSpec.describe "as an admin on the site" do
 
       expect(page).to have_link("Admin Dashboard")
       click_on "Admin Dashboard"
-      expect(current_path).to eq(dashboard_path)
+      expect(current_path).to eq(admin_dashboard_path)
     end
 
     it "allows admin to log out" do
