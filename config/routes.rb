@@ -9,9 +9,12 @@ Rails.application.routes.draw do
   get '/logout', to: 'welcome#index'
 
   resources :items, only: [:index, :show]
-  
+
   get '/profile', to: 'users#profile'
 
   resources :users, only: [:index, :new, :create, :show]
 
+  namespace :admin do
+    get  '/dashboard',    to: "admin#dashboard"
+  end
 end

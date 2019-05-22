@@ -23,6 +23,7 @@
 
     <% if current_user && current_user.default? %>
       <%= link_to "Cart", root_path %>
+      <p><%= "#{@active_items.length}" %> items in cart</p>
       <%= link_to "My Profile", user_path(current_user) %>
       <%= link_to "Logout", root_path %>
     <% end %>
@@ -36,7 +37,6 @@
       <%= link_to "Admin Dashboard", dashboard_path %>
       <%= link_to "Logout", root_path %>
     <% end %>
-
     <% flash.each do |key, value| %>
       <%= value %>
     <% end %>
