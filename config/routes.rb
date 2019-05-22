@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
   get '/merchants', to: 'merchants#index'
 
-  get '/logout', to: 'welcome#index'
+  get '/logout', to: 'application#logout'
 
   resources :items, only: [:index, :show]
 
