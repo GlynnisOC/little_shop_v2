@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'users#profile'
 
-  resources :users, only: [:index, :new, :create, :show]
+  resources :users, only: [:index, :new, :create, :show, :edit]
 
   namespace :admin do
     get  '/dashboard',    to: "admin#dashboard"
