@@ -16,7 +16,8 @@ class SessionsController < ApplicationController
       end
       flash[:message] = "Logged in as #{user.name}"
     else
-      render :new
+      redirect_to login_path
+      flash[:message] = "The email or password you entered was incorrect."
     end
   end
 

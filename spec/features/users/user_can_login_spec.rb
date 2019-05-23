@@ -51,6 +51,27 @@ RSpec.describe "As a visitor" do
         expect(current_path).to eq(root_path)
         expect(page).to have_content("Logged in as #{@admin.name}")
       end
+
+      describe "if invalid info given" do
+        it "redirects to login and tells me credentials were incorrect" do
+          visit login_path
+
+          fill_in "Email", with:  "admin@email.com"
+          fill_in "Password", with: "forgot"
+          click_button("Login")
+
+          expect(current_path).to eq(login_path)
+          expect(page).to have_content("The email or password you entered was incorrect.")
+        end
+      end
+
+
+# As a visitor
+# When I visit the login page ("/login")
+# And I submit invalid information
+# Then I am redirected to the login page
+# And I see a flash message that tells me that my credentials were incorrect
+# I am NOT told whether it was my email or password that was incorrect
     end
   end
 end
