@@ -9,7 +9,7 @@ RSpec.describe 'As a registered merchant on my dashboard page' do
 
 			visit dashboard_path
 
-			click_link "View my Items"
+			click_link "View My Items"
 
 			expect(current_path).to eq('/dashboard/items')
 		end
