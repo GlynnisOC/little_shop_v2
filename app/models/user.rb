@@ -13,8 +13,13 @@ class User < ApplicationRecord
 													:state,
 													:zip
 
+
 	validates_uniqueness_of :email
 
 	enum role: [:default, :merchant, :admin]
+
+	def self.email_taken(email)
+		where(email: email) != []
+	end
 
 end
