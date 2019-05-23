@@ -29,6 +29,28 @@ RSpec.describe "As a visitor" do
         expect(current_path).to eq(profile_path)
         expect(page).to have_content("Logged in as #{@user.name}")
       end
+
+      it "if merchant user, I am redirected to my merchant dashboard page" do
+        visit login_path
+
+        fill_in "Email", with:  "merchant@email.com"
+        fill_in "Password", with: "password"
+        click_button("Login")
+
+        expect(current_path).to eq(dashboard_path)
+        expect(page).to have_content("Logged in as #{@merchant.name}")
+      end
+
+      it "if admin user, I am redirected to the root page" do
+        visit login_path
+
+        fill_in "Email", with:  "admin@email.com"
+        fill_in "Password", with: "password"
+        click_button("Login")
+
+        expect(current_path).to eq(root_path)
+        expect(page).to have_content("Logged in as #{@admin.name}")
+      end
     end
   end
 end
