@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   # get '/merchants', to: 'merchants#index'
 
   get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  
   get '/logout', to: 'application#logout'
 
   resources :items, only: [:index, :show]
