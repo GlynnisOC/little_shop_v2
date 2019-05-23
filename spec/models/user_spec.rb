@@ -39,4 +39,12 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'class methods' do
+    it ".email_taken" do
+      User.create(name: "Bobby", email: "aol@gmail.com", password: "password", address: "123 6th ave", city: "Denver", state: "Colorado", zip: "80226")
+      email = "aol@gmail.com"
+
+      expect(User.email_taken(email)).to be_truthy
+    end
+  end
 end

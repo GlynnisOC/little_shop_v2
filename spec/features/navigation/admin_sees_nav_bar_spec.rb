@@ -44,6 +44,8 @@ RSpec.describe "as an admin on the site" do
 
       visit root_path
       expect(page).to have_link("Logout")
+
+      click_link("Logout")
       expect(current_path).to eq(root_path)
     end
   end

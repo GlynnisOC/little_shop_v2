@@ -37,4 +37,38 @@ RSpec.describe "when I click on the 'register' link in the nav bar" do
     expect(page).to have_content("You are missing required fields to register.")
     expect(current_path).to eq(users_path)
   end
+
+  it "doesn't let another user register with same email" do
+    visit new_user_path
+
+    fill_in 'Name', with: 'Blair Williams'
+    fill_in 'Street Address', with: '123 W. 6th Avenue'
+    fill_in 'City', with: 'Denver'
+    fill_in 'State', with: 'Colorado'
+    fill_in 'Zip Code', with: '80221'
+    fill_in 'Email Address', with: 'bwilliams@gmail.com'
+    fill_in 'Password', with: 'serena123'
+    fill_in 'Confirm Password', with: 'serena123'
+    click_on("Register as a User")
+
+    visit new_user_path
+
+    fill_in 'Name', with: 'Shelby Grant'
+    fill_in 'Street Address', with: '125 W. 6th Avenue'
+    fill_in 'City', with: 'Denver'
+    fill_in 'State', with: 'Colorado'
+    fill_in 'Zip Code', with: '80221'
+    fill_in 'Email Address', with: 'bwilliams@gmail.com'
+    fill_in 'Password', with: 'venus123'
+    fill_in 'Confirm Password', with: 'venus123'
+    click_on("Register as a User")
+
+    expect(page).to have_content("That email address is taken.")
+  end
 end
+
+# But include an email address already in the system
+# Then I am returned to the registration page
+# My details are not saved and I am not logged in
+# The form is filled in with all previous data except the email field and password fields
+# I see a flash message telling me the email address is already in use
