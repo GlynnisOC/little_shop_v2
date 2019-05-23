@@ -43,6 +43,7 @@ group :development, :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'simplecov'
+	gem 'factory_bot_rails'
 end
 
 group :development do
