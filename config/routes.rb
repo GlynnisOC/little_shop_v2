@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :merchants, only: [:index]
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
-  get '/merchants', to: 'merchants#index'
+  # get '/merchants', to: 'merchants#index'
 
   get '/logout', to: 'application#logout'
 
@@ -18,5 +18,7 @@ Rails.application.routes.draw do
     get  '/dashboard',    to: "admin#dashboard"
   end
 
+  # resources :carts, only: [:create]
   get '/carts', to: 'carts#index'
+  post '/carts', to: 'carts#create', as: 'add_to_cart'
 end

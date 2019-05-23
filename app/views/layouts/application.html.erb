@@ -16,14 +16,27 @@
     <%= link_to "Merchants", merchants_path %>
 
     <% if current_user == nil %>
-      <%= link_to "Cart", carts_path %>
+
+
+      <section id="visitor-nav-cart">
+        <% if @item != nil %>
+          <%= button_to "Add to Cart", add_to_cart_path(item_id: @item.id) %>
+        <% end %>
+        <%= link_to "Cart", carts_path %>
+        <p> Number of items in cart</p>
+      </section>
       <%= link_to "Login", root_path %>
       <%= link_to "Register", root_path %>
     <% end %>
 
     <% if current_user && current_user.default? %>
-      <%= link_to "Cart", carts_path %>
-      <p> Number of items in cart</p>
+      <section id="user-nav-cart">
+        <% if @item != nil %>
+          <%= button_to "Add to Cart", add_to_cart_path(item_id: @item.id) %>
+        <% end %>
+        <%= link_to "Cart", carts_path %>
+        <p> Number of items in cart</p>
+      </section>
       <%= link_to "My Profile", ("/profile") %>
       <p>Logged in as <%= current_user.name %></p>
       <%= link_to "Logout", logout_path %>
