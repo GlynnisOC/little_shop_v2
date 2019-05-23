@@ -16,14 +16,11 @@
     <%= link_to "Merchants", merchants_path %>
 
     <% if current_user == nil %>
-
-
       <section id="visitor-nav-cart">
         <% if @item != nil %>
           <%= button_to "Add to Cart", add_to_cart_path(item_id: @item.id) %>
         <% end %>
-        <%= link_to "Cart", carts_path %>
-        <p> Number of items in cart</p>
+        <%= link_to "Cart", carts_path %>: <%= cart.total_count %>
       </section>
       <%= link_to "Login", root_path %>
       <%= link_to "Register", root_path %>
@@ -34,8 +31,7 @@
         <% if @item != nil %>
           <%= button_to "Add to Cart", add_to_cart_path(item_id: @item.id) %>
         <% end %>
-        <%= link_to "Cart", carts_path %>
-        <p> Number of items in cart</p>
+        <%= link_to "Cart", carts_path %>: <%= cart.total_count %>
       </section>
       <%= link_to "My Profile", ("/profile") %>
       <p>Logged in as <%= current_user.name %></p>
@@ -48,7 +44,7 @@
     <% end %>
 
     <% if current_user && current_user.admin? %>
-      <%= link_to "Admin Dashboard", dashboard_path %>
+      <%= link_to "Admin Dashboard", admin_dashboard_path %>
       <%= link_to "Logout", logout_path %>
     <% end %>
     <% flash.each do |key, value| %>
