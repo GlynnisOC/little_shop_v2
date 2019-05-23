@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     elsif
       @user.save
       flash[:registered] = "You're logged in!"
-      redirect_to controller: 'users', action: 'profile', new_id: user.id
+      redirect_to controller: 'users', action: 'profile', new_id: @user.id
     else
       !@user.save
       flash[:missing_fields] = "You are missing required fields to register."
