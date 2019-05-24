@@ -7,52 +7,50 @@
 #   Character.create!(name: 'Luke', movie: movies.first)
 
 
-#====================ADMINS==========================#
-
-@admin_1 = User.create!(:admin)
-
-@admin_2 = User.create!(:admin)
-
-#====================MERCHANTS==========================#
-
-@merchant_1 = User.create!(:merchant)
-
-@merchant_2 = User.create!(:merchant)
-
-@merchant_3 = User.create!(:merchant)
-
-@merchant_4 = User.create!(:merchant)
-
-@merchant_5 = User.create!(:merchant)
-
-@merchant_6 = User.create!(:merchant)
-
-@merchant_7 = User.create!(:merchant)
 
 
+@admin_1 = create(:admin)
 
-#====================REGISTERED USERS==========================#
+@admin_2 = create(:admin)
 
 
-@user_1 = User.create!(:user)
+@merchant_1 = create(:merchant)
 
-@user_2 = User.create!(:user)
+@merchant_2 = create(:merchant)
 
-@user_3 = User.create!(:user)
+@merchant_3 = create(:merchant)
 
-@user_4 = User.create!(:user)
+@merchant_4 = create(:merchant)
 
-@user_5 = User.create!(:user)
+@merchant_5 = create(:merchant)
 
-@user_6 = User.create!(:user)
+@merchant_6 = create(:merchant)
 
-@user_7 = User.create!(:user)
+@merchant_7 = create(:merchant)
 
-@user_8 = User.create!(:user)
+@merchant_8 = create(:merchant)
 
-@user_9 = User.create!(:user)
 
-@user_10 = User.create!(:user)
+
+@user_1 = create(:user)
+
+@user_2 = create(:user)
+
+@user_3 = create(:user)
+
+@user_4 = create(:user)
+
+@user_5 = create(:user)
+
+@user_6 = create(:user)
+
+@user_7 = create(:user)
+
+@user_8 = create(:user)
+
+@user_9 = create(:user)
+
+@user_10 = create(:user)
 
 
 
@@ -162,11 +160,266 @@
 
 @item_51  = @merchant_8.items.create!(name: "Wheat:	Triticum Aestivum", active: true, price: 0.02, description: "this is a mock description of a seed", image: "https://picsum.photos/200/300?image=1", inventory: 128972)
 
+@order_1 = create!(:order, user: @user_1)
 
-#====================ORDERS==========================#
+@order_2 = create!(:order, user: @user_1)
 
+@order_3 = create!(:order, user: @user_1)
 
+@order_4 = create!(:order, user: @user_1)
 
+@order_5 = create!(:order, user: @user_1)
 
+@order_6 = create!(:order, user: @user_1)
 
-#====================SEEDS==========================#
+@order_7 = create!(:order, user: @user_2)
+
+@order_8 = create!(:order, user: @user_2)
+
+@order_9 = create!(:order, user: @user_2)
+
+@order_10 = create!(:order, user: @user_2)
+
+@order_11 = create!(:order, user: @user_2)
+
+@order_12 = create!(:order, user: @user_3)
+
+@order_13 = create!(:order, user: @user_3)
+
+@order_14 = create!(:order, user: @user_3)
+
+@order_15 = create!(:order, user: @user_3)
+
+@order_16 = create!(:order, user: @user_3)
+
+@order_17 = create!(:order, user: @user_4)
+
+@order_18 = create!(:order, user: @user_4)
+
+@order_19 = create!(:order, user: @user_4)
+
+@order_20 = create!(:order, user: @user_4)
+
+@order_21 = create!(:order, user: @user_4)
+
+@order_22 = create!(:order, user: @user_5)
+
+@order_23 = create!(:order, user: @user_5)
+
+@order_24 = create!(:order, user: @user_5)
+
+@order_25 = create!(:order, user: @user_5)
+
+@order_26 = create!(:order, user: @user_5)
+
+@order_27 = create!(:order, user: @user_6)
+
+@order_28 = create!(:order, user: @user_6)
+
+@order_29 = create!(:order, user: @user_6)
+
+@order_30 = create!(:order, user: @user_6)
+
+@order_31 = create!(:order, user: @user_6)
+
+@order_32 = create!(:order, user: @user_7)
+
+@order_33 = create!(:order, user: @user_7)
+
+@order_34 = create!(:order, user: @user_7)
+
+@order_35 = create!(:order, user: @user_7)
+
+@order_36 = create!(:order, user: @user_7)
+
+@order_37 = create!(:order, user: @user_8)
+
+@order_38 = create!(:order, user: @user_8)
+
+@order_39 = create!(:order, user: @user_8)
+
+@order_40 = create!(:order, user: @user_8)
+
+@order_41 = create!(:order, user: @user_8)
+
+@order_42 = create!(:order, user: @user_9)
+
+@order_43 = create!(:order, user: @user_9)
+
+@order_44 = create!(:order, user: @user_9)
+
+@order_45 = create!(:order, user: @user_9)
+
+@order_46 = create!(:order, user: @user_9)
+
+@order_47 = create!(:order, user: @user_10)
+
+@order_48 = create!(:order, user: @user_10)
+
+@order_49 = create!(:order, user: @user_10)
+
+@order_50 = create!(:order, user: @user_10)
+
+@order_51 = create!(:order, user: @user_10)
+
+@packaged_order_1 = create!(:order, user: @user_1)
+
+@packaged_order_2 = create!(:order, user: @user_1)
+
+@packaged_order_3 = create!(:order, user: @user_1)
+
+@packaged_order_4 = create!(:order, user: @user_1)
+
+@packaged_order_5 = create!(:order, user: @user_1)
+
+@packaged_order_6 = create!(:order, user: @user_1)
+
+@packaged_order_7 = create!(:order, user: @user_2)
+
+@packaged_order_8 = create!(:order, user: @user_2)
+
+@packaged_order_9 = create!(:order, user: @user_2)
+
+@packaged_order_10 = create!(:order, user: @user_2)
+
+@packaged_order_11 = create!(:order, user: @user_2)
+
+@packaged_order_12 = create!(:order, user: @user_3)
+
+@packaged_order_13 = create!(:order, user: @user_3)
+
+@packaged_order_14 = create!(:order, user: @user_3)
+
+@packaged_order_15 = create!(:order, user: @user_3)
+
+@packaged_order_16 = create!(:order, user: @user_3)
+
+@packaged_order_17 = create!(:order, user: @user_4)
+
+@packaged_order_18 = create!(:order, user: @user_4)
+
+@packaged_order_19 = create!(:order, user: @user_4)
+
+@packaged_order_20 = create!(:order, user: @user_4)
+
+@packaged_order_21 = create!(:order, user: @user_4)
+
+@packaged_order_22 = create!(:order, user: @user_5)
+
+@packaged_order_23 = create!(:order, user: @user_5)
+
+@packaged_order_24 = create!(:order, user: @user_5)
+
+@packaged_order_25 = create!(:order, user: @user_5)
+
+@shipped_order_1 = create!(:order, user: @user_1)
+
+@shipped_order_2 = create!(:order, user: @user_1)
+
+@shipped_order_3 = create!(:order, user: @user_1)
+
+@shipped_order_4 = create!(:order, user: @user_1)
+
+@shipped_order_5 = create!(:order, user: @user_1)
+
+@shipped_order_6 = create!(:order, user: @user_1)
+
+@shipped_order_7 = create!(:order, user: @user_2)
+
+@shipped_order_8 = create!(:order, user: @user_2)
+
+@shipped_order_9 = create!(:order, user: @user_2)
+
+@shipped_order_10 = create!(:order, user: @user_2)
+
+@shipped_order_11 = create!(:order, user: @user_2)
+
+@shipped_order_12 = create!(:order, user: @user_3)
+
+@shipped_order_13 = create!(:order, user: @user_3)
+
+@shipped_order_14 = create!(:order, user: @user_3)
+
+@shipped_order_15 = create!(:order, user: @user_3)
+
+@shipped_order_16 = create!(:order, user: @user_3)
+
+@shipped_order_17 = create!(:order, user: @user_4)
+
+@shipped_order_18 = create!(:order, user: @user_4)
+
+@shipped_order_19 = create!(:order, user: @user_4)
+
+@shipped_order_20 = create!(:order, user: @user_4)
+
+@shipped_order_21 = create!(:order, user: @user_4)
+
+@shipped_order_22 = create!(:order, user: @user_5)
+
+@shipped_order_23 = create!(:order, user: @user_5)
+
+@shipped_order_24 = create!(:order, user: @user_5)
+
+@shipped_order_25 = create!(:order, user: @user_5)
+ 
+@cancelled_order_1 = create!(:order, user: @user_1)
+
+@cancelled_order_2 = create!(:order, user: @user_1)
+
+@cancelled_order_3 = create!(:order, user: @user_1)
+
+@cancelled_order_4 = create!(:order, user: @user_1)
+
+@cancelled_order_5 = create!(:order, user: @user_10)
+
+@cancelled_order_6 = create!(:order, user: @user_1)
+
+@cancelled_order_7 = create!(:order, user: @user_2)
+
+@cancelled_order_8 = create!(:order, user: @user_2)
+
+@cancelled_order_9 = create!(:order, user: @user_2)
+
+@cancelled_order_10 = create!(:order, user: @user_2)
+
+@cancelled_order_11 = create!(:order, user: @user_2)
+
+@cancelled_order_12 = create!(:order, user: @user_3)
+
+@cancelled_order_13 = create!(:order, user: @user_10)
+
+@cancelled_order_14 = create!(:order, user: @user_10)
+
+@cancelled_order_15 = create!(:order, user: @user_3)
+
+@cancelled_order_16 = create!(:order, user: @user_9)
+
+@cancelled_order_17 = create!(:order, user: @user_4)
+
+@cancelled_order_18 = create!(:order, user: @user_4)
+
+@cancelled_order_19 = create!(:order, user: @user_4)
+
+@cancelled_order_20 = create!(:order, user: @user_4)
+
+@cancelled_order_21 = create!(:order, user: @user_8)
+
+@cancelled_order_22 = create!(:order, user: @user_5)
+
+@cancelled_order_23 = create!(:order, user: @user_5)
+
+@cancelled_order_24 = create!(:order, user: @user_8)
+
+@cancelled_order_25 = create!(:order, user: @user_5)
+
+@cancelled_order_26 = create!(:order, user: @user_5)
+
+@cancelled_order_27 = create!(:order, user: @user_6)
+
+@cancelled_order_28 = create!(:order, user: @user_6)
+
+@cancelled_order_29 = create!(:order, user: @user_7)
+
+@cancelled_order_30 = create!(:order, user: @user_7)
+
+@cancelled_order_31 = create!(:order, user: @user_7)
