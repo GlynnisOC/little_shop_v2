@@ -14,6 +14,64 @@
 # - [x] I also see a grand total of what everything in my cart will cost
 require 'rails_helper'
 
+RSpec.describe "as a visitor on the site" do
+  describe "visitor adds no items to cart and visits /cart" do
+    it "shows visitor empty cart message" do
+      merchant_1 = User.create!(email: "Rob@rob.rob", password: "password", role: 1, active: true, name: "Rob Rob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
+
+      active_item_1 = merchant_1.items.create!(name: "name_1", active: true, price: 2.20, description: "Buy things with your LAND!", image: "https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", inventory: 400)
+      active_item_2 = merchant_1.items.create!(name: "name_2", active: true, price: 2.40, description: "Buy things with your MONEY!", image: "https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", inventory: 500)
+      active_item_3 = merchant_1.items.create!(name: "name_3", active: true, price: 3.50, description: "Buy things with your EMOTIONS!", image: "https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", inventory: 600)
+
+      visit cart_path
+
+      expect(page).to have_content("Your cart is empty")
+    end
+
+    it "shows visitor no link to empty cart" do
+      merchant_1 = User.create!(email: "Rob@rob.rob", password: "password", role: 1, active: true, name: "Rob Rob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
+
+      active_item_1 = merchant_1.items.create!(name: "name_1", active: true, price: 2.20, description: "Buy things with your LAND!", image: "https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", inventory: 400)
+      active_item_2 = merchant_1.items.create!(name: "name_2", active: true, price: 2.40, description: "Buy things with your MONEY!", image: "https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", inventory: 500)
+      active_item_3 = merchant_1.items.create!(name: "name_3", active: true, price: 3.50, description: "Buy things with your EMOTIONS!", image: "https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", inventory: 600)
+
+      visit cart_path
+
+      expect(page).to_not have_link "Empty Cart"
+    end
+  end
+end
+
+RSpec.describe "as a user on the site" do
+  describe "user adds no items to cart and visits /cart" do
+    it "shows user empty cart message" do
+      user_1 = User.create!(email: "Bob@bob.bob", password: "password", role: 0, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
+      merchant_1 = User.create!(email: "Rob@rob.rob", password: "password", role: 1, active: true, name: "Rob Rob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user_1)
+
+      active_item_1 = merchant_1.items.create!(name: "name_1", active: true, price: 2.20, description: "Buy things with your LAND!", image: "https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", inventory: 400)
+      active_item_2 = merchant_1.items.create!(name: "name_2", active: true, price: 2.40, description: "Buy things with your MONEY!", image: "https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", inventory: 500)
+      active_item_3 = merchant_1.items.create!(name: "name_3", active: true, price: 3.50, description: "Buy things with your EMOTIONS!", image: "https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", inventory: 600)
+
+      visit cart_path
+
+      expect(page).to have_content("Your cart is empty")
+    end
+
+    it "shows user no link to empty cart" do
+      merchant_1 = User.create!(email: "Rob@rob.rob", password: "password", role: 1, active: true, name: "Rob Rob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
+
+      active_item_1 = merchant_1.items.create!(name: "name_1", active: true, price: 2.20, description: "Buy things with your LAND!", image: "https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", inventory: 400)
+      active_item_2 = merchant_1.items.create!(name: "name_2", active: true, price: 2.40, description: "Buy things with your MONEY!", image: "https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", inventory: 500)
+      active_item_3 = merchant_1.items.create!(name: "name_3", active: true, price: 3.50, description: "Buy things with your EMOTIONS!", image: "https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", inventory: 600)
+
+      visit cart_path
+
+      expect(page).to_not have_link "Empty Cart"
+    end
+  end
+end
+
 RSpec.describe "as a user on the site" do
   describe "I have added items to cart and visit /cart" do
     it "shows all the items added to the cart" do
@@ -70,6 +128,7 @@ RSpec.describe "as a user on the site" do
 
       click_link "Empty Cart"
 
+      expect(current_path).to eq(cart_path)
       expect(page).to have_content("Cart: 0")
     end
   end

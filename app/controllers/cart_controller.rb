@@ -17,6 +17,6 @@ class CartController < ApplicationController
 
   def empty_cart
     reset_session
-    redirect_to items_path
+    redirect_to cart_path
   end
 end

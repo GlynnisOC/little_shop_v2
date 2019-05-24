@@ -1,15 +1,19 @@
-<%= link_to "Empty Cart", empty_cart_path, method: :delete %>
+<% if @cart_items == [] %>
+  Your cart is empty
+<% else %>
+  <%= link_to "Empty Cart", empty_cart_path, method: :delete %>
 
-<% grand_total ||= 0 %>
+  <% grand_total ||= 0 %>
 
-<% @cart_items.each do |item| %>
-Item Name: <%= item.name %>
-<img class="small-image" src=<%= item.image %> alt=<%= item.name %>>
-Merchant: <%= item.user.name %>
-Item Price: <%= number_to_currency(item.price) %>
-Desired Quantity: <%= cart.contents[item.id.to_s] %>
-Subtotal Price: <%= number_to_currency(cart.contents[item.id.to_s] * item.price) %>
-<% grand_total += cart.contents[item.id.to_s] * item.price %>
+  <% @cart_items.each do |item| %>
+  Item Name: <%= item.name %>
+  <img class="small-image" src=<%= item.image %> alt=<%= item.name %>>
+  Merchant: <%= item.user.name %>
+  Item Price: <%= number_to_currency(item.price) %>
+  Desired Quantity: <%= cart.contents[item.id.to_s] %>
+  Subtotal Price: <%= number_to_currency(cart.contents[item.id.to_s] * item.price) %>
+  <% grand_total += cart.contents[item.id.to_s] * item.price %>
+  <% end %>
+
+  Grand Total: <%= number_to_currency(grand_total) %>
 <% end %>
-
-Grand Total: <%= number_to_currency(grand_total) %>
