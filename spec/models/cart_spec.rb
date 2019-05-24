@@ -21,11 +21,17 @@ RSpec.describe Cart do
   end
 
   describe "#add_item" do
-    it "adds a item that hasn't been added yet" do
+    it "adds an item that hasn't been added yet" do
 
       subject.add_item('3')
 
       expect(subject.contents).to eq({'1' => 2, '2' => 3, '3' => 1})
+    end
+  end
+
+  describe "#item_ids" do
+    it "returns an array of item ids" do
+      expect(subject.item_ids).to eq(["1", "2"])
     end
   end
 end
