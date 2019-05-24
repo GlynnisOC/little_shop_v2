@@ -31,8 +31,8 @@ RSpec.describe "as an admin on the site" do
       visit root_path
 
       expect(page).to have_link("Admin Dashboard")
-      sav
-      click_on "Admin Dashboard"
+
+      click_link "Admin Dashboard"
       expect(current_path).to eq(admin_dashboard_path)
     end
 
