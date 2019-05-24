@@ -1,10 +1,10 @@
 <%= link_to "Empty Cart", empty_cart_path, method: :delete %>
 
 <% grand_total ||= 0 %>
-<% @cart_items.each do |item| %>
 
+<% @cart_items.each do |item| %>
 Item Name: <%= item.name %>
-<img src=<%= item.image %> alt=<%= item.name %>>
+<img class="small-image" src=<%= item.image %> alt=<%= item.name %>>
 Merchant: <%= item.user.name %>
 Item Price: <%= number_to_currency(item.price) %>
 Desired Quantity: <%= cart.contents[item.id.to_s] %>
