@@ -1,6 +1,6 @@
 class CartController < ApplicationController
 
-  def index
+  def show
     @items_in_cart = cart.contents #.map { |key, value| Item.find(key) }
     @cart_items = Item.where(id: cart.item_ids)
   end

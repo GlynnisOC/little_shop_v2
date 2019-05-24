@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   end
 
   # resources :cart, only: [:create]
-  get '/cart', to: 'cart#index'
+  get '/cart', to: 'cart#show'
   post '/cart', to: 'cart#create', as: 'add_to_cart'
   delete '/cart', to: 'cart#empty_cart', as: 'empty_cart'
 end
