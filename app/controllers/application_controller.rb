@@ -18,6 +18,5 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !current_user.nil?
-    # flash[:logged_in] = "#{@current_user.name}, you're already logged in!"
   end
 end
