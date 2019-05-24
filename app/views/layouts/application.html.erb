@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    
+
     <%= link_to "Home", root_path %>
     <%= link_to "Items", items_path %>
     <%= link_to "Merchants", merchants_path %>
@@ -20,7 +20,7 @@
         <% if @item != nil %>
           <%= button_to "Add to Cart", add_to_cart_path(item_id: @item.id) %>
         <% end %>
-        <%= link_to "Cart", carts_path %>: <%= cart.total_count %>
+        <%= link_to "Cart", cart_path %>: <%= cart.total_count %>
       </section>
       <%= link_to "Login", root_path %>
       <%= link_to "Register", root_path %>
@@ -31,7 +31,7 @@
         <% if @item != nil %>
           <%= button_to "Add to Cart", add_to_cart_path(item_id: @item.id) %>
         <% end %>
-        <%= link_to "Cart", carts_path %>: <%= cart.total_count %>
+        <%= link_to "Cart", cart_path %>: <%= cart.total_count %>
       </section>
       <%= link_to "My Profile", ("/profile") %>
       <p>Logged in as <%= current_user.name %></p>

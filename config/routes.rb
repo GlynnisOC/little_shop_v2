@@ -26,7 +26,8 @@ Rails.application.routes.draw do
     get  '/dashboard',    to: "admins#dashboard"
   end
 
-  # resources :carts, only: [:create]
-  get '/carts', to: 'carts#index'
-  post '/carts', to: 'carts#create', as: 'add_to_cart'
+  # resources :cart, only: [:create]
+  get '/cart', to: 'cart#show'
+  post '/cart', to: 'cart#create', as: 'add_to_cart'
+  delete '/cart', to: 'cart#empty_cart', as: 'empty_cart'
 end
