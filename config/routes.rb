@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
   # get '/merchants', to: 'merchants#index'
 
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+
   get '/logout', to: 'application#logout'
 
   resources :items, only: [:index, :show]
@@ -20,7 +23,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :new, :create, :show, :edit]
 
   namespace :admin do
-    get  '/dashboard',    to: "admin#dashboard"
+    get  '/dashboard',    to: "admins#dashboard"
   end
 
   # resources :cart, only: [:create]
