@@ -66,9 +66,3 @@ RSpec.describe "when I click on the 'register' link in the nav bar" do
     expect(page).to have_content("That email address is taken.")
   end
 end
-
-# But include an email address already in the system
-# Then I am returned to the registration page
-# My details are not saved and I am not logged in
-# The form is filled in with all previous data except the email field and password fields
-# I see a flash message telling me the email address is already in use

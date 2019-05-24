@@ -65,30 +65,35 @@ RSpec.describe "As a visitor" do
         end
       end
 
+      describe "if I am a registered user" do
+        it "redirects me to my profile page" do
+          visit profile_path
 
-# As a visitor
-# When I visit the login page ("/login")
-# And I submit invalid information
-# Then I am redirected to the login page
-# And I see a flash message that tells me that my credentials were incorrect
-# I am NOT told whether it was my email or password that was incorrect
+          visit login_path
+          expect(current_path).to eq(profile_path)
+          expect(page).to have_content("#{@user.name}, you're already logged in!")
+        end
+      end
+
+      describe "if I am a registered merchant" do
+        it "redirects me to my profile page" do
+          visit profile_path
+
+          visit login_path
+          expect(current_path).to eq(dashboard_path)
+          expect(page).to have_content("#{@merchant.name}, you're already logged in!")
+        end
+      end
+
+      describe "if I am a registered admin" do
+        it "redirects me to my profile page" do
+          visit profile_path
+
+          visit login_path
+          expect(current_path).to eq(root_path)
+          expect(page).to have_content("#{@admin.name}, you're already logged in!")
+        end
+      end
     end
   end
 end
-
-# When I submit valid information
-# If I am a regular user, I am redirected to my profile page
-# If I am a merchant user, I am redirected to my merchant dashboard page
-# If I am an admin user, I am redirected to the home page of the site
-# And I see a flash message that I am logged in
-
-# describe "when I click on the 'login' link in the nav bar" do
-#   describe "I am taken to a login page" do
-#     it "and as a User can login and go to my profile page" do
-#     end
-#   end
-# end
-#
-# fill_in 'Email', with: 'user@email.com'
-# fill_in 'Password', with: 'password'
-# click_link("Submit")
