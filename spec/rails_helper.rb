@@ -1,5 +1,4 @@
-require 'simplecov'
-SimpleCov.start
+#SimpleCov.start
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
@@ -57,6 +56,7 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  config.include FactoryBot::Syntax::Methods
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
@@ -71,5 +71,4 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
-  config.include FactoryBot::Syntax::Methods
 end
