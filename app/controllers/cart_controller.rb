@@ -1,6 +1,8 @@
 class CartController < ApplicationController
 
   def index
+    @items_in_cart = cart.contents #.map { |key, value| Item.find(key) }
+    @cart_items = Item.where(id: cart.item_ids)
   end
 
   def create
@@ -13,4 +15,8 @@ class CartController < ApplicationController
     redirect_to items_path
   end
 
+  def empty_cart
+    reset_session
+    redirect_to items_path
+  end
 end

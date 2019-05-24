@@ -16,4 +16,8 @@ class Cart
   def add_item(id)
     @contents[id.to_s] = count_of(id) + 1
   end
+
+  def item_ids
+    @contents.keys
+  end
 end
