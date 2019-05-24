@@ -22,15 +22,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    # @user = User.find_by()
   end
 
   def profile
-
     if params[:new_id] != nil
       @user = User.find(params[:new_id])
     else
       @user = User.find(current_user.id)
+      # binding.pry
+      flash[:logged_in] = "#{@user.name}, you're already logged in!"
     end
   end
 
