@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'welcome#index'
 
-  resources :merchants, only: [:index] 
+  resources :merchants, only: [:index]
 
 	namespace :dashboard do
 		resources :items, only: [:index]
@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
   # get '/merchants', to: 'merchants#index'
+
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
 
   get '/logout', to: 'application#logout'
 
@@ -20,7 +23,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :new, :create, :show, :edit]
 
   namespace :admin do
-    get  '/dashboard',    to: "admin#dashboard"
+    get  '/dashboard',    to: "admins#dashboard"
   end
 
   # resources :carts, only: [:create]
