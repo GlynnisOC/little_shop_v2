@@ -65,7 +65,7 @@ RSpec.describe "As a visitor" do
         end
       end
 
-      describe "if I am a registered user" do
+      describe "if I am a registered user and logged in" do
         it "redirects me to my profile page" do
           visit profile_path
 
@@ -75,7 +75,7 @@ RSpec.describe "As a visitor" do
         end
       end
 
-      describe "if I am a registered merchant" do
+      describe "if I am a registered merchant and logged in" do
         it "redirects me to my profile page" do
           visit profile_path
 
@@ -85,7 +85,7 @@ RSpec.describe "As a visitor" do
         end
       end
 
-      describe "if I am a registered admin" do
+      describe "if I am a registered admin and logged in" do
         it "redirects me to my profile page" do
           visit profile_path
 
