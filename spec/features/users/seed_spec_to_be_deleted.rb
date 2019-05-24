@@ -1,58 +1,52 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or create!d alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create!([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create!(name: 'Luke', movie: movies.first)
+require 'rails_helper'
+
+RSpec.describe 'As a programmer trying to get working seed data' do
+	it 'does things the way I want' do
+binding.pry
 
 
-#====================ADMINS==========================#
+@admin_1 = create(:admin)
 
-@admin_1 = User.create!(:admin)
+@admin_2 = create(:admin)
 
-@admin_2 = User.create!(:admin)
 
-#====================MERCHANTS==========================#
+@merchant_1 = create(:merchant)
 
-@merchant_1 = User.create!(:merchant)
+@merchant_2 = create(:merchant)
 
-@merchant_2 = User.create!(:merchant)
+@merchant_3 = create(:merchant)
 
-@merchant_3 = User.create!(:merchant)
+@merchant_4 = create(:merchant)
 
-@merchant_4 = User.create!(:merchant)
+@merchant_5 = create(:merchant)
 
-@merchant_5 = User.create!(:merchant)
+@merchant_6 = create(:merchant)
 
-@merchant_6 = User.create!(:merchant)
+@merchant_7 = create(:merchant)
 
-@merchant_7 = User.create!(:merchant)
+@merchant_8 = create(:merchant)
 
 
 
-#====================REGISTERED USERS==========================#
+@user_1 = create(:user)
 
+@user_2 = create(:user)
 
-@user_1 = User.create!(:user)
+@user_3 = create(:user)
 
-@user_2 = User.create!(:user)
+@user_4 = create(:user)
 
-@user_3 = User.create!(:user)
+@user_5 = create(:user)
 
-@user_4 = User.create!(:user)
+@user_6 = create(:user)
 
-@user_5 = User.create!(:user)
+@user_7 = create(:user)
 
-@user_6 = User.create!(:user)
+@user_8 = create(:user)
 
-@user_7 = User.create!(:user)
+@user_9 = create(:user)
 
-@user_8 = User.create!(:user)
-
-@user_9 = User.create!(:user)
-
-@user_10 = User.create!(:user)
+@user_10 = create(:user)
 
 
 
@@ -162,11 +156,7 @@
 
 @item_51  = @merchant_8.items.create!(name: "Wheat:	Triticum Aestivum", active: true, price: 0.02, description: "this is a mock description of a seed", image: "https://picsum.photos/200/300?image=1", inventory: 128972)
 
+binding.pry
 
-#====================ORDERS==========================#
-
-
-
-
-
-#====================SEEDS==========================#
+	end
+end
