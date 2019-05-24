@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
   # get '/merchants', to: 'merchants#index'
 
+
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
 

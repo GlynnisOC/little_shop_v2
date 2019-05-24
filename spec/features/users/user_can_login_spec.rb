@@ -67,10 +67,20 @@ RSpec.describe "As a visitor" do
 
       describe "if I am a registered user and logged in" do
         it "redirects me to my profile page" do
-          visit profile_path
+          visit login_path
+
+          fill_in "Email", with:  "user@email.com"
+          fill_in "Password", with: "password"
+          click_button("Login")
+
+          expect(current_path).to eq(profile_path)
 
           visit login_path
           expect(current_path).to eq(profile_path)
+          click_on("Login")
+
+          expect(current_path).to eq(profile_path)
+          # save_and_open_page
           expect(page).to have_content("#{@user.name}, you're already logged in!")
         end
       end
@@ -97,3 +107,7 @@ RSpec.describe "As a visitor" do
     end
   end
 end
+# If I am a regular user, I am redirected to my profile page
+# If I am a merchant user, I am redirected to my merchant dashboard page
+# If I am an admin user, I am redirected to the home page of the site
+# And I see a flash message that tells me I am already logged in

@@ -1,5 +1,11 @@
 class SessionsController < ApplicationController
+  before_action :authenticated_user, only: [:new]
 
+  def authenticated_user
+    if logged_in?
+      redirect_to profile_path
+    end
+  end
   def new
   end
 
@@ -19,6 +25,7 @@ class SessionsController < ApplicationController
       redirect_to login_path
       flash[:message] = "The email or password you entered was incorrect."
     end
+
   end
 
 end
