@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :show]
 
   get '/profile', to: 'users#profile'
+  get 'profile/orders', to: "orders#index"
+  get 'profile/orders/:id', to: "orders#show", as: 'order_show'
 
   resources :users, only: [:index, :new, :create, :show, :edit]
 
