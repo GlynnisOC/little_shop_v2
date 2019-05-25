@@ -1,0 +1,26 @@
+<%= link_to "Add new item" %>
+
+<% current_user.items.each do |item| %>
+
+  <ul id="merchant-item-<%= item.id %>" class="item-card">
+    <li>Item ID: <%= item.id %></li>
+    <li><%= item.name %></li>
+    <li><img src=<%= item.image %> width=200 /></li>
+    <li>Current Price: <%= item.price %></li>
+    <li>Inventory: <%= item.inventory %></li>
+    <li><%= link_to "Edit #{item.name}" %></li>
+
+    <% if item.active?%>
+      <li><%= link_to "Disable" %></li>
+    <% else %>
+      <li><%= link_to "Enable" %></li>
+    <% end %>
+
+    <% if OrderItem.find_by(item_id: item.id) == nil %>
+      <li><%= link_to "Delete Item" %></li>
+    <% end %>
+
+  </ul>
+<% end %>
+
+<!-- OrderItem.find_by(item_id: item.id) -->
