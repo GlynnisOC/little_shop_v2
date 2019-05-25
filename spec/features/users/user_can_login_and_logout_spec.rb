@@ -52,6 +52,21 @@ RSpec.describe "As a visitor" do
         expect(page).to have_content("Logged in as #{@admin.name}")
       end
 
+      it "when logged in, I can logout" do
+        visit login_path
+
+        fill_in "Email", with:  "admin@email.com"
+        fill_in "Password", with: "password"
+        click_button("Login")
+
+        click_link("Logout")
+
+        expect(current_path).to eq(root_path)
+        expect(page).to have_content("You are logged out")
+        expect(page).to have_content("Cart: 0")
+
+      end
+
       describe "if invalid info given" do
         it "redirects to login and tells me credentials were incorrect" do
           visit login_path
