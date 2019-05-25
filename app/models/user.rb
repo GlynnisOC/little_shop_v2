@@ -4,7 +4,7 @@ class User < ApplicationRecord
 	has_many :items
 
 	validates_presence_of 	:name,
-													:password,
+													:password_digest,
 													:email,
 													:role,
 													:active,
@@ -21,5 +21,4 @@ class User < ApplicationRecord
 	def self.email_taken(email)
 		where(email: email) != []
 	end
-
 end
