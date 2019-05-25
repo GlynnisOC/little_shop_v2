@@ -1,7 +1,7 @@
 <%= link_to "Add new item" %>
 
 <% current_user.items.each do |item| %>
-<% require "pry"; binding.pry %>
+
   <ul id="merchant-item-<%= item.id %>" class="item-card">
     <li>Item ID: <%= item.id %></li>
     <li><%= item.name %></li>
@@ -16,6 +16,9 @@
       <li><%= link_to "Enable" %></li>
     <% end %>
 
+    <% if OrderItem.find_by(item_id: item.id) == nil %>
+      <li><%= link_to "Delete Item" %></li>
+    <% end %>
 
   </ul>
 <% end %>
