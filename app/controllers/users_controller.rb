@@ -29,6 +29,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:new_id])
     else
       @user = User.find(current_user.id)
+      flash[:logged_in] = "#{@user.name}, you're already logged in!"
     end
   end
 

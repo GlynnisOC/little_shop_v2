@@ -38,31 +38,19 @@ RSpec.describe "when I click on the 'register' link in the nav bar" do
     expect(current_path).to eq(users_path)
   end
 
-  it "doesn't let another user register with same email" do
-    visit new_user_path
+  it "does not allow me to login with bad credentials" do
+    visit root_path
 
-    fill_in 'Name', with: 'Blair Williams'
-    fill_in 'Street Address', with: '123 W. 6th Avenue'
-    fill_in 'City', with: 'Denver'
-    fill_in 'State', with: 'Colorado'
-    fill_in 'Zip Code', with: '80221'
-    fill_in 'Email Address', with: 'bwilliams@gmail.com'
-    fill_in 'Password', with: 'serena123'
-    fill_in 'Confirm Password', with: 'serena123'
-    click_on("Register as a User")
+    User.create(name: "Bobby", email: "aol@gmail.com", password: "password", address: "123 6th ave", city: "Denver", state: "Colorado", zip: "80226")
 
-    visit new_user_path
+    visit login_path
+    fill_in "Email", with: "alo@gmail.com"
+    fill_in "Password", with: "passwrod"
 
-    fill_in 'Name', with: 'Shelby Grant'
-    fill_in 'Street Address', with: '125 W. 6th Avenue'
-    fill_in 'City', with: 'Denver'
-    fill_in 'State', with: 'Colorado'
-    fill_in 'Zip Code', with: '80221'
-    fill_in 'Email Address', with: 'bwilliams@gmail.com'
-    fill_in 'Password', with: 'venus123'
-    fill_in 'Confirm Password', with: 'venus123'
-    click_on("Register as a User")
+    click_on("Login")
+    save_and_open_page
 
-    expect(page).to have_content("That email address is taken.")
+    expect(current_path).to eq(login_path)
+    expect(page).to have_content("Your credentials are incorrect")
   end
 end

@@ -7,8 +7,10 @@
 	<li>State: <%= @user.state %></li>
 	<li>Zip Code: <%= @user.zip %></li>
 	<%= link_to "Edit Profile", edit_user_path(@user) %>
+	<%= link_to "Login", profile_path(@user) %>
 </ul>
 
 <% if @user.orders != [] %>
 	<%= link_to "My Orders", profile_orders_path(user_id: "#{@user.id}")  %>
 <% end %>
+
