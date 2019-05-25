@@ -6,7 +6,9 @@
 	<li>City: <%= @user.city %></li>
 	<li>State: <%= @user.state %></li>
 	<li>Zip Code: <%= @user.zip %></li>
+
 	<%= link_to "Edit Profile", profile_edit_path %>
+
 </ul>
 
 <% if @user.orders != [] %>
