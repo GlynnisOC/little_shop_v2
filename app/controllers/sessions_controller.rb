@@ -1,5 +1,11 @@
 class SessionsController < ApplicationController
+  before_action :authenticated_user, only: [:new]
 
+  def authenticated_user
+    if logged_in?
+      redirect_to profile_path
+    end
+  end
   def new
   end
 
@@ -13,6 +19,7 @@ class SessionsController < ApplicationController
         redirect_to dashboard_path
       elsif user.admin?
         redirect_to root_path
+        flash[:logged_in] = "#{user.name}, you're already logged in!"
       end
       flash[:message] = "Logged in as #{user.name}"
     else
@@ -20,5 +27,4 @@ class SessionsController < ApplicationController
       flash[:message] = "The email or password you entered was incorrect."
     end
   end
-
 end

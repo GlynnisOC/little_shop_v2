@@ -2,9 +2,11 @@ class User < ApplicationRecord
 	has_secure_password
 
 	has_many :items
+	has_many :orders
+
 
 	validates_presence_of 	:name,
-													:password,
+													:password_digest,
 													:email,
 													:role,
 													:active,
@@ -21,5 +23,4 @@ class User < ApplicationRecord
 	def self.email_taken(email)
 		where(email: email) != []
 	end
-
 end

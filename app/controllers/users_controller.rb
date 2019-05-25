@@ -25,16 +25,35 @@ class UsersController < ApplicationController
   end
 
   def profile
-
     if params[:new_id] != nil
       @user = User.find(params[:new_id])
     else
       @user = User.find(current_user.id)
+      flash[:logged_in] = "#{@user.name}, you're already logged in!"
     end
+  end
+
+  def edit
+    @user = User.find_by(params[:id])
+  end
+
+  def update
+    new_params = user_params.reject{ |key, value| value == "" }
+    current_user.update!(new_params)
+    redirect_to profile_path
+    flash[:updated_profile] = "#{@current_user.name}, your profile is updated!"
   end
 
   private
   def user_params
     params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password)
   end
+
+  # def update_params
+  #   if params[:user][:password] == ""
+  #     params.require(:user).permit(:name, :address, :city, :state, :zip, :email)
+  #   else
+  #     user_params
+  #   end
+  # end
 end
