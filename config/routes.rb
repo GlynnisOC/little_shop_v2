@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :show]
 
   get '/profile', to: 'users#profile'
+  get 'profile/orders', to: "orders#index"
+  get 'profile/orders/:id', to: "orders#show", as: 'order_show'
 
   resources :users, only: [:index, :new, :create, :show, :edit]
 
@@ -29,10 +31,4 @@ Rails.application.routes.draw do
   post '/cart', to: 'cart#create', as: 'add_to_cart'
   delete '/cart', to: 'cart#empty_cart', as: 'empty_cart'
   patch '/cart', to: 'cart#change_amount', as: 'change_amount'
-
-  get 'profile/orders', to: "orders#index"
-  # namespace :profile do
-  #   get '/orders', to: "users#orders"
-  # end
-
 end

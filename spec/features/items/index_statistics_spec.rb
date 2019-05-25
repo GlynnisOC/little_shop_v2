@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe 'As a visitor on the items index page' do
 	describe 'I see an area with the index page statistics' do
 		before :each do
-			# @user_1 = User.create!(email: "user_1@123.123", password: "password", role: 0, active: true, name: "Bob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
-
 			@merchant_1 = User.create!(email: "123@123.123", password: "password", role: 1, active: true, name: "Bob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
 			@merchant_2 = User.create!(email: "321@321.321", password: "password", role: 1, active: true, name: "Bob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
 
@@ -67,7 +65,6 @@ RSpec.describe 'As a visitor on the items index page' do
 				expect(page).to have_content(@item_4.name)
 				expect(page).to have_content(@item_5.name)
 				expect(page).to have_content(@item_6.name)
-
 
 				expect(page).to have_content(2)
 				expect(page).to have_content(6)
