@@ -30,4 +30,6 @@ Rails.application.routes.draw do
   get '/cart', to: 'cart#show'
   post '/cart', to: 'cart#create', as: 'add_to_cart'
   delete '/cart', to: 'cart#empty_cart', as: 'empty_cart'
+  # patch '/cart', to: 'cart#change_amount', as: 'change_amount'
+  patch '/cart', to: 'cart#change_amount', as: 'change_amount'
 end

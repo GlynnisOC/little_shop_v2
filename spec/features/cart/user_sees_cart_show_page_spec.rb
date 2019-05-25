@@ -91,9 +91,9 @@ RSpec.describe "as a user on the site" do
         click_button "Add to Cart"
       end
 
-      visit item_path(active_item_1.id)
-
       expect(page).to have_content("Cart: 1")
+
+      visit item_path(active_item_1.id)
 
       within("#user-nav-cart") do
         click_button "Add to Cart"
@@ -125,6 +125,44 @@ RSpec.describe "as a user on the site" do
       expect(page).to have_content("Subtotal Price: $2.40")
 
       expect(page).to have_content("Grand Total: $6.80")
+
+      within "#cart-item-#{active_item_1.id}" do
+        click_button "Add One"
+      end
+
+      within "#cart-item-#{active_item_1.id}" do
+        expect(page).to have_content("Desired Quantity: 3")
+        expect(page).to have_content("Subtotal Price: $6.60")
+      end
+
+      within "#cart-item-#{active_item_1.id}" do
+        click_button "Subtract One"
+      end
+
+      within "#cart-item-#{active_item_1.id}" do
+        expect(page).to have_content("Desired Quantity: 2")
+        expect(page).to have_content("Subtotal Price: $4.40")
+      end
+
+      within "#cart-item-#{active_item_1.id}" do
+        click_button "Subtract One"
+      end
+
+      within "#cart-item-#{active_item_1.id}" do
+        expect(page).to have_content("Desired Quantity: 1")
+        expect(page).to have_content("Subtotal Price: $2.20")
+      end
+
+      within "#cart-item-#{active_item_1.id}" do
+        click_button "Subtract One"
+      end
+
+      expect(page).to_not have_content(active_item_1.name)
+
+
+
+
+
 
       click_link "Empty Cart"
 
