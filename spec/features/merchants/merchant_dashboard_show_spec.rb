@@ -44,39 +44,40 @@ RSpec.describe 'As a registered merchant on the site' do
 		it "I see details about each item I've added to the system" do
 			visit dashboard_items_path
 
-			expect(page).to have_content("Item ID: #{@item_1.id}")
-			expect(page).to have_content("#{@item_1.name}")
-			expect(page).to have_css("img[src*='#{@item_1.image}']")
-			expect(page).to have_content("Current Price: #{@item_1.price}")
-			expect(page).to have_content("Inventory: #{@item_1.inventory}")
-			expect(page).to have_link("Edit #{@item_1.name}")
+			within "#merchant-item-#{@item_1.id}" do
+				expect(page).to have_content("Item ID: #{@item_1.id}")
+				expect(page).to have_content("#{@item_1.name}")
+				expect(page).to have_css("img[src*='#{@item_1.image}']")
+				expect(page).to have_content("Current Price: #{@item_1.price}")
+				expect(page).to have_content("Inventory: #{@item_1.inventory}")
+				expect(page).to have_link("Edit #{@item_1.name}")
+				expect(page).to have_link("Disable")
+			end
 
-			expect(page).to have_content("Item ID: #{@item_2.id}")
-			expect(page).to have_content("#{@item_2.name}")
-			expect(page).to have_css("img[src*='#{@item_2.image}']")
-			expect(page).to have_content("Current Price: #{@item_2.price}")
-			expect(page).to have_content("Inventory: #{@item_2.inventory}")
-			expect(page).to have_link("Edit #{@item_2.name}")
+			within "#merchant-item-#{@item_2.id}" do
+				expect(page).to have_content("Item ID: #{@item_2.id}")
+				expect(page).to have_content("#{@item_2.name}")
+				expect(page).to have_css("img[src*='#{@item_2.image}']")
+				expect(page).to have_content("Current Price: #{@item_2.price}")
+				expect(page).to have_content("Inventory: #{@item_2.inventory}")
+				expect(page).to have_link("Edit #{@item_2.name}")
+				expect(page).to have_link("Disable")
+			end
 
-			expect(page).to have_content("Item ID: #{@item_3.id}")
-			expect(page).to have_content("#{@item_3.name}")
-			expect(page).to have_css("img[src*='#{@item_3.image}']")
-			expect(page).to have_content("Current Price: #{@item_3.price}")
-			expect(page).to have_content("Inventory: #{@item_3.inventory}")
-			expect(page).to have_link("Edit #{@item_3.name}")
+			within "#merchant-item-#{@item_3.id}" do
+				expect(page).to have_content("Item ID: #{@item_3.id}")
+				expect(page).to have_content("#{@item_3.name}")
+				expect(page).to have_css("img[src*='#{@item_3.image}']")
+				expect(page).to have_content("Current Price: #{@item_3.price}")
+				expect(page).to have_content("Inventory: #{@item_3.inventory}")
+				expect(page).to have_link("Edit #{@item_3.name}")
+				expect(page).to have_link("Enable")
+			end
+			
 		end
 	end
-	# I see each item I have already added to the system, including:
-	# - the ID of the item
-	# - the name of the item
-	# - a thumbnail image for that item
-	# - the price of that item
-	# - my current inventory count for that item
-	# - a link or button to edit the item
-	#
+
 	# If no user has ever ordered this item, I see a link to delete the item
-	# If the item is enabled, I see a button or link to disable the item
-	# If the item is disabled, I see a button or link to enable the item
 
 
 end
