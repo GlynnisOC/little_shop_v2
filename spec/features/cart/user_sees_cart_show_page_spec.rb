@@ -56,6 +56,7 @@ RSpec.describe "as a user on the site" do
       visit cart_path
 
       expect(page).to have_content("Your cart is empty")
+
     end
 
     it "shows user no link to empty cart" do
@@ -191,7 +192,7 @@ RSpec.describe "as a user on the site" do
       end
 
       expect(page).to have_content("Cart: 2")
-      
+
       within "#cart-item-#{active_item_3.id}" do
         click_button "Add One"
       end
@@ -261,6 +262,13 @@ RSpec.describe "as a visitor on the site" do
       click_link "Empty Cart"
 
       expect(page).to have_content("Cart: 0")
+
+      visit item_path(active_item_1.id)
+
+      click_button "Add to Cart"
+
+      expect(page).to have_content("Cart: 1")
+
     end
   end
 end

@@ -16,7 +16,7 @@ class CartController < ApplicationController
   end
 
   def empty_cart
-    reset_session
+    session[:cart] = {}
     redirect_to cart_path
   end
 
