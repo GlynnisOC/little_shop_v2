@@ -16,6 +16,7 @@
       <% grand_total += cart.contents[item.id.to_s] * item.price %>
       <%= button_to "Add One", change_amount_path(item_id: "#{item.id}", change_amount: "1"), controller: "cart", action: "change_amount", method: :patch %>
       <%= button_to "Subtract One", change_amount_path(item_id: "#{item.id}", change_amount: "-1"), controller: "cart", action: "change_amount", method: :patch %>
+      <%= button_to "Remove From Cart", change_amount_path(item_id: "#{item.id}", change_amount: "-#{cart.contents[item.id.to_s]}"), controller: "cart", action: "change_amount", method: :patch %>
 
     </section>
 
