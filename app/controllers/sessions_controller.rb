@@ -19,13 +19,12 @@ class SessionsController < ApplicationController
         redirect_to dashboard_path
       elsif user.admin?
         redirect_to root_path
+        flash[:logged_in] = "#{user.name}, you're already logged in!"
       end
       flash[:message] = "Logged in as #{user.name}"
     else
       redirect_to login_path
       flash[:message] = "The email or password you entered was incorrect."
     end
-
   end
-
 end

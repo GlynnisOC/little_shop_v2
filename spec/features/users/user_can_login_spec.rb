@@ -101,9 +101,19 @@ RSpec.describe "As a visitor" do
         end
       end
 
+      describe "if I am a logged in admin user and I click login" do
+        it "redirects me to welcome page" do
+          visit login_path
+
+          fill_in "Email", with:  "admin@email.com"
+          fill_in "Password", with: "password"
+          click_button("Login")
+
+          expect(current_path).to eq(root_path)
+
+          expect(page).to have_content("#{@admin.name}, you're already logged in!")
+        end
+      end
     end
   end
 end
-# If I am a merchant user, I am redirected to my merchant dashboard page
-# If I am an admin user, I am redirected to the home page of the site
-# And I see a flash message that tells me I am already logged in
