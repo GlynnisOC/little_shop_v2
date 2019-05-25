@@ -1,0 +1,25 @@
+<%= form_for @user, url: profile_edit_path, method: :patch do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :email, "Email Address" %>
+  <%= f.text_field :email %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.label :address, "Street Address" %>
+  <%= f.text_field :address %>
+
+  <%= f.label :city %>
+  <%= f.text_field :city %>
+
+  <%= f.label :state %>
+  <%= f.text_field :state %>
+
+  <%= f.label :zip, "Zip Code" %>
+  <%= f.text_field :zip %>
+
+  <%= f.submit "Update Profile" %>
+
+<% end %>

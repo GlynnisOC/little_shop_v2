@@ -7,6 +7,35 @@ RSpec.describe "As a registered user" do
     @user_2 = User.create!(email: "user2@email.com", password: "password", role: 0, active: true, name: "Yuzer Too", address: "123 street", city: "Youzintry", state:"US", zip: "80211")
   end
 
+
+  describe "when I visit my profile page" do
+    it "I see a link to edit my profile" do
+      visit login_path
+
+      fill_in "Email", with: "#{@user.email}"
+      fill_in "Password", with: "#{@user.password}"
+      click_button("Login")
+
+      visit profile_path
+
+      click_link("Edit Profile")
+      expect(current_path).to eq(profile_edit_path)
+      expect(page).to have_content("#{@user.name}")
+      expect(page).to_not have_content("#{@user.password}")
+
+      fill_in "Street Address", with: "675 5th St."
+      fill_in "City", with: "Yuxerton"
+      fill_in "Password", with: "pword"
+      click_button("Update Profile")
+
+      expect(current_path).to eq(profile_path)
+      expect(page).to have_content("#{@user.name}, your profile is updated!")
+      expect(@user.reload.address).to eq("675 5th St.")
+      expect(@user.reload.city).to eq("Yuxerton")
+    end
+  end
+
+
   describe "when I visit the login path" do
     it "I see a field to enter my email address and password" do
 

@@ -52,21 +52,6 @@ RSpec.describe "As a visitor" do
         expect(page).to have_content("Logged in as #{@admin.name}")
       end
 
-      it "when logged in, I can logout" do
-        visit login_path
-
-        fill_in "Email", with:  "admin@email.com"
-        fill_in "Password", with: "password"
-        click_button("Login")
-
-        click_link("Logout")
-
-        expect(current_path).to eq(root_path)
-        expect(page).to have_content("You are logged out")
-        expect(page).to have_content("Cart: 0")
-
-      end
-
       describe "if invalid info given" do
         it "redirects to login and tells me credentials were incorrect" do
           visit login_path
@@ -79,54 +64,6 @@ RSpec.describe "As a visitor" do
           expect(page).to have_content("The email or password you entered was incorrect.")
         end
       end
-
-      describe "if I am a registered user and logged in" do
-        it "redirects me to my profile page" do
-          visit login_path
-
-          fill_in "Email", with:  "user@email.com"
-          fill_in "Password", with: "password"
-          click_button("Login")
-
-          expect(current_path).to eq(profile_path)
-
-          visit login_path
-          expect(current_path).to eq(profile_path)
-      
-          expect(page).to have_content("#{@user.name}, you're already logged in!")
-        end
-      end
-
-      describe "if I am a registered merchant and logged in" do
-        it "redirects me to my dashboard page" do
-          visit login_path
-
-          fill_in "Email", with:  "merchant@email.com"
-          fill_in "Password", with: "password"
-          click_button("Login")
-
-          expect(current_path).to eq(dashboard_path)
-
-          click_on("Login")
-
-          expect(current_path).to eq(dashboard_path)
-          expect(page).to have_content("#{@merchant.name}, you're already logged in!")
-        end
-      end
-
-      describe "if I am a logged in admin user and I click login" do
-        it "redirects me to welcome page" do
-          visit login_path
-
-          fill_in "Email", with:  "admin@email.com"
-          fill_in "Password", with: "password"
-          click_button("Login")
-
-          expect(current_path).to eq(root_path)
-
-          expect(page).to have_content("#{@admin.name}, you're already logged in!")
-        end
-      end
     end
   end
-end
+end 
