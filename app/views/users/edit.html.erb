@@ -1,0 +1,25 @@
+<%= form_for @user do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :email, "Email Address" %>
+  <%= f.text_field :email %>
+
+  <%= f.label "Password" %>
+  <%= f.password_field " " %>
+
+  <%= f.label "Street Address" %>
+  <%= f.text_field :address %>
+
+  <%= f.label "City" %>
+  <%= f.text_field :city %>
+
+  <%= f.label "State" %>
+  <%= f.text_field :state %>
+
+  <%= f.label "Zip Code" %>
+  <%= f.text_field :zip %>
+
+  <%= f.submit "Update Profile" %>
+
+<% end %>

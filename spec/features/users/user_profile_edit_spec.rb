@@ -19,6 +19,10 @@ RSpec.describe "As a registered user" do
 
       click_link("Edit Profile")
       expect(current_path).to eq(profile_edit_path)
+      expect(page).to have_content("#{@user.name}")
+      expect(page).to_not have_content("#{@user.password}")
+      save_and_open_page
+
     end
   end
 end

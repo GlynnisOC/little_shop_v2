@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   end
 
   def profile
-    # binding.pry
     if params[:new_id] != nil
       @user = User.find(params[:new_id])
     else
@@ -34,7 +33,8 @@ class UsersController < ApplicationController
   end
 
   def edit
-  end 
+    @user = User.find_by(params[:id])
+  end
 
   private
   def user_params
