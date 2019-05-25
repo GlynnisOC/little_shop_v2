@@ -15,6 +15,7 @@ RSpec.describe "As a registered user" do
       expect(page).to have_field("Email")
       expect(page).to have_field("Password")
       expect(page).to have_button("Login")
+    end
   end
 end
 
