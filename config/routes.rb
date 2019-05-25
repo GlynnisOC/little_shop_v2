@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :show]
 
   get '/profile', to: 'users#profile'
+  get '/profile/edit', to: 'users#edit'
 
   resources :users, only: [:index, :new, :create, :show, :edit]
 
