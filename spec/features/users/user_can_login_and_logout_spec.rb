@@ -92,9 +92,7 @@ RSpec.describe "As a visitor" do
 
           visit login_path
           expect(current_path).to eq(profile_path)
-          click_on("Login")
-
-          expect(current_path).to eq(profile_path(@user))
+      
           expect(page).to have_content("#{@user.name}, you're already logged in!")
         end
       end
