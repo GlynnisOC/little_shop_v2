@@ -8,3 +8,8 @@
 	<li>Zip Code: <%= @user.zip %></li>
 	<%= link_to "Edit Profile", profile_edit_path %>
 </ul>
+
+<% if @user.orders != [] %>
+	<%= link_to "My Orders", profile_orders_path(user_id: "#{@user.id}")  %>
+<% end %>
+

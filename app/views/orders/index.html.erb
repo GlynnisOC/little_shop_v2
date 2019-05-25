@@ -1,0 +1,10 @@
+<% @user.orders.each do |order| %>
+  <section id="orders-index-order-<%= order.id %>">
+    Order ID: <%= link_to "#{order.id}", order_show_path(order.id) %>
+    Date Order Was Made: <%= order.created_at.strftime("%F") %>
+    Date Order Was Last Updated: <%= order.updated_at.strftime("%F") %>
+    Order Status: <%= order.status %>
+    Total Quantity of Items: <%= order.items.size %>
+    Grand Total (All Items): <%= number_to_currency(order.order_grand_total) %>
+  </section>
+<% end %>
