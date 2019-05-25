@@ -18,13 +18,11 @@ RSpec.describe "As a registered user" do
       visit profile_path
 
       click_link("Edit Profile")
-      # expect(current_path).to eq(edit_profile_path)
+      expect(current_path).to eq(profile_edit_path)
     end
   end
 end
 
-# When I click on the link to edit my profile data
-# Then my current URI route is "/profile/edit"
 # I see a form like the registration page
 # The form contains all of my user information
 # The password fields are blank and can be left blank
