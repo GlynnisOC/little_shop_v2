@@ -22,11 +22,16 @@ RSpec.describe 'As a registered merchant on the site' do
 
 	describe "When I visit my items page '/dashboard/items'" do
 		before :each do
-			@merchant = User.create!(email: "merchant@email.com", password: "password", role: "merchant", name: "Murr Chante", address: "123 Sesame St", city: "Merchantsville", state: "MV", zip: 38511)
+			@merchant 		= User.create!(email: "merchant@email.com", password: "password", role: "merchant", name: "Murr Chante", address: "123 Sesame St", city: "Merchantsville", state: "MV", zip: 38511)
+			@user 				= User.create!(email: "user@email.com", password: "password", role: "default", name: "Yu Xer", address: "1600 Pennsylvania Ave", city: "Userton", state: "US", zip: 12345)
 
-			@item_1 =  @merchant.items.create!(name: "Item One", active: true, price: 1.00, description: "This is item one", image: "https://picsum.photos/200/300?image=1", inventory: 100)
-			@item_2 =  @merchant.items.create!(name: "Item Two", active: true, price: 2.00, description: "This is item two", image: "https://picsum.photos/200/300?image=1", inventory: 200)
-			@item_3 =  @merchant.items.create!(name: "Item Three", active: false, price: 3.00, description: "This is item three", image: "https://picsum.photos/200/300?image=1", inventory: 300)
+			@item_1 			= @merchant.items.create!(name: "Item One", active: true, price: 1.00, description: "This is item one", image: "https://picsum.photos/200/300?image=1", inventory: 100)
+			@item_2 			= @merchant.items.create!(name: "Item Two", active: true, price: 2.00, description: "This is item two", image: "https://picsum.photos/200/300?image=1", inventory: 200)
+			@item_3 			= @merchant.items.create!(name: "Item Three", active: false, price: 3.00, description: "This is item three", image: "https://picsum.photos/200/300?image=1", inventory: 300)
+
+			@order_1  		= Order.create!(status: 0, user_id: @user.id)
+
+			@order_item_1 = OrderItem.create!(item_id: @item_1.id, order_id: @order_1.id, quantity: 1, price: 1.00, fulfilled: false)
 
 			visit login_path
 
@@ -52,6 +57,7 @@ RSpec.describe 'As a registered merchant on the site' do
 				expect(page).to have_content("Inventory: #{@item_1.inventory}")
 				expect(page).to have_link("Edit #{@item_1.name}")
 				expect(page).to have_link("Disable")
+
 			end
 
 			within "#merchant-item-#{@item_2.id}" do
@@ -62,6 +68,7 @@ RSpec.describe 'As a registered merchant on the site' do
 				expect(page).to have_content("Inventory: #{@item_2.inventory}")
 				expect(page).to have_link("Edit #{@item_2.name}")
 				expect(page).to have_link("Disable")
+				expect(page).to have_link("Delete Item")
 			end
 
 			within "#merchant-item-#{@item_3.id}" do
@@ -72,8 +79,11 @@ RSpec.describe 'As a registered merchant on the site' do
 				expect(page).to have_content("Inventory: #{@item_3.inventory}")
 				expect(page).to have_link("Edit #{@item_3.name}")
 				expect(page).to have_link("Enable")
+				expect(page).to have_link("Delete Item")
 			end
-			
+
+			# require "pry"; binding.pry
+
 		end
 	end
 
