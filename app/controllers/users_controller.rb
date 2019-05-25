@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def profile
-    
+
     if params[:new_id] != nil
       @user = User.find(params[:new_id])
     else
