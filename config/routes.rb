@@ -29,4 +29,10 @@ Rails.application.routes.draw do
   post '/cart', to: 'cart#create', as: 'add_to_cart'
   delete '/cart', to: 'cart#empty_cart', as: 'empty_cart'
   patch '/cart', to: 'cart#change_amount', as: 'change_amount'
+
+  get 'profile/orders', to: "orders#index"
+  # namespace :profile do
+  #   get '/orders', to: "users#orders"
+  # end
+
 end

@@ -23,22 +23,19 @@ RSpec.describe 'As a registered user' do
 			user_1 = User.create!(email: "123@123.123", password: "password", role: 0, active: true, name: "Bob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
 			allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user_1)
 
-			merchant_1 = User.create!(email: "456@123.123", password: "password", role: 1, active: true, name: "Rob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
+			User.create!(email: "456@123.123", password: "password", role: 1, active: true, name: "Rob", address: "123 shady lane", city: "Memphis", state: "TN", zip: 80315)
 
 			visit profile_path
 
 			expect(page).to_not have_content("My Orders")
 
-			# @order_1 = create(:order, user: @user)
-			order_1 = user_1.orders.create!(status: 0)
+			user_1.orders.create!(status: 0)
+			visit profile_path
 
+			expect(page).to have_link("My Orders")
+			click_link("My Orders")
 
-
-			# expect(page).to have_link("My Orders")
-			# click_link("My Orders")
-			#
-			# expect(current_path).to eq("/profile/orders")
-
+			expect(current_path).to eq(profile_orders_path)
 		end
 	end
 end
