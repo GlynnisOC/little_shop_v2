@@ -8,7 +8,9 @@ class ApplicationController < ActionController::Base
   end
 
   def logout
+    reset_session
     redirect_to root_path
+    flash[:message] = "You are logged out"
   end
 
   def cart
