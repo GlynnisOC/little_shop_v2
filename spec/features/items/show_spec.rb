@@ -31,27 +31,18 @@ RSpec.describe 'As any user' do
   		expect(page).to_not have_content(@active_item_2.name)
 		end
 
-    # it 'shows a link to add to cart if visitor or regular user' do
-    #
+    it 'shows the average amount of time it takes this merchant to fulfill this item' # do
     #   visit items_path
     #
     #   within "#item-#{@active_item_1.id}" do
     #     click_link("#{@active_item_1.name}")
     #   end
     #
-    #   expect(page).to have_link("Add to Cart")
+    #   expect(current_path).to eq(item_path(@active_item_1))
     #
-    #   click_link "Add to Cart"
-    #
-    #   expect(current_path).to eq(items_path)
-    #
-    #   expect(page).to have_content("#{@active_item_1.name} has been added to your cart")
-    #
-    #
+    # 
     #
     # end
 
-
-    it 'shows the average amount of time it takes this merchant to fulfill this item'
 	end
 end

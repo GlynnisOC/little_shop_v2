@@ -6,13 +6,20 @@
   <% grand_total ||= 0 %>
 
   <% @cart_items.each do |item| %>
-  Item Name: <%= item.name %>
-  <img class="small-image" src=<%= item.image %> alt=<%= item.name %>>
-  Merchant: <%= item.user.name %>
-  Item Price: <%= number_to_currency(item.price) %>
-  Desired Quantity: <%= cart.contents[item.id.to_s] %>
-  Subtotal Price: <%= number_to_currency(cart.contents[item.id.to_s] * item.price) %>
-  <% grand_total += cart.contents[item.id.to_s] * item.price %>
+    <section id="cart-item-<%= item.id %>">
+      Item Name: <%= item.name %>
+      <img class="small-image" src=<%= item.image %> alt=<%= item.name %>>
+      Merchant: <%= item.user.name %>
+      Item Price: <%= number_to_currency(item.price) %>
+      Desired Quantity: <%= cart.contents[item.id.to_s] %>
+      Subtotal Price: <%= number_to_currency(cart.contents[item.id.to_s] * item.price) %>
+      <% grand_total += cart.contents[item.id.to_s] * item.price %>
+      <%= button_to "Add One", change_amount_path(item_id: "#{item.id}", change_amount: "1"), controller: "cart", action: "change_amount", method: :patch %>
+      <%= button_to "Subtract One", change_amount_path(item_id: "#{item.id}", change_amount: "-1"), controller: "cart", action: "change_amount", method: :patch %>
+      <%= button_to "Remove From Cart", change_amount_path(item_id: "#{item.id}", change_amount: "-#{cart.contents[item.id.to_s]}"), controller: "cart", action: "change_amount", method: :patch %>
+
+    </section>
+
   <% end %>
 
   Grand Total: <%= number_to_currency(grand_total) %>
