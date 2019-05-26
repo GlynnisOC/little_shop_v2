@@ -6,4 +6,12 @@ class Admin::UsersController < ApplicationController
 		def show
 			@user = User.find(params[:id])
 		end
+		
+		def upgrade
+			if current_admin?
+				user = User.find(params[:id])
+				user.upgrade_to_merchant
+				redirect_to admin_merchant_path(user)
+			end
+		end
 end
