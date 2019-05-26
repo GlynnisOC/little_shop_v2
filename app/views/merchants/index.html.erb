@@ -1,6 +1,10 @@
 <% @active_merchants.each do |merchant| %>
 	<ul id="merchant-<%= merchant.id %>-info" >
+	<% if current_admin? %>
+		<li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+	<% else %>
 		<li><%= merchant.name %></li>
+	<% end %>
 		<li><%= merchant.city %></li>
 		<li><%= merchant.state %></li>
 		<li><%= merchant.created_at.strftime("%m-%d-%Y") %></li>
