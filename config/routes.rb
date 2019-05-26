@@ -26,8 +26,9 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :new, :create, :show, :edit]
 
   namespace :admin do
-    get  '/dashboard',    to: "admins#dashboard"
-		resources :users, only: [:index, :show]
+    get  '/dashboard', to: "admins#dashboard"
+		get '/users/:id', to: "users#upgrade", as: 'upgrade_user' 
+		resources :users, only: [:index, :show] 
 		resources :merchants, only: [:show]
   end
 

@@ -6,4 +6,7 @@
 	<li>City: <%= @user.city %></li>
 	<li>State: <%= @user.state %></li>
 	<li>Zip Code: <%= @user.zip %></li>
+	<% if current_admin? %>
+		<%= link_to "Upgrade to Merchant", admin_upgrade_user_path(@user) %> 
+	<% end %>
 </ul>
