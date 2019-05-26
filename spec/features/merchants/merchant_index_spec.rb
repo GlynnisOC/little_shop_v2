@@ -15,7 +15,7 @@ RSpec.describe 'As a visitor on the merchants index page' do
 				expect(page).to have_content(@merchant_1.name)
 				expect(page).to have_content(@merchant_1.city)
 				expect(page).to have_content(@merchant_1.state)
-				expect(page).to have_content(@merchant_1.create_at.strftime "%m-%d-%Y")
+				expect(page).to have_content(@merchant_1.created_at.strftime "%m-%d-%Y")
 			end	
 
 			
@@ -23,7 +23,7 @@ RSpec.describe 'As a visitor on the merchants index page' do
 				expect(page).to have_content(@merchant_2.name)
 				expect(page).to have_content(@merchant_2.city)
 				expect(page).to have_content(@merchant_2.state)
-				expect(page).to have_content(@merchant_2.create_at.strftime "%m-%d-%Y")
+				expect(page).to have_content(@merchant_2.created_at.strftime "%m-%d-%Y")
 			end	
 
 			expect(page).to_not have_content(@inactive_merchant.name)
