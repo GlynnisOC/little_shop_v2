@@ -106,5 +106,13 @@ RSpec.describe User, type: :model do
       expect(@merchant.top_five_items_sold.last.name).to eq(@item_5.name)
       expect(@merchant.top_five_items_sold.last.item_quantity).to eq(3)
     end
+
+    it "calculates all items sold" do
+      expect(@merchant.all_items_sold).to eq(28)
+    end
+
+    it "calculates total starting inventory" do
+      expect(@merchant.total_starting_inventory).to eq(2800)
+    end
   end
 end

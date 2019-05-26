@@ -87,6 +87,8 @@ RSpec.describe 'As a registered merchant on the site' do
 	describe "I see statistics when I visit the merchant dashboard" do
 		before :each do
 			@merchant = User.create!(email: "merchant@email.com", password: "password", role: "merchant", name: "Murr Chante", address: "123 Sesame St", city: "Merchantsville", state: "MV", zip: 38511)
+			@merchant2 = User.create!(email: "merchant2@email.com", password: "password", role: "merchant", name: "Murr Chante", address: "123 Sesame St", city: "Merchantsville", state: "MV", zip: 38511)
+
 			@user_1		= User.create!(email: "user_1@email.com", 	password: "password", role: "default",  name: "user_name_1", address: "1000 Abc Street", city: "City_1", state: "AA", zip: 00001)
 			@user_2		= User.create!(email: "user_2@email.com", 	password: "password", role: "default",  name: "user_name_2", address: "2000 Abc Street", city: "City_1", state: "AB", zip: 00002)
 			@user_3		= User.create!(email: "user_3@email.com", 	password: "password", role: "default",  name: "user_name_3", address: "3000 Abc Street", city: "City_1", state: "AB", zip: 00003)
@@ -102,6 +104,7 @@ RSpec.describe 'As a registered merchant on the site' do
 			@item_5 = @merchant.items.create!(name: "Item Five", 	active: true,  price: 5.00, description: "This is item five",  image: "https://picsum.photos/200/300?image=1", inventory: 500)
 			@item_6 = @merchant.items.create!(name: "Item Six", 	active: true,  price: 6.00, description: "This is item six", 	 image: "https://picsum.photos/200/300?image=1", inventory: 600)
 			@item_7 = @merchant.items.create!(name: "Item Seven",	active: true,  price: 6.00, description: "This is item seven", image: "https://picsum.photos/200/300?image=1", inventory: 700)
+			@item_8 = @merchant2.items.create!(name: "Item Seven",	active: true,  price: 6.00, description: "This is item seven", image: "https://picsum.photos/200/300?image=1", inventory: 700)
 
       @order_1 = @user_1.orders.create(status: 2)
       @order_2 = @user_2.orders.create(status: 2)
@@ -145,7 +148,7 @@ RSpec.describe 'As a registered merchant on the site' do
 			visit dashboard_path
 		end
 
-			# [ ] - top 5 items I have sold by quantity, and the quantity of each that I've sold
+			# [x] - top 5 items I have sold by quantity, and the quantity of each that I've sold
 			# [ ] - total quantity of items I've sold, and as a percentage against my sold units plus remaining inventory (eg, if I have sold 1,000 things and still have 9,000 things in inventory, the message would say something like "Sold 1,000 items, which is 10% of your total inventory")
 			# [ ] - top 3 states where my items were shipped, and their quantities
 			# [ ] - top 3 city/state where my items were shipped, and their quantities (Springfield, MI should not be grouped with Springfield, CO)
@@ -165,9 +168,9 @@ RSpec.describe 'As a registered merchant on the site' do
 			end
 		end
 
-		xit "total quantity of items I've sold, and as a percentage against my sold units plus remaining inventory" do
-			within "#x" do
-				expect(page).to have_content("x")
+		it "total quantity of items I've sold, and as a percentage against my sold units plus remaining inventory" do
+			within "#total-items-sold" do
+				expect(page).to have_content("Sold 28 items, which is 1% of your total inventory")
 			end
 		end
 

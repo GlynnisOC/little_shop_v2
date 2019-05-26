@@ -32,4 +32,15 @@ class User < ApplicationRecord
 				 .order('item_quantity DESC')
 				 .limit(5)
 	end
+
+	def all_items_sold
+		items.joins(:order_items)
+				 .where('order_items.fulfilled = ?', true)
+				 .sum('order_items.quantity')
+	end
+
+	def total_starting_inventory
+		items.distinct.joins(:order_items).where('order_items.fulfilled = ?', true).sum('items.inventory')
+	end
+
 end

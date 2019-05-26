@@ -13,6 +13,7 @@
 
 <section id="merchant-dash-stats">
 	<h1>Merchant Dashboard Statistics</h1>
+
 	<section id="top-five-items-sold">
 		<h3>Top Five Items Sold by Quantity</h3>
 		<ol>
@@ -21,4 +22,16 @@
 			<% end %>
 		</ol>
 	</section>
+
+	<section id="total-items-sold">
+		<h3>Total Quantity Sold</h3>
+		<ul>
+			<li>Total Quantity Sold: <%= @all_items_sold %></li>
+			<li>Total Starting Inventory: <%= @total_starting_inventory %></li>
+			<% if @total_starting_inventory > 0 %>
+				<li>Sold <%= @all_items_sold %> items, which is <%= number_to_percentage(100 * @all_items_sold / @total_starting_inventory, precision: 0) %> of your total inventory</li>
+			<% end %>
+		</ul>
+	</section>
+
 </section>
