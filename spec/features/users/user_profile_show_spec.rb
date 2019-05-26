@@ -9,7 +9,7 @@ RSpec.describe 'As a registered user' do
 
 			visit profile_path
 
-			within "#user-profile-info" do
+			within "#user-#{user.id}-profile-info" do
 				expect(page).to have_content("Name: #{user.name}")
 				expect(page).to have_content("Email: #{user.email}")
 				expect(page).to have_content("Address: #{user.address}")
