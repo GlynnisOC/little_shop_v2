@@ -127,8 +127,8 @@ RSpec.describe 'As a registered merchant on the site' do
 
 			expect(current_path).to eq(dashboard_items_path)
 			expect(page).to have_content("Your new item has been saved")
-			# expect(page).to have_content(new_item.name)
-			# expect(page).to have_css("img[src*='#{new_item.image}']")
+			expect(page).to have_content(new_item.name)
+			expect(page).to have_css("img[src*='#{new_item.image}']")
 
 		end
 
