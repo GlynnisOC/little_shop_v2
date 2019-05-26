@@ -4,6 +4,8 @@ class Item < ApplicationRecord
 		has_many :orders, through: :order_items
 
 		validates_presence_of :name, :price, :description, :image, :inventory
+	  validates :price, numericality: { greater_than: 0 }
+	  validates :inventory, numericality: { greater_than_or_equal_to: 0 }
 
 		def self.where_active
 			Item.where(active: true)

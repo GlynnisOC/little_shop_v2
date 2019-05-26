@@ -5,25 +5,23 @@ Rails.application.routes.draw do
   resources :merchants, only: [:index]
 
 	namespace :dashboard do
-		resources :items, only: [:index]
+		resources :items, only: [:index, :new, :create]
 	end
 
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
-
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
 
   get '/logout', to: 'application#logout'
 
-  resources :items, only: [:index, :show]
+  resources :items, only: [:index, :show, :create]
 
   get '/profile', to: 'users#profile'
   get '/profile/edit', to: 'users#edit'
   patch '/profile/edit', to: 'users#update'
   get 'profile/orders', to: "orders#index"
   get 'profile/orders/:id', to: "orders#show", as: 'order_show'
-
 
   resources :users, only: [:index, :new, :create, :show, :edit]
 
