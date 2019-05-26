@@ -24,7 +24,6 @@ RSpec.describe 'As an admin user on the merchant index page' do
 				expect(page).to have_content("State: #{@merchant_1.state}")
 				expect(page).to have_content("Zip Code: #{@merchant_1.zip}")
 			end
-
 		end
 	end
 end
