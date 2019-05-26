@@ -5,5 +5,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
+    @items = @order.items.distinct
   end
 end
