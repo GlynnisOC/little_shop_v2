@@ -1,0 +1,18 @@
+Order ID: <%= @order.id %>
+Order Created: <%= @order.created_at.strftime("%F") %>
+Order Updated: <%= @order.updated_at.strftime("%F") %>
+Order Status: <%= @order.status %>
+
+<% @items.each do |item| %>
+  <section id="order-show-item-<%= item.id %>">
+    Item Name: <%= item.name %>
+    Item Description: <%= item.description %>
+    <img class="small-image" src=<%= item.image %> alt=<%= item.name %>>
+    Item Quantity: <%= @order.item_quantity(item.id) %>
+    Item Price: <%= number_to_currency(item.price) %>
+    Item Subtotal: <%= number_to_currency(item.price * @order.item_quantity(item.id)) %>
+  </section>
+<% end %>
+
+Total Items in Order: <%= @order.items.length %>
+Order Grand Total: <%= number_to_currency(@order.order_grand_total) %>
