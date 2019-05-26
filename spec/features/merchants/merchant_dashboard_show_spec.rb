@@ -83,4 +83,78 @@ RSpec.describe 'As a registered merchant on the site' do
 			end
 		end
 	end
+
+	describe "I see statistics when I visit the merchant dashboard" do
+		before :each do
+			@merchant = User.create!(email: "merchant@email.com", password: "password", role: "merchant", name: "Murr Chante", address: "123 Sesame St", city: "Merchantsville", state: "MV", zip: 38511)
+			@user 		= User.create!(email: "user@email.com", password: "password", role: "default", name: "Yu Xer", address: "1600 Pennsylvania Ave", city: "Userton", state: "US", zip: 12345)
+
+			@item_1 = @merchant.items.create!(name: "Item One", active: true, price: 1.00, description: "This is item one", image: "https://picsum.photos/200/300?image=1", inventory: 100)
+			@item_2 = @merchant.items.create!(name: "Item Two", active: true, price: 2.00, description: "This is item two", image: "https://picsum.photos/200/300?image=1", inventory: 200)
+			@item_3 = @merchant.items.create!(name: "Item Three", active: false, price: 3.00, description: "This is item three", image: "https://picsum.photos/200/300?image=1", inventory: 300)
+
+			@order_1 = Order.create!(status: 0, user_id: @user.id)
+
+			@order_item_1 = OrderItem.create!(item_id: @item_1.id, order_id: @order_1.id, quantity: 1, price: 1.00, fulfilled: false)
+
+			visit login_path
+
+			fill_in "Email", with:  "merchant@email.com"
+			fill_in "Password", with: "password"
+			click_button("Login")
+
+			visit dashboard_path
+		end
+
+			# [ ] - top 5 items I have sold by quantity, and the quantity of each that I've sold
+			# [ ] - total quantity of items I've sold, and as a percentage against my sold units plus remaining inventory (eg, if I have sold 1,000 things and still have 9,000 things in inventory, the message would say something like "Sold 1,000 items, which is 10% of your total inventory")
+			# [ ] - top 3 states where my items were shipped, and their quantities
+			# [ ] - top 3 city/state where my items were shipped, and their quantities (Springfield, MI should not be grouped with Springfield, CO)
+			# [ ] - name of the user with the most orders from me (pick one if there's a tie), and number of orders
+			# [ ] - name of the user who bought the most total items from me (pick one if there's a tie), and the total quantity
+			# [ ] - top 3 users who have spent the most money on my items, and the total amount they've spent
+
+		it "top 5 items I have sold by quantity, and the quantity of each that I've sold" do
+			within "#x" do
+				expect(page).to have_content("x")
+			end
+		end
+
+		xit "total quantity of items I've sold, and as a percentage against my sold units plus remaining inventory" do
+			within "#x" do
+				expect(page).to have_content("x")
+			end
+		end
+
+		xit "top 3 states where my items were shipped, and their quantities" do
+			within "#x" do
+				expect(page).to have_content("x")
+			end
+		end
+
+		xit "top 3 city/state where my items were shipped, and their quantities" do
+			within "#x" do
+				expect(page).to have_content("x")
+			end
+		end
+
+		xit "name of the user with the most orders from me" do
+			within "#x" do
+				expect(page).to have_content("x")
+			end
+		end
+
+		xit "name of the user who bought the most total items from me" do
+			within "#x" do
+				expect(page).to have_content("x")
+			end
+		end
+
+		xit "top 3 users who have spent the most money on my items, and the total amount they've spent" do
+			within "#x" do
+				expect(page).to have_content("x")
+			end
+		end
+
+	end
 end
