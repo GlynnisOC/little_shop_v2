@@ -5,7 +5,6 @@ class MerchantsController < ApplicationController
   def dashboard
 		@merchant = User.find(current_user.id)
     flash[:logged_in] = "#{@merchant.name}, you're already logged in!"
-# [ ] - top 5 items I have sold by quantity, and the quantity of each that I've sold
     @top_five_items_sold = @merchant.top_five_items_sold
   end
 

@@ -143,7 +143,6 @@ RSpec.describe 'As a registered merchant on the site' do
 			click_button("Login")
 
 			visit dashboard_path
-			save_and_open_page
 		end
 
 			# [ ] - top 5 items I have sold by quantity, and the quantity of each that I've sold
@@ -156,7 +155,13 @@ RSpec.describe 'As a registered merchant on the site' do
 
 		it "top 5 items I have sold by quantity, and the quantity of each that I've sold" do
 			within "#merchant-dash-stats" do
-				expect(page).to have_content("x")
+				expect(page.all('li')[0]).to have_content("#{@item_1.name}: 7 Sold")
+				expect(page.all('li')[1]).to have_content("#{@item_2.name}: 6 Sold")
+				expect(page.all('li')[2]).to have_content("#{@item_3.name}: 5 Sold")
+				expect(page.all('li')[3]).to have_content("#{@item_4.name}: 4 Sold")
+				expect(page.all('li')[4]).to have_content("#{@item_5.name}: 3 Sold")
+
+				expect(page).to_not have_content("#{@item_6.name}: 2 Sold")
 			end
 		end
 
