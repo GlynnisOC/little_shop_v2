@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+	before :each do 
+      @merchant_1 = User.create!(email: "Bob@bob.bob", password: "password", role: 1, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
+
+      @admin_1 = User.create!(email: "Bob@bob.bob", password: "password", role: 2, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
+
+		
+      @user_1 = User.create!(email: "Bob@bob.bob", password: "password", role: 0, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
+      @user_2 = User.create!(email: "Bob@bob.bob", password: "password", role: 0, active: false, name: "Joe Joe", address: "2 had Ln", city: "denva", state: "CO", zip: "80303")
+	end
+
   describe 'relationships' do
 		it {should have_many :items}
   end
@@ -18,21 +28,18 @@ RSpec.describe User, type: :model do
 
   describe 'roles' do
     it "can be created as a merchant" do
-      merchant_1 = User.create!(email: "Bob@bob.bob", password: "password", role: 1, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
 
       expect(merchant_1.role).to eq("merchant")
       expect(merchant_1.merchant?).to be_truthy
     end
 
     it "can be created as an admin" do
-      admin_1 = User.create!(email: "Bob@bob.bob", password: "password", role: 2, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
 
       expect(admin_1.role).to eq("admin")
       expect(admin_1.admin?).to be_truthy
     end
 
     it "can be created as a default user" do
-      user_1 = User.create!(email: "Bob@bob.bob", password: "password", role: 0, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
 
       expect(user_1.role).to eq("default")
       expect(user_1.default?).to be_truthy
@@ -46,5 +53,9 @@ RSpec.describe User, type: :model do
 
       expect(User.email_taken(email)).to be_truthy
     end
+		
+		it '.all_reg_users' do
+			expect(User.all_reg_users).to eq([@user_1, @user_2])
+		end
   end
 end

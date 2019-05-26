@@ -13,6 +13,7 @@ RSpec.describe 'As an admin user' do
 			expect(page).to_not have_link("Users")
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_1)
+			visit root_path
 			click_link("Users")
 			
 			within "user-#{@user_1.id}-info" do
@@ -28,7 +29,7 @@ RSpec.describe 'As an admin user' do
 			expect(current_path).to eq(user_path(@user_1))
 		end
 
-		it 'shows each user registration date and a button to upgrade that user to merchant' do
+		xit 'shows each user registration date and a button to upgrade that user to merchant' do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_1)
 			visit admin_users_path 
 
