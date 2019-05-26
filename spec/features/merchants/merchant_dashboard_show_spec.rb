@@ -132,18 +132,69 @@ RSpec.describe 'As a registered merchant on the site' do
 
 		end
 
-		# I see a form where I can add new information about an item, including:
-		# - the name of the item, which cannot be blank
-		# - a description for the item, which cannot be blank
-		# - a thumbnail image URL string, which CAN be left blank
-		# - a price which must be greater than $0.00
-		# - my current inventory count of this item which is 0 or greater
-		#
-		# When I submit valid information and save the form
-		# I am taken back to my items page
-		# I see a flash message indicating my new item is saved
-		# I see the new item on the page, and it is enabled and available for sale
-		# If I left the image field blank, I see a placeholder image for the thumbnail
-	end
+		it "name and description fields can't be blank" do
+			visit new_dashboard_item_path
 
+			fill_in 'Price', with: -1.00
+			fill_in 'Available Inventory', with: -1
+
+			click_button("Add Item")
+
+			expect(current_path).to eq(new_dashboard_item_path)
+			expect(page).to have_content("New item information missing or invalid.")
+
+		end
+
+		it "price can't be less than $0.00" do
+			visit new_dashboard_item_path
+
+			fill_in 'Name', with: "New Item"
+			fill_in 'Description', with: "New item description"
+			fill_in 'Image', with: 'https://bit.ly/2Ey9spB'
+			fill_in 'Price', with: -1.00
+			fill_in 'Available Inventory', with: 1
+
+			click_button("Add Item")
+
+			expect(current_path).to eq(new_dashboard_item_path)
+			expect(page).to have_content("New item information missing or invalid.")
+
+		end
+
+		it "quantity can't be less than 0" do
+			visit new_dashboard_item_path
+
+			fill_in 'Name', with: "New Item"
+			fill_in 'Description', with: "New item description"
+			fill_in 'Image', with: 'https://bit.ly/2Ey9spB'
+			fill_in 'Price', with: 1.00
+			fill_in 'Available Inventory', with: -1
+
+			click_button("Add Item")
+
+			expect(current_path).to eq(new_dashboard_item_path)
+			expect(page).to have_content("New item information missing or invalid.")
+
+		end
+
+		it "image can be left blank and if it is then a default image is given" do
+			visit new_dashboard_item_path
+
+			fill_in 'Name', with: "New Item"
+			fill_in 'Description', with: "New item description"
+			fill_in 'Price', with: 1.00
+			fill_in 'Available Inventory', with: 0
+
+			click_button("Add Item")
+
+			new_item = Item.find_by(name: "New Item")
+			default_img = 'https://bit.ly/2HWf7qo'
+
+			expect(current_path).to eq(dashboard_items_path)
+			expect(page).to have_content("Your new item has been saved")
+			expect(page).to have_content(new_item.name)
+			expect(page).to have_css("img[src*='#{default_img}']")
+
+		end
+	end
 end
