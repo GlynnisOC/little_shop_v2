@@ -24,7 +24,6 @@ RSpec.describe "As a registered user" do
 
       fill_in "Street Address", with: "675 5th St."
       fill_in "City", with: "Yuxerton"
-      fill_in "Password", with: "pword"
       click_button("Update Profile")
 
       expect(current_path).to eq(profile_path)
@@ -48,5 +47,6 @@ RSpec.describe "As a registered user" do
 
       expect(current_path).to eq(profile_edit_path)
       expect(page).to have_content("That email address is taken.")
+    end
   end
 end
