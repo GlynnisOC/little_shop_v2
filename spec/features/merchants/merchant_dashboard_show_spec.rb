@@ -87,15 +87,54 @@ RSpec.describe 'As a registered merchant on the site' do
 	describe "I see statistics when I visit the merchant dashboard" do
 		before :each do
 			@merchant = User.create!(email: "merchant@email.com", password: "password", role: "merchant", name: "Murr Chante", address: "123 Sesame St", city: "Merchantsville", state: "MV", zip: 38511)
-			@user 		= User.create!(email: "user@email.com", password: "password", role: "default", name: "Yu Xer", address: "1600 Pennsylvania Ave", city: "Userton", state: "US", zip: 12345)
+			@user_1		= User.create!(email: "user_1@email.com", 	password: "password", role: "default",  name: "user_name_1", address: "1000 Abc Street", city: "City_1", state: "AA", zip: 00001)
+			@user_2		= User.create!(email: "user_2@email.com", 	password: "password", role: "default",  name: "user_name_2", address: "2000 Abc Street", city: "City_1", state: "AB", zip: 00002)
+			@user_3		= User.create!(email: "user_3@email.com", 	password: "password", role: "default",  name: "user_name_3", address: "3000 Abc Street", city: "City_1", state: "AB", zip: 00003)
+			@user_4 	= User.create!(email: "user_4@email.com", 	password: "password", role: "default",  name: "user_name_4", address: "4000 Abc Street", city: "City_1", state: "AC", zip: 00004)
+			@user_5 	= User.create!(email: "user_5@email.com", 	password: "password", role: "default",  name: "user_name_5", address: "5000 Abc Street", city: "City_1", state: "AC", zip: 00004)
+			@user_6 	= User.create!(email: "user_6@email.com", 	password: "password", role: "default",  name: "user_name_6", address: "6000 Abc Street", city: "City_1", state: "AC", zip: 00004)
+			@user_7 	= User.create!(email: "user_7@email.com", 	password: "password", role: "default",  name: "user_name_7", address: "7000 Abc Street", city: "City_1", state: "Ad", zip: 00004)
 
-			@item_1 = @merchant.items.create!(name: "Item One", active: true, price: 1.00, description: "This is item one", image: "https://picsum.photos/200/300?image=1", inventory: 100)
-			@item_2 = @merchant.items.create!(name: "Item Two", active: true, price: 2.00, description: "This is item two", image: "https://picsum.photos/200/300?image=1", inventory: 200)
-			@item_3 = @merchant.items.create!(name: "Item Three", active: false, price: 3.00, description: "This is item three", image: "https://picsum.photos/200/300?image=1", inventory: 300)
+			@item_1 = @merchant.items.create!(name: "Item One", 	active: true,  price: 1.00, description: "This is item one", 	 image: "https://picsum.photos/200/300?image=1", inventory: 100)
+			@item_2 = @merchant.items.create!(name: "Item Two", 	active: true,  price: 2.00, description: "This is item two", 	 image: "https://picsum.photos/200/300?image=1", inventory: 200)
+			@item_3 = @merchant.items.create!(name: "Item Three", active: true,  price: 3.00, description: "This is item three", image: "https://picsum.photos/200/300?image=1", inventory: 300)
+			@item_4 = @merchant.items.create!(name: "Item Four", 	active: true,  price: 4.00, description: "This is item four",  image: "https://picsum.photos/200/300?image=1", inventory: 400)
+			@item_5 = @merchant.items.create!(name: "Item Five", 	active: true,  price: 5.00, description: "This is item five",  image: "https://picsum.photos/200/300?image=1", inventory: 500)
+			@item_6 = @merchant.items.create!(name: "Item Six", 	active: true,  price: 6.00, description: "This is item six", 	 image: "https://picsum.photos/200/300?image=1", inventory: 600)
+			@item_7 = @merchant.items.create!(name: "Item Seven",	active: true,  price: 6.00, description: "This is item seven", image: "https://picsum.photos/200/300?image=1", inventory: 700)
 
-			@order_1 = Order.create!(status: 0, user_id: @user.id)
+      @order_1 = @user_1.orders.create(status: 2)
+      @order_2 = @user_2.orders.create(status: 2)
+      @order_3 = @user_3.orders.create(status: 2)
+      @order_4 = @user_4.orders.create(status: 2)
+      @order_5 = @user_5.orders.create(status: 2)
+      @order_6 = @user_6.orders.create(status: 2)
+      @order_7 = @user_7.orders.create(status: 2)
+      @order_8 = @user_7.orders.create(status: 2)
 
-			@order_item_1 = OrderItem.create!(item_id: @item_1.id, order_id: @order_1.id, quantity: 1, price: 1.00, fulfilled: false)
+			@order_item_1a = @item_1.order_items.create!(item: @item_1, order: @order_1, quantity: 7, price: 5.00, fulfilled: true)
+			@order_item_1b = @item_1.order_items.create!(item: @item_1, order: @order_1, quantity: 7, price: 5.00, fulfilled: false)
+
+			@order_item_2a = @item_2.order_items.create!(item: @item_2, order: @order_2, quantity: 6, price: 5.00, fulfilled: true)
+			@order_item_2b = @item_2.order_items.create!(item: @item_2, order: @order_2, quantity: 6, price: 5.00, fulfilled: false)
+
+			@order_item_3a = @item_3.order_items.create!(item: @item_3, order: @order_3, quantity: 5, price: 5.00, fulfilled: true)
+			@order_item_3b = @item_3.order_items.create!(item: @item_3, order: @order_3, quantity: 5, price: 5.00, fulfilled: false)
+
+			@order_item_4a = @item_4.order_items.create!(item: @item_4, order: @order_4, quantity: 4, price: 5.00, fulfilled: true)
+			@order_item_4b = @item_4.order_items.create!(item: @item_4, order: @order_4, quantity: 4, price: 5.00, fulfilled: false)
+
+			@order_item_5a = @item_5.order_items.create!(item: @item_5, order: @order_5, quantity: 3, price: 5.00, fulfilled: true)
+			@order_item_5b = @item_5.order_items.create!(item: @item_5, order: @order_5, quantity: 3, price: 5.00, fulfilled: false)
+
+			@order_item_6a = @item_6.order_items.create!(item: @item_6, order: @order_6, quantity: 1, price: 5.00, fulfilled: true)
+			@order_item_6b = @item_6.order_items.create!(item: @item_6, order: @order_6, quantity: 1, price: 5.00, fulfilled: false)
+
+			@order_item_7a = @item_7.order_items.create!(item: @item_7, order: @order_7, quantity: 1, price: 5.00, fulfilled: true)
+			@order_item_7b = @item_7.order_items.create!(item: @item_7, order: @order_7, quantity: 1, price: 5.00, fulfilled: false)
+
+			@order_item_8a = @item_7.order_items.create!(item: @item_7, order: @order_8, quantity: 1, price: 5.00, fulfilled: true)
+			@order_item_8b = @item_7.order_items.create!(item: @item_7, order: @order_8, quantity: 1, price: 5.00, fulfilled: false)
 
 			visit login_path
 
@@ -104,6 +143,7 @@ RSpec.describe 'As a registered merchant on the site' do
 			click_button("Login")
 
 			visit dashboard_path
+			save_and_open_page
 		end
 
 			# [ ] - top 5 items I have sold by quantity, and the quantity of each that I've sold
@@ -115,7 +155,7 @@ RSpec.describe 'As a registered merchant on the site' do
 			# [ ] - top 3 users who have spent the most money on my items, and the total amount they've spent
 
 		it "top 5 items I have sold by quantity, and the quantity of each that I've sold" do
-			within "#x" do
+			within "#merchant-dash-stats" do
 				expect(page).to have_content("x")
 			end
 		end

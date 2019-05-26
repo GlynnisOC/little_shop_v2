@@ -9,3 +9,16 @@
 	<%= link_to "View My Items", dashboard_items_path %>
 	<%= link_to "Login", dashboard_path %>
 </ul>
+
+
+<section id="merchant-dash-stats">
+	<h1>Merchant Dashboard Statistics</h1>
+	<section id="top-five-items-sold">
+		<h3>Top Five Items Sold by Quantity</h3>
+		<ol>
+			<% @top_five_items_sold.each do |item| %>
+				<li><%= item.name %>: <%= item.item_quantity %> Sold</li>
+			<% end %>
+		</ol>
+	</section>
+</section>

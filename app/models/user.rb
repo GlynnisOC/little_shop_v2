@@ -23,4 +23,13 @@ class User < ApplicationRecord
 	def self.email_taken(email)
 		where(email: email) != []
 	end
+
+	def top_five_items_sold
+		items.select(:name, 'SUM(order_items.quantity) AS item_quantity')
+				 .joins(:order_items)
+				 .where('order_items.fulfilled = ?', true)
+				 .group(:id)
+				 .order('item_quantity DESC')
+				 .limit(5)
+	end
 end
