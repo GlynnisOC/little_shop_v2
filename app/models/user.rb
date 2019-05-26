@@ -9,7 +9,7 @@ class User < ApplicationRecord
 													:password_digest,
 													:email,
 													:role,
-													:active,
+#													:active,
 													:address,
 													:city,
 													:state,
@@ -22,5 +22,9 @@ class User < ApplicationRecord
 
 	def self.email_taken(email)
 		where(email: email) != []
+	end
+
+	def self.all_reg_users
+		where(role: 0)
 	end
 end
