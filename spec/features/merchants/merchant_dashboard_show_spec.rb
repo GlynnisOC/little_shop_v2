@@ -9,7 +9,7 @@ RSpec.describe 'As a registered merchant on the site' do
 
 			visit dashboard_path
 
-			within "#merchant-profile-info" do
+			within "#merchant-#{merchant.id}-profile-info" do
 				expect(page).to have_content("Name: #{merchant.name}")
 				expect(page).to have_content("Email: #{merchant.email}")
 				expect(page).to have_content("Address: #{merchant.address}")
