@@ -26,7 +26,7 @@ RSpec.describe 'As an admin user' do
 
 			click_link(@user_2.name)
 
-			expect(current_path).to eq(user_path(@user_2))
+			expect(current_path).to eq(admin_user_path(@user_2))
 		end
 
 		it 'shows each user registration date and a button to upgrade that user to merchant' do
