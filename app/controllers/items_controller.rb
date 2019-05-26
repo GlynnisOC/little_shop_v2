@@ -11,4 +11,11 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @cart = Cart.new(session[:cart])
   end
+
+  def create
+    redirect_to dashboard_items_path
+    flash[:message] = "Your new item has been saved"
+  end
+
+
 end

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get '/logout', to: 'application#logout'
 
-  resources :items, only: [:index, :show]
+  resources :items, only: [:index, :show, :create]
 
   get '/profile', to: 'users#profile'
   get '/profile/edit', to: 'users#edit'
