@@ -43,7 +43,7 @@ RSpec.describe 'As a registered merchant on the site' do
 		it "I see a link to add a new item to the system" do
 			visit dashboard_items_path
 
-			expect(page).to have_link("Add new item")
+			expect(page).to have_link("Add New Item")
 		end
 
 		it "I see details about each item I've added to the system" do
@@ -81,6 +81,120 @@ RSpec.describe 'As a registered merchant on the site' do
 				expect(page).to have_link("Enable")
 				expect(page).to have_link("Delete Item")
 			end
+		end
+
+		it "I see a link to add a new item" do
+			visit dashboard_items_path
+
+			click_link("Add New Item")
+
+			expect(current_path).to eq(new_dashboard_item_path)
+		end
+	end
+
+	describe "when I visit the page to add a new item" do
+		before :each do
+			@merchant = User.create!(email: "merchant@email.com", password: "password", role: "merchant", name: "Murr Chante", address: "123 Sesame St", city: "Merchantsville", state: "MV", zip: 38511)
+			@user 		= User.create!(email: "user@email.com", password: "password", role: "default", name: "Yu Xer", address: "1600 Pennsylvania Ave", city: "Userton", state: "US", zip: 12345)
+
+			@item_1 = @merchant.items.create!(name: "Item One", active: true, price: 1.00, description: "This is item one", image: "https://picsum.photos/200/300?image=1", inventory: 100)
+			@item_2 = @merchant.items.create!(name: "Item Two", active: true, price: 2.00, description: "This is item two", image: "https://picsum.photos/200/300?image=1", inventory: 200)
+			@item_3 = @merchant.items.create!(name: "Item Three", active: false, price: 3.00, description: "This is item three", image: "https://picsum.photos/200/300?image=1", inventory: 300)
+
+			@order_1 = Order.create!(status: 0, user_id: @user.id)
+
+			@order_item_1 = OrderItem.create!(item_id: @item_1.id, order_id: @order_1.id, quantity: 1, price: 1.00, fulfilled: false)
+
+			visit login_path
+
+			fill_in "Email", with:  "merchant@email.com"
+			fill_in "Password", with: "password"
+			click_button("Login")
+		end
+
+		it "I see a form where I can add information for a new item" do
+			visit new_dashboard_item_path
+
+			fill_in 'Name', with: 'New Item'
+			fill_in 'Description', with: 'This is the description for a new item.'
+			fill_in 'Image', with: 'https://bit.ly/2Ey9spB'
+			fill_in 'Price', with: 1.00
+			fill_in 'Available Inventory', with: 5
+
+			click_button("Add Item")
+
+			new_item = Item.find_by(name: "New Item")
+
+			expect(current_path).to eq(dashboard_items_path)
+			expect(page).to have_content("Your new item has been saved")
+			expect(page).to have_content(new_item.name)
+			expect(page).to have_css("img[src*='#{new_item.image}']")
+
+		end
+
+		it "name and description fields can't be blank" do
+			visit new_dashboard_item_path
+
+			fill_in 'Price', with: -1.00
+			fill_in 'Available Inventory', with: -1
+
+			click_button("Add Item")
+
+			expect(current_path).to eq(new_dashboard_item_path)
+			expect(page).to have_content("New item information missing or invalid.")
+
+		end
+
+		it "price can't be less than $0.00" do
+			visit new_dashboard_item_path
+
+			fill_in 'Name', with: "New Item"
+			fill_in 'Description', with: "New item description"
+			fill_in 'Image', with: 'https://bit.ly/2Ey9spB'
+			fill_in 'Price', with: -1.00
+			fill_in 'Available Inventory', with: 1
+
+			click_button("Add Item")
+
+			expect(current_path).to eq(new_dashboard_item_path)
+			expect(page).to have_content("New item information missing or invalid.")
+
+		end
+
+		it "quantity can't be less than 0" do
+			visit new_dashboard_item_path
+
+			fill_in 'Name', with: "New Item"
+			fill_in 'Description', with: "New item description"
+			fill_in 'Image', with: 'https://bit.ly/2Ey9spB'
+			fill_in 'Price', with: 1.00
+			fill_in 'Available Inventory', with: -1
+
+			click_button("Add Item")
+
+			expect(current_path).to eq(new_dashboard_item_path)
+			expect(page).to have_content("New item information missing or invalid.")
+
+		end
+
+		it "image can be left blank and if it is then a default image is given" do
+			visit new_dashboard_item_path
+
+			fill_in 'Name', with: "New Item"
+			fill_in 'Description', with: "New item description"
+			fill_in 'Price', with: 1.00
+			fill_in 'Available Inventory', with: 0
+
+			click_button("Add Item")
+
+			new_item = Item.find_by(name: "New Item")
+			default_img = 'https://bit.ly/2HWf7qo'
+
+			expect(current_path).to eq(dashboard_items_path)
+			expect(page).to have_content("Your new item has been saved")
+			expect(page).to have_content(new_item.name)
+			expect(page).to have_css("img[src*='#{default_img}']")
+
 		end
 	end
 end
