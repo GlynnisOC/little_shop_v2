@@ -43,7 +43,7 @@ RSpec.describe 'As a registered merchant on the site' do
 		it "I see a link to add a new item to the system" do
 			visit dashboard_items_path
 
-			expect(page).to have_link("Add new item")
+			expect(page).to have_link("Add New Item")
 		end
 
 		it "I see details about each item I've added to the system" do
@@ -82,5 +82,29 @@ RSpec.describe 'As a registered merchant on the site' do
 				expect(page).to have_link("Delete Item")
 			end
 		end
+
+		it "I see a link to add a new item" do
+			visit dashboard_items_path
+
+			click_link("Add New Item")
+
+			expect(current_path).to eq(new_dashboard_item_path)
+		end
+
+# And I click on the link to add a new item
+# My URI route should be "/dashboard/items/new"
+# I see a form where I can add new information about an item, including:
+# - the name of the item, which cannot be blank
+# - a description for the item, which cannot be blank
+# - a thumbnail image URL string, which CAN be left blank
+# - a price which must be greater than $0.00
+# - my current inventory count of this item which is 0 or greater
+#
+# When I submit valid information and save the form
+# I am taken back to my items page
+# I see a flash message indicating my new item is saved
+# I see the new item on the page, and it is enabled and available for sale
+# If I left the image field blank, I see a placeholder image for the thumbnail
+
 	end
 end
