@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get  '/dashboard', to: "admins#dashboard"
-		get '/users/:id', to: "users#upgrade", as: 'upgrade_user' 
+		post '/users/:id', to: "users#upgrade", as: 'upgrade_user' 
 		resources :users, only: [:index, :show] 
 		resources :merchants, only: [:show]
   end

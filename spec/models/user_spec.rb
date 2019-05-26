@@ -52,7 +52,7 @@ RSpec.describe User, type: :model do
 		it '#upgrade_to_merchant' do
 			@user_1.upgrade_to_merchant
 			@user_1.reload
-			expect(@user_1.role).to eq(1)
+			expect(@user_1.role).to eq("merchant")
 		end
 	end
 

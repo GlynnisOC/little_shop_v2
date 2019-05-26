@@ -11,6 +11,7 @@ class Admin::UsersController < ApplicationController
 			if current_admin?
 				user = User.find(params[:id])
 				user.upgrade_to_merchant
+				flash[:upgraded] = "#{user.name} is now a merchant"
 				redirect_to admin_merchant_path(user)
 			end
 		end
