@@ -27,4 +27,8 @@ class User < ApplicationRecord
 	def self.all_reg_users
 		where(role: 0)
 	end
+
+	def self.active_merchants
+		where(role: 1).where(active: true)
+	end
 end
