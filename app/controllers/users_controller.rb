@@ -38,10 +38,14 @@ class UsersController < ApplicationController
   end
 
   def update
-    new_params = user_params.reject{ |key, value| value == "" }
-    current_user.update!(new_params)
-    redirect_to profile_path
-    flash[:updated_profile] = "#{@current_user.name}, your profile is updated!"
+    if User.email_taken(update_params[:email]) == true
+      redirect_to profile_edit_path
+      flash[:email_in_use] = "That email address is taken."
+    else
+      current_user.update!(update_params)
+      redirect_to profile_path
+      flash[:updated_profile] = "#{@current_user.name}, your profile is updated!"
+    end
   end
 
   private
@@ -49,11 +53,14 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password)
   end
 
-  # def update_params
-  #   if params[:user][:password] == ""
-  #     params.require(:user).permit(:name, :address, :city, :state, :zip, :email)
-  #   else
-  #     user_params
-  #   end
-  # end
+  def update_params
+    if params[:user][:password] == "" && (params[:user][:email] == current_user.email)
+      params.require(:user).permit(:name, :address, :city, :state, :zip)
+    elsif
+      params[:user][:password] == "" && (params[:user][:email] != current_user.email)
+      params.require(:user).permit(:name, :address, :city, :state, :zip, :email)
+    else
+      user_params
+    end
+  end
 end
