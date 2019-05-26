@@ -1,5 +1,7 @@
 <% @all_reg_users.each do |user| %>
 	<ul id="user-<%= user.id %>-info" >
-	<%= link_to user.name, user_path(user) %>	
+		<li><%= link_to user.name, user_path(user) %></li>	
+		<li><%= user.created_at.strftime("%m-%d-%Y") %></li>	
+		<li><%= button_to "Upgrade to Merchant" %></li>
 	</ul>
 <% end %>

@@ -29,17 +29,17 @@ RSpec.describe 'As an admin user' do
 			expect(current_path).to eq(user_path(@user_2))
 		end
 
-		xit 'shows each user registration date and a button to upgrade that user to merchant' do
+		it 'shows each user registration date and a button to upgrade that user to merchant' do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_1)
 			visit admin_users_path 
 
 			within "#user-#{@user_1.id}-info" do
-				expect(page).to have_content(@user_1.created_at)
+				expect(page).to have_content(@user_1.created_at.strftime "%m-%d-%Y")
 				expect(page).to have_button("Upgrade to Merchant")
 			end
 
 			within "#user-#{@user_2.id}-info" do
-				expect(page).to have_content(@user_2.created_at)
+				expect(page).to have_content(@user_2.created_at.strftime "%m-%d-%Y")
 				expect(page).to have_button("Upgrade to Merchant")
 			end
 		end
