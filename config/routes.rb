@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get  '/dashboard', to: "admins#dashboard"
 		post '/users/:id', to: "users#upgrade", as: 'upgrade_user' 
+		post '/merchants/:id', to: "merchants#downgrade", as: 'downgrade_merchant' 
 		post '/merchants/:id/enable', to: "merchants#enable", as: 'enable_merchant' 
 		post '/merchants/:id/disable', to: "merchants#disable", as: 'disable_merchant' 
 		resources :users, only: [:index, :show] 

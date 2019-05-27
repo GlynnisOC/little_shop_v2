@@ -55,6 +55,11 @@ RSpec.describe User, type: :model do
 			expect(@user_1.role).to eq("merchant")
 		end
 			
+		it '#downgrade_to_user' do
+		  merchant = create(:merchant)
+			merchant.downgrade_to_user	
+			expect(merchant.role).to eq("user")
+		end
 		it '#enable_merchant' do
       inactive_merchant = create(:inactive_merchant) 
 			inactive_merchant.enable_merchant

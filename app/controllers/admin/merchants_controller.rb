@@ -26,4 +26,9 @@ class Admin::MerchantsController < ApplicationController
 		redirect_to admin_merchants_path
 	end
 	
+	def downgrade
+		downgraded_merchant = User.find(params[:id])
+		downgraded_merchant.downgrade_to_user
+		redirect_to admin_user_path(downgraded_merchant)
+	end	
 end
