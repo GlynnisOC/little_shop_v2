@@ -13,7 +13,6 @@ RSpec.describe 'As an admin user' do
 
 		it 'shows all merchants in the system, with info and show links' do
 			visit admin_merchants_path
-			
 			within "#merchant-#{@merchant_1.id}-info" do
 				expect(page).to have_content(@merchant_1.city)
 				expect(page).to have_content(@merchant_1.state)
@@ -22,6 +21,7 @@ RSpec.describe 'As an admin user' do
 				expect(current_path).to eq(admin_merchant_path(@merchant_1))
 			end
 
+			visit admin_merchants_path
 			within "#merchant-#{@merchant_2.id}-info" do
 				expect(page).to have_content(@merchant_2.city)
 				expect(page).to have_content(@merchant_2.state)
@@ -29,7 +29,8 @@ RSpec.describe 'As an admin user' do
 				click_link(@merchant_2.name)
 				expect(current_path).to eq(admin_merchant_path(@merchant_2))
 			end
-
+			
+			visit admin_merchants_path
 			within "#merchant-#{@merchant_3.id}-info" do
 				expect(page).to have_button("Enable")
 			end

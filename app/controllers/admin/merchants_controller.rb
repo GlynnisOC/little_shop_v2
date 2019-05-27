@@ -1,6 +1,6 @@
 class Admin::MerchantsController < ApplicationController
 	def index
-		@merchants = User.all_merchants
+		@all_merchants = User.all_merchants
 	end
 
 	def show
