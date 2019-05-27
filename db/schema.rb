@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_25_223528) do
+ActiveRecord::Schema.define(version: 2019_05_26_194204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.float "price"
     t.text "description"
-    t.string "image"
+    t.string "image", default: "https://bit.ly/2HWf7qo"
     t.integer "inventory"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

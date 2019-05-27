@@ -23,7 +23,9 @@ class CartController < ApplicationController
   def change_amount
     @item = Item.find(params[:item_id])
     item_id_str = @item.id.to_s
-    session[:cart][item_id_str] += params[:change_amount].to_i if @item.inventory > session[:cart][item_id_str]
+    if @item.inventory >= session[:cart][item_id_str] + params[:change_amount].to_i
+      session[:cart][item_id_str] += params[:change_amount].to_i
+    end
     session[:cart] = session[:cart].reject{ |item_id, quantity| quantity <= 0 }
     redirect_to cart_path
   end

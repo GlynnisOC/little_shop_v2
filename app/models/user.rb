@@ -8,7 +8,7 @@ class User < ApplicationRecord
 													:password_digest,
 													:email,
 													:role,
-													:active,
+#													:active,
 													:address,
 													:city,
 													:state,
@@ -19,9 +19,14 @@ class User < ApplicationRecord
 
 	enum role: [:default, :merchant, :admin]
 
+	def upgrade_to_merchant
+		update(role: 1)
+	end
+
 	def self.email_taken(email)
 		where(email: email) != []
 	end
+
 
 	def top_five_items_sold
 		items.select(:name, 'SUM(order_items.quantity) AS item_quantity')
@@ -108,5 +113,14 @@ class User < ApplicationRecord
 			end
 		end
 		top_spender_hash
+	end
+
+	def self.all_reg_users
+		where(role: 0)
+	end
+
+	def self.active_merchants
+		where(role: 1).where(active: true)
+
 	end
 end

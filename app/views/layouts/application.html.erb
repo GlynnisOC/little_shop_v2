@@ -45,6 +45,7 @@
 
     <% if current_user && current_user.admin? %>
       <%= link_to "Admin Dashboard", admin_dashboard_path %>
+      <%= link_to "Users", admin_users_path %>
       <%= link_to "Logout", logout_path %>
     <% end %>
     <% flash.each do |key, value| %>
