@@ -11,11 +11,11 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_email(params[:email])
-    if user && user.authenticate(params[:password])
+    if user && user.authenticate(params[:password]) && user.active
       session[:user_id] = user.id
       if user.default?
         redirect_to profile_path
-      elsif user.merchant?
+      elsif user.merchant? && user.active == true
         redirect_to dashboard_path
       elsif user.admin?
         redirect_to root_path

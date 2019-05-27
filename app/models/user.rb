@@ -26,6 +26,11 @@ class User < ApplicationRecord
 	def enable_merchant
 		update(active: true)
 	end
+
+	def disable_merchant
+		update(active: false)
+	end
+
 	def self.email_taken(email)
 		where(email: email) != []
 	end
