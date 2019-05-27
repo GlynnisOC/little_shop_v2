@@ -12,6 +12,10 @@ class ItemsController < ApplicationController
     @cart = Cart.new(session[:cart])
   end
 
+  def new
+    @item = Item.new
+  end
+
   def create
     @item = Item.new(item_params)
     @item[:user_id] = current_user.id
