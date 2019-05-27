@@ -21,6 +21,7 @@
 				<li><%= item.name %>: <%= item.item_quantity %> Sold</li>
 			<% end %>
 		</ol>
+
 	</section>
 
 	<section id="total-items-sold">
@@ -51,5 +52,16 @@
 			<% end %>
 		</ul>
 	</section>
+
+	<section id="top-user-by-orders">
+		<h3>Top User By Orders</h3>
+		<ul>
+			<% if @top_user_by_orders != nil %>
+				<li><%= @top_user_by_orders.name %>: <%= @top_user_by_orders.orders.length %> orders</li>
+			<% else %>
+				<li>No Current Orders<li>
+			<% end %>
+		</ul>
+</section>
 
 </section>

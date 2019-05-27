@@ -61,11 +61,27 @@ class User < ApplicationRecord
 				.group('citystate')
 				.order('shipments DESC')
 				.limit(3)
-
-
-				# @people = @company.people.select("fname || ', ' || lname as name")
 	end
 
+	def top_user_by_orders
+		top_user = User.select('orders.user_id AS unique_id', 'COUNT(DISTINCT(order_items.id)) AS unique_orders')
+				.joins(orders: :items)
+				.where('items.user_id = ?', self.id)
+				.group('orders.user_id')
+				.order('unique_orders DESC')
+				.limit(1)
+				.first
 
-
+			User.find(top_user.unique_id) if top_user != nil
+		#
+		# User.find(
+		# 	User.select('orders.user_id AS unique_id', 'COUNT(DISTINCT(order_items.id)) AS unique_orders')
+		# 			.joins(orders: :items)
+		# 			.where('items.user_id = ?', self.id)
+		# 			.group('orders.user_id')
+		# 			.order('unique_orders DESC')
+		# 			.limit(1)
+		# 			.first.unique_id
+		# )
+	end
 end

@@ -129,6 +129,11 @@ RSpec.describe User, type: :model do
       expect(@merchant.top_three_citystates.last.citystate).to eq("City_1, AA")
     end
 
+    it "produces name of user with most orders, along with number of orders" do
+      expect(@merchant.top_user_by_orders.name).to eq("#{@user_7.name}")
+      expect(@merchant.top_user_by_orders.orders.length).to eq(2)
+    end
+
 
   end
 end

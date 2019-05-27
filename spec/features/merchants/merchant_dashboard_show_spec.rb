@@ -151,7 +151,7 @@ RSpec.describe 'As a registered merchant on the site' do
 			# [x] - top 5 items I have sold by quantity, and the quantity of each that I've sold
 			# [x] - total quantity of items I've sold, and as a percentage against my sold units plus remaining inventory (eg, if I have sold 1,000 things and still have 9,000 things in inventory, the message would say something like "Sold 1,000 items, which is 10% of your total inventory")
 			# [x] - top 3 states where my items were shipped, and their quantities
-			# [ ] - top 3 city/state where my items were shipped, and their quantities (Springfield, MI should not be grouped with Springfield, CO)
+			# [x] - top 3 city/state where my items were shipped, and their quantities (Springfield, MI should not be grouped with Springfield, CO)
 			# [ ] - name of the user with the most orders from me (pick one if there's a tie), and number of orders
 			# [ ] - name of the user who bought the most total items from me (pick one if there's a tie), and the total quantity
 			# [ ] - top 3 users who have spent the most money on my items, and the total amount they've spent
@@ -194,9 +194,9 @@ RSpec.describe 'As a registered merchant on the site' do
 			end
 		end
 
-		xit "name of the user with the most orders from me" do
-			within "#x" do
-				expect(page).to have_content("x")
+		it "name of the user with the most orders from me" do
+			within "#top-user-by-orders" do
+				expect(page).to have_content("#{@user_7.name}: 2 orders")
 			end
 		end
 
