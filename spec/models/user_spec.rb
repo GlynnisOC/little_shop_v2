@@ -76,8 +76,8 @@ RSpec.describe User, type: :model do
       @order_item_3a = @item_3.order_items.create!(item: @item_3, order: @order_3, quantity: 5, price: 5.00, fulfilled: true)
       @order_item_3b = @item_3.order_items.create!(item: @item_3, order: @order_3, quantity: 5, price: 5.00, fulfilled: false)
 
-      @order_item_4a = @item_4.order_items.create!(item: @item_4, order: @order_4, quantity: 4, price: 5.00, fulfilled: true)
-      @order_item_4b = @item_4.order_items.create!(item: @item_4, order: @order_4, quantity: 4, price: 5.00, fulfilled: false)
+      @order_item_4a = @item_4.order_items.create!(item: @item_4, order: @order_4, quantity: 4, price: 55.00, fulfilled: true)
+      @order_item_4b = @item_4.order_items.create!(item: @item_4, order: @order_4, quantity: 4, price: 55.00, fulfilled: false)
 
       @order_item_5a = @item_5.order_items.create!(item: @item_5, order: @order_5, quantity: 3, price: 5.00, fulfilled: true)
       @order_item_5b = @item_5.order_items.create!(item: @item_5, order: @order_5, quantity: 3, price: 5.00, fulfilled: false)
@@ -139,6 +139,9 @@ RSpec.describe User, type: :model do
       expect(@merchant.top_user_by_items[:unique_items]).to eq(14)
     end
 
-
+    it "produces name of user with most spending, along with total spent" do
+      expect(@merchant.top_three_users_by_spending.keys).to eq([@user_4.name, @user_1.name, @user_2.name])
+      expect(@merchant.top_three_users_by_spending.values).to eq([220, 35, 30])
+    end
   end
 end

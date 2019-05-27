@@ -57,7 +57,6 @@ RSpec.describe 'As a registered merchant on the site' do
 				expect(page).to have_content("Inventory: #{@item_1.inventory}")
 				expect(page).to have_link("Edit #{@item_1.name}")
 				expect(page).to have_link("Disable")
-
 			end
 
 			within "#merchant-item-#{@item_2.id}" do
@@ -124,8 +123,8 @@ RSpec.describe 'As a registered merchant on the site' do
 			@order_item_3a = @item_3.order_items.create!(item: @item_3, order: @order_3, quantity: 5, price: 5.00, fulfilled: true)
 			@order_item_3b = @item_3.order_items.create!(item: @item_3, order: @order_3, quantity: 5, price: 5.00, fulfilled: false)
 
-			@order_item_4a = @item_4.order_items.create!(item: @item_4, order: @order_4, quantity: 4, price: 5.00, fulfilled: true)
-			@order_item_4b = @item_4.order_items.create!(item: @item_4, order: @order_4, quantity: 4, price: 5.00, fulfilled: false)
+			@order_item_4a = @item_4.order_items.create!(item: @item_4, order: @order_4, quantity: 4, price: 55.00, fulfilled: true)
+			@order_item_4b = @item_4.order_items.create!(item: @item_4, order: @order_4, quantity: 4, price: 55.00, fulfilled: false)
 
 			@order_item_5a = @item_5.order_items.create!(item: @item_5, order: @order_5, quantity: 3, price: 5.00, fulfilled: true)
 			@order_item_5b = @item_5.order_items.create!(item: @item_5, order: @order_5, quantity: 3, price: 5.00, fulfilled: false)
@@ -147,14 +146,6 @@ RSpec.describe 'As a registered merchant on the site' do
 
 			visit dashboard_path
 		end
-
-			# [x] - top 5 items I have sold by quantity, and the quantity of each that I've sold
-			# [x] - total quantity of items I've sold, and as a percentage against my sold units plus remaining inventory (eg, if I have sold 1,000 things and still have 9,000 things in inventory, the message would say something like "Sold 1,000 items, which is 10% of your total inventory")
-			# [x] - top 3 states where my items were shipped, and their quantities
-			# [x] - top 3 city/state where my items were shipped, and their quantities (Springfield, MI should not be grouped with Springfield, CO)
-			# [x] - name of the user with the most orders from me (pick one if there's a tie), and number of orders
-			# [x] - name of the user who bought the most total items from me (pick one if there's a tie), and the total quantity
-			# [ ] - top 3 users who have spent the most money on my items, and the total amount they've spent
 
 		it "top 5 items I have sold by quantity, and the quantity of each that I've sold" do
 			within "#merchant-dash-stats" do
@@ -201,18 +192,17 @@ RSpec.describe 'As a registered merchant on the site' do
 		end
 
 		it "name of the user who bought the most total items from me" do
-			save_and_open_page
-
 			within "#top-user-by-items" do
 				expect(page).to have_content("#{@user_1.name}: 14 items")
 			end
 		end
 
-		xit "top 3 users who have spent the most money on my items, and the total amount they've spent" do
-			within "#x" do
-				expect(page).to have_content("x")
+		it "top 3 users who have spent the most money on my items, and the total amount they've spent" do
+			within "#top-three-users-by-spending" do
+				expect(page.all('li')[0]).to have_content("#{@user_4.name}: $220.00")
+				expect(page.all('li')[1]).to have_content("#{@user_1.name}: $35.00")
+				expect(page.all('li')[2]).to have_content("#{@user_2.name}: $30.00")
 			end
 		end
-
 	end
 end

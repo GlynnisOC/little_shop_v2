@@ -10,10 +10,8 @@
 	<%= link_to "Login", dashboard_path %>
 </ul>
 
-
 <section id="merchant-dash-stats">
 	<h1>Merchant Dashboard Statistics</h1>
-
 	<section id="top-five-items-sold">
 		<h3>Top Five Items Sold by Quantity</h3>
 			<ol>
@@ -44,7 +42,7 @@
 
 	<section id="top-three-states-for-items-shipped">
 		<h3>Top Three States for Items Shipped</h3>
-		<ul>
+		<ol>
 			<% if @top_three_states != nil %>
 				<% @top_three_states.each do |shipment_state| %>
 					<li>State of <%= shipment_state.state %>: <%= shipment_state.shipments %> items shipped</li>
@@ -52,12 +50,12 @@
 			<% else %>
 				<li>No orders exist</li>
 			<% end %>
-		</ul>
+		</ol>
 	</section>
 
 	<section id="top-three-citystates-for-items-shipped">
 		<h3>Top Three Cities for Items Shipped</h3>
-		<ul>
+		<ol>
 			<% if @top_three_citystates != nil %>
 				<% @top_three_citystates.each do |shipment_citystate| %>
 					<li>City of <%= shipment_citystate.citystate %>: <%= shipment_citystate.shipments %> items shipped</li>
@@ -65,7 +63,7 @@
 			<% else %>
 				<li>No orders exist</li>
 			<% end %>
-		</ul>
+		</ol>
 	</section>
 
 	<section id="top-user-by-orders">
@@ -90,4 +88,16 @@
 		</ul>
 	</section>
 
+	<section id="top-three-users-by-spending">
+		<h3>Top Three Users by Spending</h3>
+		<ol>
+			<% if @top_three_users_by_spending != nil %>
+				<% @top_three_users_by_spending.each do |name, spending| %>
+					<li><%= name %>: <%= number_to_currency(spending) %></li>
+				<% end %>
+			<% else %>
+				<li>No Current Spenders<li>
+			<% end %>
+		</ol>
+	</section>
 </section>

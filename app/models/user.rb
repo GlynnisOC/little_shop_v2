@@ -4,7 +4,6 @@ class User < ApplicationRecord
 	has_many :items
 	has_many :orders
 
-
 	validates_presence_of 	:name,
 													:password_digest,
 													:email,
@@ -77,7 +76,12 @@ class User < ApplicationRecord
 
 	def top_user_by_items
 		top_user_hash = Hash.new(0)
-		top_user_id = User.select('orders.user_id AS unique_id', 'SUM(order_items.quantity) AS unique_items').joins(orders: :items).where('items.user_id = ?', self.id).group('orders.user_id').order('unique_items DESC').limit(1).first
+		top_user_id = User.select('orders.user_id AS unique_id', 'SUM(order_items.quantity) AS unique_items')
+		.joins(orders: :items)
+		.where('items.user_id = ?', self.id)
+		.group('orders.user_id')
+		.order('unique_items DESC')
+		.limit(1).first
 
 		if top_user_id != nil
 			user = User.find(top_user_id.unique_id)
@@ -85,5 +89,24 @@ class User < ApplicationRecord
 			top_user_hash[:unique_items] = top_user_id.unique_items
 			top_user_hash
 		end
+	end
+
+	def top_three_users_by_spending
+		top_spender_hash = Hash.new(0)
+		top_user_ids = User.select('orders.user_id AS unique_id', 'SUM(order_items.quantity * order_items.price) AS total_spending')
+		.joins(orders: :items)
+		.where('order_items.fulfilled = ?', true)
+		.where('items.user_id = ?', self.id)
+		.group('orders.user_id')
+		.order('total_spending DESC')
+		.limit(3)
+
+		if top_user_ids != nil
+			top_user_ids.each do |top_user_id|
+				user = User.find(top_user_id.unique_id)
+				top_spender_hash[user.name] = top_user_id.total_spending
+			end
+		end
+		top_spender_hash
 	end
 end
