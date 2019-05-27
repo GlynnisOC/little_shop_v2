@@ -10,6 +10,7 @@ class Admin::MerchantsController < ApplicationController
 	def enable
 		@merchant = User.find(params[:id])
 		@merchant.enable_merchant
+		flash[:enabled] = "#{@merchant.name} is now enabled"
 		redirect_to admin_merchants_path
 	end
 end
