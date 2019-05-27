@@ -4,8 +4,8 @@ RSpec.describe User, type: :model do
 	before :each do 
       @merchant_1 = User.create!(email: "@merchant_1@gmail.com", password: "password", role: 1, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
 
-      @inactive_merchant = create(:inactive_merchant) 
       @merchant_2 = create(:merchant) 
+      @inactive_merchant = create(:inactive_merchant) 
       @admin_1 = User.create!(email: "@admin_1@gmail.com", password: "password", role: 2, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
 
 		
