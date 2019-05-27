@@ -43,4 +43,16 @@ class User < ApplicationRecord
 		items.distinct.joins(:order_items).where('order_items.fulfilled = ?', true).sum('items.inventory')
 	end
 
+	def top_three_states
+		User.select(:state, 'SUM(order_items.quantity) AS shipments')
+				.joins(orders: :items)
+				.where('orders.status = ?', 2)
+				.where('items.user_id = ?', self.id)
+				.group(:state)
+				.order('shipments DESC')
+				.limit(3)
+	end
+
+
+
 end

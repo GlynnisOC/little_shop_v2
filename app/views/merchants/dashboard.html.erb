@@ -34,4 +34,13 @@
 		</ul>
 	</section>
 
+	<section id="top-three-states-for-items-shipped">
+		<h3>Top Three States for Items Shipped</h3>
+		<ul>
+			<% @top_three_states.each do |shipment_state| %>
+				<li>State of <%= shipment_state.state %>: <%= shipment_state.shipments %> items shipped</li>
+			<% end %>
+		</ul>
+	</section>
+
 </section>

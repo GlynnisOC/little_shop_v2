@@ -95,7 +95,7 @@ RSpec.describe 'As a registered merchant on the site' do
 			@user_4 	= User.create!(email: "user_4@email.com", 	password: "password", role: "default",  name: "user_name_4", address: "4000 Abc Street", city: "City_1", state: "AC", zip: 00004)
 			@user_5 	= User.create!(email: "user_5@email.com", 	password: "password", role: "default",  name: "user_name_5", address: "5000 Abc Street", city: "City_1", state: "AC", zip: 00004)
 			@user_6 	= User.create!(email: "user_6@email.com", 	password: "password", role: "default",  name: "user_name_6", address: "6000 Abc Street", city: "City_1", state: "AC", zip: 00004)
-			@user_7 	= User.create!(email: "user_7@email.com", 	password: "password", role: "default",  name: "user_name_7", address: "7000 Abc Street", city: "City_1", state: "Ad", zip: 00004)
+			@user_7 	= User.create!(email: "user_7@email.com", 	password: "password", role: "default",  name: "user_name_7", address: "7000 Abc Street", city: "City_1", state: "AD", zip: 00004)
 
 			@item_1 = @merchant.items.create!(name: "Item One", 	active: true,  price: 1.00, description: "This is item one", 	 image: "https://picsum.photos/200/300?image=1", inventory: 100)
 			@item_2 = @merchant.items.create!(name: "Item Two", 	active: true,  price: 2.00, description: "This is item two", 	 image: "https://picsum.photos/200/300?image=1", inventory: 200)
@@ -149,8 +149,8 @@ RSpec.describe 'As a registered merchant on the site' do
 		end
 
 			# [x] - top 5 items I have sold by quantity, and the quantity of each that I've sold
-			# [ ] - total quantity of items I've sold, and as a percentage against my sold units plus remaining inventory (eg, if I have sold 1,000 things and still have 9,000 things in inventory, the message would say something like "Sold 1,000 items, which is 10% of your total inventory")
-			# [ ] - top 3 states where my items were shipped, and their quantities
+			# [x] - total quantity of items I've sold, and as a percentage against my sold units plus remaining inventory (eg, if I have sold 1,000 things and still have 9,000 things in inventory, the message would say something like "Sold 1,000 items, which is 10% of your total inventory")
+			# [x] - top 3 states where my items were shipped, and their quantities
 			# [ ] - top 3 city/state where my items were shipped, and their quantities (Springfield, MI should not be grouped with Springfield, CO)
 			# [ ] - name of the user with the most orders from me (pick one if there's a tie), and number of orders
 			# [ ] - name of the user who bought the most total items from me (pick one if there's a tie), and the total quantity
@@ -174,9 +174,13 @@ RSpec.describe 'As a registered merchant on the site' do
 			end
 		end
 
-		xit "top 3 states where my items were shipped, and their quantities" do
-			within "#x" do
-				expect(page).to have_content("x")
+		it "top 3 states where my items were shipped, and their quantities" do
+			within "#top-three-states-for-items-shipped" do
+				expect(page.all('li')[0]).to have_content("State of #{@user_2.state}: 22 items shipped")
+				expect(page.all('li')[1]).to have_content("State of #{@user_4.state}: 16 items shipped")
+				expect(page.all('li')[2]).to have_content("State of #{@user_1.state}: 14 items shipped")
+
+				expect(page).to_not have_content("State of #{@user_7.state}")
 			end
 		end
 

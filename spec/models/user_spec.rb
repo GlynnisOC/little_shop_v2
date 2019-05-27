@@ -48,7 +48,7 @@ RSpec.describe User, type: :model do
       @user_4 	= User.create!(email: "user_4@email.com", 	password: "password", role: "default",  name: "user_name_4", address: "4000 Abc Street", city: "City_1", state: "AC", zip: 00004)
       @user_5 	= User.create!(email: "user_5@email.com", 	password: "password", role: "default",  name: "user_name_5", address: "5000 Abc Street", city: "City_1", state: "AC", zip: 00004)
       @user_6 	= User.create!(email: "user_6@email.com", 	password: "password", role: "default",  name: "user_name_6", address: "6000 Abc Street", city: "City_1", state: "AC", zip: 00004)
-      @user_7 	= User.create!(email: "user_7@email.com", 	password: "password", role: "default",  name: "user_name_7", address: "7000 Abc Street", city: "City_1", state: "Ad", zip: 00004)
+      @user_7 	= User.create!(email: "user_7@email.com", 	password: "password", role: "default",  name: "user_name_7", address: "7000 Abc Street", city: "City_1", state: "AD", zip: 00004)
 
       @item_1 = @merchant.items.create!(name: "Item One", 	active: true,  price: 1.00, description: "This is item one", 	 image: "https://picsum.photos/200/300?image=1", inventory: 100)
       @item_2 = @merchant.items.create!(name: "Item Two", 	active: true,  price: 2.00, description: "This is item two", 	 image: "https://picsum.photos/200/300?image=1", inventory: 200)
@@ -114,5 +114,14 @@ RSpec.describe User, type: :model do
     it "calculates total starting inventory" do
       expect(@merchant.total_starting_inventory).to eq(2800)
     end
+
+    it "produces top three states for items shipped" do
+      expect(@merchant.top_three_states.length).to eq(3)
+      expect(@merchant.top_three_states.first.state).to eq("AB")
+      expect(@merchant.top_three_states.second.state).to eq("AC")
+      expect(@merchant.top_three_states.last.state).to eq("AA")
+    end
+
+
   end
 end
