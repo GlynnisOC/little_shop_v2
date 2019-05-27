@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     get  '/dashboard', to: "admins#dashboard"
 		post '/users/:id', to: "users#upgrade", as: 'upgrade_user' 
 		resources :users, only: [:index, :show] 
-		resources :merchants, only: [:show]
+		resources :merchants, only: [:show, :index]
   end
 
   get '/cart', to: 'cart#show'
