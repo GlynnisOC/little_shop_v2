@@ -56,9 +56,9 @@ RSpec.describe User, type: :model do
 		end
 			
 		it '#enable_merchant' do
-			@inactive_merchant.enable
+			@inactive_merchant.enable_merchant
 			@inactive_merchant.reload
-			expect(@inactive_merchant.enabled).to be_truthy
+			expect(@inactive_merchant.active).to be_truthy
 		end
 	end
 

@@ -9,7 +9,7 @@ class Admin::MerchantsController < ApplicationController
 
 	def enable
 		@merchant = User.find(params[:id])
-		@merchant.enable
+		@merchant.enable_merchant
 		redirect_to admin_merchants_path
 	end
 end

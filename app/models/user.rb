@@ -24,6 +24,9 @@ class User < ApplicationRecord
 		update(role: 1)
 	end
 
+	def enable_merchant
+		update(active: true)
+	end
 	def self.email_taken(email)
 		where(email: email) != []
 	end
