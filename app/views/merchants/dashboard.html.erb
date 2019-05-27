@@ -16,21 +16,28 @@
 
 	<section id="top-five-items-sold">
 		<h3>Top Five Items Sold by Quantity</h3>
-		<ol>
-			<% @top_five_items_sold.each do |item| %>
-				<li><%= item.name %>: <%= item.item_quantity %> Sold</li>
-			<% end %>
-		</ol>
-
+			<ol>
+				<% if @top_five_items_sold != nil %>
+					<% @top_five_items_sold.each do |item| %>
+						<li><%= item.name %>: <%= item.item_quantity %> Sold</li>
+					<% end %>
+				<% else %>
+					<li>No items exist</li>
+				<% end %>
+			</ol>
 	</section>
 
 	<section id="total-items-sold">
 		<h3>Total Quantity Sold</h3>
 		<ul>
-			<li>Total Quantity Sold: <%= @all_items_sold %></li>
-			<li>Total Starting Inventory: <%= @total_starting_inventory %></li>
-			<% if @total_starting_inventory > 0 %>
-				<li>Sold <%= @all_items_sold %> items, which is <%= number_to_percentage(100 * @all_items_sold / @total_starting_inventory, precision: 0) %> of your total inventory</li>
+			<% if @all_items_sold != nil %>
+				<li>Total Quantity Sold: <%= @all_items_sold %></li>
+				<li>Total Starting Inventory: <%= @total_starting_inventory %></li>
+				<% if @total_starting_inventory > 0 %>
+					<li>Sold <%= @all_items_sold %> items, which is <%= number_to_percentage(100 * @all_items_sold / @total_starting_inventory, precision: 0) %> of your total inventory</li>
+				<% end %>
+			<% else %>
+				<li>No items sold</li>
 			<% end %>
 		</ul>
 	</section>
@@ -38,8 +45,12 @@
 	<section id="top-three-states-for-items-shipped">
 		<h3>Top Three States for Items Shipped</h3>
 		<ul>
-			<% @top_three_states.each do |shipment_state| %>
-				<li>State of <%= shipment_state.state %>: <%= shipment_state.shipments %> items shipped</li>
+			<% if @top_three_states != nil %>
+				<% @top_three_states.each do |shipment_state| %>
+					<li>State of <%= shipment_state.state %>: <%= shipment_state.shipments %> items shipped</li>
+				<% end %>
+			<% else %>
+				<li>No orders exist</li>
 			<% end %>
 		</ul>
 	</section>
@@ -47,8 +58,12 @@
 	<section id="top-three-citystates-for-items-shipped">
 		<h3>Top Three Cities for Items Shipped</h3>
 		<ul>
-			<% @top_three_citystates.each do |shipment_citystate| %>
-				<li>City of <%= shipment_citystate.citystate %>: <%= shipment_citystate.shipments %> items shipped</li>
+			<% if @top_three_citystates != nil %>
+				<% @top_three_citystates.each do |shipment_citystate| %>
+					<li>City of <%= shipment_citystate.citystate %>: <%= shipment_citystate.shipments %> items shipped</li>
+				<% end %>
+			<% else %>
+				<li>No orders exist</li>
 			<% end %>
 		</ul>
 	</section>
@@ -62,6 +77,6 @@
 				<li>No Current Orders<li>
 			<% end %>
 		</ul>
-</section>
+	</section>
 
 </section>
