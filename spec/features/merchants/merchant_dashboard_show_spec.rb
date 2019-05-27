@@ -184,9 +184,13 @@ RSpec.describe 'As a registered merchant on the site' do
 			end
 		end
 
-		xit "top 3 city/state where my items were shipped, and their quantities" do
-			within "#x" do
-				expect(page).to have_content("x")
+		it "top 3 city/state where my items were shipped, and their quantities" do
+			within "#top-three-citystates-for-items-shipped" do
+				expect(page.all('li')[0]).to have_content("City of #{@user_2.city}, #{@user_2.state}: 22 items shipped")
+				expect(page.all('li')[1]).to have_content("City of #{@user_4.city}, #{@user_4.state}: 16 items shipped")
+				expect(page.all('li')[2]).to have_content("City of #{@user_1.city}, #{@user_1.state}: 14 items shipped")
+
+				expect(page).to_not have_content("City of #{@user_7.state}")
 			end
 		end
 

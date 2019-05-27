@@ -43,4 +43,13 @@
 		</ul>
 	</section>
 
+	<section id="top-three-citystates-for-items-shipped">
+		<h3>Top Three Cities for Items Shipped</h3>
+		<ul>
+			<% @top_three_citystates.each do |shipment_citystate| %>
+				<li>City of <%= shipment_citystate.citystate %>: <%= shipment_citystate.shipments %> items shipped</li>
+			<% end %>
+		</ul>
+	</section>
+
 </section>

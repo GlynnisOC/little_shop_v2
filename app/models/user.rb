@@ -53,6 +53,19 @@ class User < ApplicationRecord
 				.limit(3)
 	end
 
+	def top_three_citystates
+		User.select("users.city || ', ' || users.state AS citystate", 'SUM(order_items.quantity) AS shipments')
+				.joins(orders: :items)
+				.where('orders.status = ?', 2)
+				.where('items.user_id = ?', self.id)
+				.group('citystate')
+				.order('shipments DESC')
+				.limit(3)
+
+
+				# @people = @company.people.select("fname || ', ' || lname as name")
+	end
+
 
 
 end

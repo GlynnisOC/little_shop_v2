@@ -9,6 +9,7 @@ class MerchantsController < ApplicationController
     @all_items_sold = @merchant.all_items_sold
     @total_starting_inventory = @merchant.total_starting_inventory
     @top_three_states = @merchant.top_three_states
+    @top_three_citystates = @merchant.top_three_citystates
 
   end
 

@@ -122,6 +122,13 @@ RSpec.describe User, type: :model do
       expect(@merchant.top_three_states.last.state).to eq("AA")
     end
 
+    it "produces top three citystates for items shipped" do
+      expect(@merchant.top_three_citystates.length).to eq(3)
+      expect(@merchant.top_three_citystates.first.citystate).to eq("City_1, AB")
+      expect(@merchant.top_three_citystates.second.citystate).to eq("City_1, AC")
+      expect(@merchant.top_three_citystates.last.citystate).to eq("City_1, AA")
+    end
+
 
   end
 end
