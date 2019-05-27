@@ -11,6 +11,7 @@ class MerchantsController < ApplicationController
     @top_three_states         = @merchant.top_three_states
     @top_three_citystates     = @merchant.top_three_citystates
     @top_user_by_orders       = @merchant.top_user_by_orders
+    @top_user_by_items        = @merchant.top_user_by_items
 
   end
 

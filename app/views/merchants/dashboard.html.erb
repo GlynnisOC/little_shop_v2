@@ -79,4 +79,15 @@
 		</ul>
 	</section>
 
+	<section id="top-user-by-items">
+		<h3>Top User By Items</h3>
+		<ul>
+			<% if @top_user_by_items != nil %>
+				<li><%= @top_user_by_items[:user_name] %>: <%= @top_user_by_items[:unique_items] %> items</li>
+			<% else %>
+				<li>No Current Items<li>
+			<% end %>
+		</ul>
+	</section>
+
 </section>

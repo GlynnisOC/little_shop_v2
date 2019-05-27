@@ -134,6 +134,11 @@ RSpec.describe User, type: :model do
       expect(@merchant.top_user_by_orders.orders.length).to eq(2)
     end
 
+    it "produces name of user with most items, along with number of items" do
+      expect(@merchant.top_user_by_items[:user_name]).to eq("#{@user_1.name}")
+      expect(@merchant.top_user_by_items[:unique_items]).to eq(14)
+    end
+
 
   end
 end

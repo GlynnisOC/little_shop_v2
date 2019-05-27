@@ -64,7 +64,7 @@ class User < ApplicationRecord
 	end
 
 	def top_user_by_orders
-		top_user = User.select('orders.user_id AS unique_id', 'COUNT(DISTINCT(order_items.id)) AS unique_orders')
+		top_user_id = User.select('orders.user_id AS unique_id', 'COUNT(DISTINCT(order_items.id)) AS unique_orders')
 				.joins(orders: :items)
 				.where('items.user_id = ?', self.id)
 				.group('orders.user_id')
@@ -72,16 +72,18 @@ class User < ApplicationRecord
 				.limit(1)
 				.first
 
-			User.find(top_user.unique_id) if top_user != nil
-		#
-		# User.find(
-		# 	User.select('orders.user_id AS unique_id', 'COUNT(DISTINCT(order_items.id)) AS unique_orders')
-		# 			.joins(orders: :items)
-		# 			.where('items.user_id = ?', self.id)
-		# 			.group('orders.user_id')
-		# 			.order('unique_orders DESC')
-		# 			.limit(1)
-		# 			.first.unique_id
-		# )
+			User.find(top_user_id.unique_id) if top_user_id != nil
+	end
+
+	def top_user_by_items
+		top_user_hash = Hash.new(0)
+		top_user_id = User.select('orders.user_id AS unique_id', 'SUM(order_items.quantity) AS unique_items').joins(orders: :items).where('items.user_id = ?', self.id).group('orders.user_id').order('unique_items DESC').limit(1).first
+
+		if top_user_id != nil
+			user = User.find(top_user_id.unique_id)
+			top_user_hash[:user_name] = user.name
+			top_user_hash[:unique_items] = top_user_id.unique_items
+			top_user_hash
+		end
 	end
 end
