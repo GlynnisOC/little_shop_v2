@@ -50,15 +50,16 @@ RSpec.describe User, type: :model do
 
 	describe 'instance methods' do 
 		it '#upgrade_to_merchant' do
-			@user_1.upgrade_to_merchant
-			@user_1.reload
-			expect(@user_1.role).to eq("merchant")
+			user = create(:user)
+			user.upgrade_to_merchant
+			user.reload
+			expect(user.role).to eq("merchant")
 		end
 			
 		it '#downgrade_to_user' do
 		  merchant = create(:merchant)
 			merchant.downgrade_to_user	
-			expect(merchant.role).to eq("user")
+			expect(merchant.role).to eq("default")
 		end
 		it '#enable_merchant' do
       inactive_merchant = create(:inactive_merchant) 
@@ -88,7 +89,8 @@ RSpec.describe User, type: :model do
 		end
 
 		it '.active_merchants' do
-			expect(User.active_merchants).to eq([@merchant_1, @merchant_2])
+			actual = User.active_merchants
+			expect(actual).to eq([@merchant_1, @merchant_2])
 		end
 		
 		it '.all_merchants' do 
