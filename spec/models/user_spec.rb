@@ -4,8 +4,8 @@ RSpec.describe User, type: :model do
 	before :each do 
       @merchant_1 = User.create!(email: "@merchant_1@gmail.com", password: "password", role: 1, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
 
-      @merchant_2 = create(:merchant) 
       @inactive_merchant = create(:inactive_merchant) 
+      @merchant_2 = create(:merchant) 
       @admin_1 = User.create!(email: "@admin_1@gmail.com", password: "password", role: 2, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
 
 		
@@ -56,15 +56,17 @@ RSpec.describe User, type: :model do
 		end
 			
 		it '#enable_merchant' do
-			@inactive_merchant.enable_merchant
-			@inactive_merchant.reload
-			expect(@inactive_merchant.active).to be_truthy
+      inactive_merchant = create(:inactive_merchant) 
+			inactive_merchant.enable_merchant
+			inactive_merchant.reload
+			expect(inactive_merchant.active).to be_truthy
 		end
 
 		it '#disable_merchant' do
-			@inactive_merchant.disable_merchant
-			@inactive_merchant.reload
-			expect(@inactive_merchant.active).to be_falsy
+			merchant = create(:merchant)
+			merchant.disable_merchant
+			merchant.reload
+			expect(merchant.active).to be_falsy
 		end
 	end
 

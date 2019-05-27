@@ -17,11 +17,11 @@ RSpec.describe 'As an admin on the merchant index ' do
 			click_link "Logout"
 
 			merchant.reload
+			binding.pry
 			visit login_path
   	  fill_in "Email", with: merchant.email
   	  fill_in "Password", with: merchant.password
   	  click_button("Login")
-save_and_open_page
 			expect(current_path).to eq(dashboard_path)	
 		end
 	end
