@@ -90,6 +90,25 @@ RSpec.describe 'As a registered merchant on the site' do
 
 			expect(current_path).to eq(new_dashboard_item_path)
 		end
+
+		it "I'm taken to form to edit item when I click link to edit" do
+			visit dashboard_items_path
+
+			click_link("Edit #{@item_1.name}")
+
+			expect(current_path).to eq(edit_dashboard_item_path(@item_1.id))
+
+			fill_in "Name", with: "Edited Item Name"
+      fill_in "Description", with: "Edited item description"
+
+      click_button("Update Item")
+
+      expect(current_path).to eq(dashboard_items_path)
+      expect(page).to have_content("Your item has been updated!")
+      expect(@item_1.reload.name).to eq("Edited Item Name")
+      expect(@item_1.reload.description).to eq("Edited item description")
+
+		end
 	end
 
 	describe "when I visit the page to add a new item" do
