@@ -1,0 +1,12 @@
+<% @all_merchants.each do |merchant| %>
+	<ul id="merchant-<%= merchant.id %>-info" >
+		<li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+		<li><%= merchant.city %></li>
+		<li><%= merchant.state %></li>
+		<% if merchant.active == true %>
+			<li><%= button_to "Disable", admin_disable_merchant_path(merchant) %>	</li>
+		<% else %>
+			<li><%= button_to "Enable", admin_enable_merchant_path(merchant) %>	</li>
+		<% end  %>
+	</ul>
+<% end  %>
