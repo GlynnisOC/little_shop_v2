@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'As an admin on the merchant index ' do
 	describe 'when I click the enable button for a disabled merchant' do
 		it 'enables the merchant account, posts a flash message, and allows the merchant to login' do
-			merchant = create(:merchant)	
+			inactive_merchant = create(:inactive_merchant)	
   	  admin = create(:admin) 
 			visit login_path
   	  fill_in "Email", with: admin.email

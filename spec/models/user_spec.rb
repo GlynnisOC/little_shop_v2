@@ -54,6 +54,12 @@ RSpec.describe User, type: :model do
 			@user_1.reload
 			expect(@user_1.role).to eq("merchant")
 		end
+			
+		it '#enable_merchant' do
+			@inactive_merchant.enable
+			@inactive_merchant.reload
+			expect(@inactive_merchant.enabled).to be_truthy
+		end
 	end
 
   describe 'class methods' do
