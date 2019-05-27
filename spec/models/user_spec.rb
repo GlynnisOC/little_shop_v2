@@ -69,7 +69,7 @@ RSpec.describe User, type: :model do
 		end
 
 		it '.active_merchants' do
-			expect(User.active_merchants).to eq([@merchant_1, @merchant_2])
+			expect(User.active_merchants).to eq([@merchant_1, @merchant_2] || [@merchant_2, @merchant_1])
 		end
   end
 end
