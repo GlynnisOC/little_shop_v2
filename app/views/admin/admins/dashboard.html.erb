@@ -2,5 +2,5 @@
 <%= link_to "Login", admin_dashboard_path %>
 <% @orders.each do |order| %>
   <h4>Order ID:</h4> <%= order.id %>
-
+  <h4>User Profile:</h4> <%= link_to order.user.name, admin_user_path(order.user) %>
 <% end %>

@@ -18,11 +18,10 @@ RSpec.describe "when I log into the admin dashboard" do
 
   it "I can see the users who've placed the order and view their profile" do
     visit admin_dashboard_path
-    # save_and_open_page
 
     expect(page).to have_content("#{@order.user.name}")
-    click_button("#{@order.user.name}")
-    expect(current_path).to eq(user_path)
+    click_on("#{@order.user.name}")
+    expect(current_path).to eq(admin_user_path(@order.user))
   end
 end
 
