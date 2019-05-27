@@ -48,6 +48,14 @@ RSpec.describe User, type: :model do
     end
   end
 
+	describe 'instance methods' do 
+		it '#upgrade_to_merchant' do
+			@user_1.upgrade_to_merchant
+			@user_1.reload
+			expect(@user_1.role).to eq("merchant")
+		end
+	end
+
   describe 'class methods' do
     it ".email_taken" do
       User.create(name: "Bobby", email: "aol@gmail.com", password: "password", address: "123 6th ave", city: "Denver", state: "Colorado", zip: "80226")

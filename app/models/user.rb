@@ -20,6 +20,10 @@ class User < ApplicationRecord
 
 	enum role: [:default, :merchant, :admin]
 
+	def upgrade_to_merchant
+		update(role: 1)
+	end
+
 	def self.email_taken(email)
 		where(email: email) != []
 	end
