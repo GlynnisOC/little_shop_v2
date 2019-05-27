@@ -1,2 +1,6 @@
 <%= link_to "Admin Dashboard", admin_dashboard_path %>
 <%= link_to "Login", admin_dashboard_path %>
+<% @orders.each do |order| %>
+  <h4>Order ID:</h4> <%= order.id %>
+
+<% end %>

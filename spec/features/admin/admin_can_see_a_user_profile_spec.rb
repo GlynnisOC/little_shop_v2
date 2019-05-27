@@ -18,6 +18,5 @@ RSpec.describe 'As an admin user on a user profile page' do
 				expect(page).to have_content("State: #{@user_1.state}")
 				expect(page).to have_content("Zip Code: #{@user_1.zip}")
 			end
-			
 		end
 end
