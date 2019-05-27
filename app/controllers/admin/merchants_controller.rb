@@ -1,10 +1,15 @@
 class Admin::MerchantsController < ApplicationController
 	def index
-		@all_merchants = User.all_merchants
+			@all_merchants = User.all_merchants
 	end
 
 	def show
-		@merchant = User.find(params[:id])
+		if current_admin?
+			@merchant = User.find(params[:id])
+		else 
+			@merchant = User.find(params[:id])
+			redirect_to dashboard_path 
+		end
 	end
 
 	def enable
