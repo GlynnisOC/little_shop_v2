@@ -60,6 +60,12 @@ RSpec.describe User, type: :model do
 			@inactive_merchant.reload
 			expect(@inactive_merchant.active).to be_truthy
 		end
+
+		it '#disable_merchant' do
+			@inactive_merchant.disable_merchant
+			@inactive_merchant.reload
+			expect(@inactive_merchant.active).to be_falsy
+		end
 	end
 
   describe 'class methods' do
