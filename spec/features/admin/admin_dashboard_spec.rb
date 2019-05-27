@@ -23,10 +23,14 @@ RSpec.describe "when I log into the admin dashboard" do
     click_on("#{@order.user.name}")
     expect(current_path).to eq(admin_user_path(@order.user))
   end
-end
 
-# For each order I see the following information:
-# - date the order was created
+  it "I can see the date the order was created" do
+    visit admin_dashboard_path
+
+    expect(page).to have_content("#{@order.created_at}")
+    expect(page).to have_content("#{@order2.created_at}")
+  end
+end
 #
 # Orders are sorted by "status" in this order:
 #
