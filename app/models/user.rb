@@ -19,6 +19,10 @@ class User < ApplicationRecord
 
 	enum role: [:default, :merchant, :admin]
 
+	def downgrade_to_user
+		update(role: 0)
+	end
+
 	def upgrade_to_merchant
 		update(role: 1)
 	end
@@ -29,6 +33,10 @@ class User < ApplicationRecord
 
 	def disable_merchant
 		update(active: false)
+	end
+
+	def item_disable
+		items.update(active: false)
 	end
 
 	def self.email_taken(email)
@@ -128,8 +136,7 @@ class User < ApplicationRecord
 	end
 
 	def self.active_merchants
-		where(role: 1).where(active: true)
-
+		where(role: 1).where(active: true).order(:name)
 	end
 
 	def self.all_merchants
