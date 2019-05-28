@@ -95,4 +95,35 @@ describe Item, type: :model do
 			expect(item.active).to be_truthy
 		end
 	end
+
+	describe "instance methods" do
+		before :each do
+			buyer = User.create!(email: "buyer@email.com", password: "password", role: 0, active: true, name: "Buy Yer", address: "123 Buyer Lane", city: "Buya Buya", state: "BY", zip: "11111")
+			merchant_1 = User.create!(email: "seller_1@email.com", password: "password", role: 1, active: true, name: "Seller One", address: "111 Seller Lane", city: "Sellermore", state: "SL", zip: "11111")
+			merchant_2 = User.create!(email: "seller_2@email.com", password: "password", role: 1, active: true, name: "Seller Two", address: "222 Seller Lane", city: "New Sellermore", state: "SL", zip: "22222")
+
+			@item_1 = merchant_1.items.create!(name: "Item 1", active: true, price: 1.00, description: "Buy things with your MONEY!", image: "https://bit.ly/2JH7Zl1", inventory: 100)
+			@item_2 = merchant_2.items.create!(name: "Item 2", active: true, price: 2.00, description: "Buy things with your MONEY!", image: "https://bit.ly/2JH7Zl1", inventory: 200)
+
+			order_1 = create(:order, user: buyer)
+			order_2 = create(:order, user: buyer)
+			order_3 = create(:order, user: buyer)
+			order_4 = create(:order, user: buyer)
+
+			@time_now = Time.now
+			@time_plus_one = Time.now + 86400 # one day = 86400 seconds
+			@time_plus_two = Time.now + 172800 # two days
+			@time_plus_three = Time.now + 259200 # three days
+
+			order_item_1 = @item_1.order_items.create!(item: @item_1, order: order_1, quantity: 10, price: 5.00, fulfilled: true, created_at: @time_now, updated_at: @time_plus_one)
+			order_item_2 = @item_1.order_items.create!(item: @item_1, order: order_2, quantity: 20, price: 5.00, fulfilled: true, created_at: @time_now, updated_at: @time_plus_two)
+			order_item_3 = @item_1.order_items.create!(item: @item_1, order: order_3, quantity: 30, price: 5.00, fulfilled: true, created_at: @time_now, updated_at: @time_plus_three)
+			order_item_4 = @item_2.order_items.create!(item: @item_2, order: order_4, quantity: 40, price: 5.00, fulfilled: true, created_at: @time_now, updated_at: @time_plus_three)
+		end
+
+		it "returns average time for merchant to fulfill item" do
+			expect(@item_1.average_time_to_fulfill).to eq(2.00)
+		end
+	end
+
 end

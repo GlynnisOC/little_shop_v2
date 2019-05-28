@@ -31,18 +31,37 @@ RSpec.describe 'As any user' do
   		expect(page).to_not have_content(@active_item_2.name)
 		end
 
-    it 'shows the average amount of time it takes this merchant to fulfill this item' # do
-    #   visit items_path
-    #
-    #   within "#item-#{@active_item_1.id}" do
-    #     click_link("#{@active_item_1.name}")
-    #   end
-    #
-    #   expect(current_path).to eq(item_path(@active_item_1))
-    #
-    # 
-    #
-    # end
+    it 'shows the average amount of time it takes this merchant to fulfill this item' do
+
+      merchant = User.create!(email: "seller@email.com", password: "password", role: 1, active: true, name: "Seller", address: "456 Seller Lane", city: "Sellermore", state: "SL", zip: "99999")
+
+      item = merchant.items.create!(name: "Item 1", active: true, price: 1.00, description: "Buy things with your MONEY!", image: "https://bit.ly/2JH7Zl1", inventory: 100)
+
+      buyer = User.create!(email: "buyer@email.com", password: "password", role: 0, active: true, name: "Buy Yer", address: "123 Buyer Lane", city: "Buya Buya", state: "BY", zip: "11111")
+
+      order_1 = create(:order, user: buyer)
+      order_2 = create(:order, user: buyer)
+      order_3 = create(:order, user: buyer)
+
+      @time_now = Time.now
+      @time_plus_one = Time.now + 86400 # one day = 86400 seconds
+      @time_plus_two = Time.now + 172800 # two days
+      @time_plus_three = Time.now + 259200 # three days
+
+      order_item = item.order_items.create!(item: item, order: order_1, quantity: 10, price: 5.00, fulfilled: true, created_at: @time_now, updated_at: @time_plus_one)
+      order_item_2 = item.order_items.create!(item: item, order: order_2, quantity: 20, price: 5.00, fulfilled: true, created_at: @time_now, updated_at: @time_plus_two)
+      order_item_3 = item.order_items.create!(item: item, order: order_3, quantity: 30, price: 5.00, fulfilled: true, created_at: @time_now, updated_at: @time_plus_three)
+
+
+      visit items_path
+
+      within "#item-#{item.id}" do
+        click_link("#{item.name}")
+      end
+
+      expect(current_path).to eq(item_path(item))
+      expect(page).to have_content("Average amount of time it takes this merchant to fulfill this item: #{item.average_time_to_fulfill} days")
+    end
 
 	end
 end

@@ -29,6 +29,10 @@ class Item < ApplicationRecord
 					.limit(5)
 	end
 
+	def average_time_to_fulfill
+		order_items.where(fulfilled: true).average('updated_at - created_at')
+	end
+
 	def disable_item
 		update(active: false)
 	end

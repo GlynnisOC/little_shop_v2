@@ -1,11 +1,16 @@
 <main class="show-page">
   <h1> <%= @item.name %> </h1>
-  <p> <%= @item.price %> </p>
+  <p>Price: <%= number_to_currency(@item.price) %> </p>
 
   <div class="show-page-image">
     <img class="large-image" src="<%= @item.image %>"/>
   </div>
 
-  <p> <%= @item.user.name %> </p>
-  <p> <%= @item.inventory %> </p>
+  <p>Merchant: <%= @item.user.name %> </p>
+  <p>Quantity Available: <%= @item.inventory %> </p>
+
+  <% if @item.average_time_to_fulfill != nil %>
+    <p>Average amount of time it takes this merchant to fulfill this item: <%= @item.average_time_to_fulfill %> days.</p>
+  <% end %>
+
 </main>
