@@ -60,7 +60,6 @@ RSpec.describe 'As any user' do
       end
 
       expect(current_path).to eq(item_path(item))
-save_and_open_page
       expect(page).to have_content("Average amount of time it takes this merchant to fulfill this item: #{item.average_time_to_fulfill} days")
     end
 
