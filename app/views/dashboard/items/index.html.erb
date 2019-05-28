@@ -17,7 +17,7 @@
     <% end %>
 
     <% if OrderItem.find_by(item_id: item.id) == nil %>
-      <li><%= link_to "Delete Item" %></li>
+      <li><%= button_to "Delete Item", delete_item_path(item), method: :delete %></li>
     <% end %>
 
   </ul>

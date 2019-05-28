@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   patch 'items/:id/edit', to: 'items#update'
   post '/items/:id/disable', to: "items#disable", as: 'disable_item'
   post '/items/:id/enable', to: "items#enable", as: 'enable_item'
+  delete '/items/:id/delete', to: "items#delete", as: 'delete_item'
 
   get '/profile', to: 'users#profile'
   get '/profile/edit', to: 'users#edit'
