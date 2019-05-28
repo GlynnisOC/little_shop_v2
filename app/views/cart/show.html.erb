@@ -2,6 +2,7 @@
   Your cart is empty
 <% else %>
   <%= link_to "Empty Cart", empty_cart_path, method: :delete %>
+  <h5>You must <%= link_to "login", login_path %> or <%= link_to "register", new_user_path %> to complete the checkout process.</h5>
 
   <% grand_total ||= 0 %>
 
