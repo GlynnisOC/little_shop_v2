@@ -28,3 +28,5 @@ class SessionsController < ApplicationController
     end
   end
 end
+
+# refactor method to redirect based on user role 
