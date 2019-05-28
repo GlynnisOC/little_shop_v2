@@ -47,6 +47,10 @@ class ItemsController < ApplicationController
   end
 
   def delete
+    @item = Item.find(params[:id])
+    current_user.items.delete(@item)
+    flash[:deleted] = "#{@item.name} is now deleted"
+    redirect_to dashboard_items_path
   end
 
   private
