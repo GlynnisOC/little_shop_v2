@@ -5,7 +5,6 @@ RSpec.describe 'as an admin user on my dashboard'  do
 		describe 'and each order has a button to ship the order' do
 			before :each do
 				@admin_1 = create(:admin)
-				# @user_1 = create(:user)
 				allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin_1)
 
 				@order_1 = create(:order)
@@ -13,7 +12,6 @@ RSpec.describe 'as an admin user on my dashboard'  do
 				@order_3 = create(:shipped_order)
 				@order_4 = create(:cancelled_order)
 				visit admin_dashboard_path
-				# enum status: [:pending, :packaged, :shipped, :cancelled]
 			end
 
 			it 'button exists when order status is packaged_order' do
@@ -34,7 +32,15 @@ RSpec.describe 'as an admin user on my dashboard'  do
 				end
 			end
 
+			it 'clicking Ship Order button updates order.status to Shipped' do
+				expect(@order_2.status).to eq("packaged")
 
+				within "#admin-dashboard-order-#{@order_2.id}" do
+					click_button("Ship Order")
+				end
+				@order_2.reload
+				expect(@order_2.status).to eq("shipped")
+			end
 		end
 	end
 end

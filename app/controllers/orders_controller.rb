@@ -8,4 +8,10 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @items = @order.items.distinct
   end
+
+  def ship_packaged_order
+    @order = Order.find(params[:id])
+    @order.ship_packaged_order
+    redirect_to admin_dashboard_path
+  end
 end

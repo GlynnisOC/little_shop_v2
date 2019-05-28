@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   get 'profile/orders', to: "orders#index"
   get 'profile/orders/:id', to: "orders#show", as: 'order_show'
 
+  post '/orders/:id/ship', to: "orders#ship_packaged_order", as: 'ship_packaged_order'
+
   resources :users, only: [:index, :new, :create, :show, :edit]
 
   namespace :admin do

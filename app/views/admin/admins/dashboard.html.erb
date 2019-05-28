@@ -8,10 +8,8 @@
     <h4>User Profile:</h4> <%= link_to order.user.name, admin_user_path(order.user) %>
 
     <% if order.status == "packaged" %>
-      <%= button_to "Ship Order" %>
+      <%= button_to "Ship Order", ship_packaged_order_path(order) %>
     <% end %>
 
-
-</section>
-
+  </section>
 <% end %>
