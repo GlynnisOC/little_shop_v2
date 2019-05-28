@@ -1,8 +1,17 @@
 <%= link_to "Admin Dashboard", admin_dashboard_path %>
 <%= link_to "Login", admin_dashboard_path %>
 <% @orders.each do |order| %>
-  <h4>Order ID:</h4> <%= order.id %>
-  <h4>Order Created At:</h4> <%= order.created_at %>
-  <h4>Order Status:</h4> <%= order.status %>
-  <h4>User Profile:</h4> <%= link_to order.user.name, admin_user_path(order.user) %>
+  <section id='admin-dashboard-order-<%= order.id %>'>
+    <h4>Order ID:</h4> <%= order.id %>
+    <h4>Order Created At:</h4> <%= order.created_at %>
+    <h4>Order Status:</h4> <%= order.status %>
+    <h4>User Profile:</h4> <%= link_to order.user.name, admin_user_path(order.user) %>
+
+    <% if order.status == "packaged" %>
+      <%= button_to "Ship Order" %>
+    <% end %>
+
+
+</section>
+
 <% end %>
