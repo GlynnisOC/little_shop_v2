@@ -40,11 +40,12 @@ RSpec.describe "when I log into the admin dashboard" do
     order4 = create(:order)
     order.status = 0
     order2.status = 1
+    order2.reload
     order3.status = 2
+    order3.reload
     order4.status = 3
+    order4.reload
     visit admin_dashboard_path
-    # binding.pry
-    # save_and_open_page
 
     expect(page).to have_content("#{order.status}")
     expect(page).to have_content("#{order2.status}")

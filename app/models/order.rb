@@ -15,4 +15,7 @@ class Order < ApplicationRecord
 		items.count { |item| item.id == item_id }
 	end
 
+	def self.status_sorted
+		Order.order(:status)
+	end
 end
