@@ -11,7 +11,7 @@ RSpec.describe 'As an admin user' do
 
 		it 'redirects me to the proper admin user show page' do
 			visit admin_user_path(@merchant)
-			expect(current_path).to eq(admin_merchant_path(@user))
+			expect(current_path).to eq(admin_merchant_path(@merchant))
 		end
 	end
 end
