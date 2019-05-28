@@ -12,10 +12,6 @@ class ItemsController < ApplicationController
     @cart = Cart.new(session[:cart])
   end
 
-  def new
-    @item = Item.new
-  end
-
   def create
     @item = Item.new(item_params)
     @item[:user_id] = current_user.id
@@ -27,7 +23,13 @@ class ItemsController < ApplicationController
       redirect_to dashboard_items_path
       flash[:message] = "Your new item has been saved"
     end
+  end
 
+  def update
+    @item = Item.find(params[:id])
+    @item.update!(item_params)
+    redirect_to dashboard_items_path
+    flash[:item_updated] = "Your item has been updated!"
   end
 
   private

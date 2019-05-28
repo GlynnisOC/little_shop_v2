@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :merchants, only: [:index]
 
 	namespace :dashboard do
-		resources :items, only: [:index, :new, :create]
+		resources :items, only: [:index, :new, :create, :edit]
 	end
 
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
@@ -15,7 +15,9 @@ Rails.application.routes.draw do
 
   get '/logout', to: 'application#logout'
 
-  resources :items, only: [:index, :show, :create]
+  resources :items, only: [:index, :show, :create, :edit]
+  # patch 'dashboard/items/:id/edit', to: 'items#update'
+  patch 'items/:id/edit', to: 'items#update'
 
   get '/profile', to: 'users#profile'
   get '/profile/edit', to: 'users#edit'
