@@ -136,12 +136,7 @@ class User < ApplicationRecord
 	end
 
 	def self.active_merchants
-<<<<<<< HEAD
 		where(role: 1).where(active: true).order(:name)
-=======
-		where(role: 1).where(active: true)
-
->>>>>>> 38f1dbc9556144867a0bcb79df3c5a78f788a7d9
 	end
 
 	def self.all_merchants
