@@ -10,6 +10,13 @@
 	<%= link_to "Login", dashboard_path %>
 </ul>
 
+<ul>
+	<h2>Orders Info</h2>
+	<% @orders.each do |order| %>
+	<li>Order ID: <%= link_to order.id, dashboard_order_path(order) %></li>
+	<% end %>
+</ul>
+
 <section id="merchant-dash-stats">
 	<h1>Merchant Dashboard Statistics</h1>
 	<section id="top-five-items-sold">

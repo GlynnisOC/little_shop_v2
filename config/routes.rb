@@ -8,12 +8,15 @@ Rails.application.routes.draw do
 		resources :items, only: [:index, :new, :create, :edit]
   end
 
+  namespace :dashboard do
+    resources :orders, only: [:show]
+  end 
+
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
 
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-
   get '/logout', to: 'application#logout'
 
   resources :items, only: [:index, :show, :create, :edit]

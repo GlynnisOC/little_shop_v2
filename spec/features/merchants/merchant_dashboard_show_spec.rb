@@ -361,7 +361,17 @@ RSpec.describe 'As a registered merchant on the site' do
 			fill_in "Password", with: "password"
 			click_button("Login")
 
-			expect(page).to have_content(@order1, @order2)
+			visit dashboard_path
+			expect(page).to have_content("Orders Info")
+			expect(page).to have_content(@order_1.id, @order_2.id)
+			click_link(@order_1.id)
+
+			expect(current_path).to eq(dashboard_order_path(@order_1))
+
+			visit dashboard_path
+			click_link(@order_2.id)
+			expect(current_path).to eq(dashboard_order_path(@order_2))
+
 		end
 	end
 end
