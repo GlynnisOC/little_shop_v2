@@ -11,9 +11,9 @@
     <li><%= link_to "Edit #{item.name}", edit_dashboard_item_path(item.id) %></li>
 
     <% if item.active?%>
-      <li><%= link_to "Disable" %></li>
+      <li><%= button_to "Disable", disable_item_path(item) %></li>
     <% else %>
-      <li><%= link_to "Enable" %></li>
+      <li><%= button_to "Enable", enable_item_path(item) %></li>
     <% end %>
 
     <% if OrderItem.find_by(item_id: item.id) == nil %>

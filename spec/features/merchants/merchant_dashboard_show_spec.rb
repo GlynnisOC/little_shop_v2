@@ -56,7 +56,7 @@ RSpec.describe 'As a registered merchant on the site' do
 				expect(page).to have_content("Current Price: #{@item_1.price}")
 				expect(page).to have_content("Inventory: #{@item_1.inventory}")
 				expect(page).to have_link("Edit #{@item_1.name}")
-				expect(page).to have_link("Disable")
+				expect(page).to have_button("Disable")
 			end
 
 			within "#merchant-item-#{@item_2.id}" do
@@ -66,7 +66,7 @@ RSpec.describe 'As a registered merchant on the site' do
 				expect(page).to have_content("Current Price: #{@item_2.price}")
 				expect(page).to have_content("Inventory: #{@item_2.inventory}")
 				expect(page).to have_link("Edit #{@item_2.name}")
-				expect(page).to have_link("Disable")
+				expect(page).to have_button("Disable")
 				expect(page).to have_link("Delete Item")
 			end
 
@@ -77,7 +77,7 @@ RSpec.describe 'As a registered merchant on the site' do
 				expect(page).to have_content("Current Price: #{@item_3.price}")
 				expect(page).to have_content("Inventory: #{@item_3.inventory}")
 				expect(page).to have_link("Edit #{@item_3.name}")
-				expect(page).to have_link("Enable")
+				expect(page).to have_button("Enable")
 				expect(page).to have_link("Delete Item")
 			end
 		end

@@ -32,6 +32,23 @@ class ItemsController < ApplicationController
     flash[:item_updated] = "Your item has been updated!"
   end
 
+  def disable
+    @item = Item.find(params[:id])
+    @item.disable_item
+    flash[:disabled] = "#{@item.name} is no longer for sale"
+    redirect_to dashboard_items_path
+  end
+
+  def enable
+    @item = Item.find(params[:id])
+    @item.enable_item
+    flash[:enabled] = "#{@item.name} is now available for sale"
+    redirect_to dashboard_items_path
+  end
+
+  def delete
+  end
+
   private
 
   def item_params
