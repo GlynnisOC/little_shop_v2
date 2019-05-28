@@ -101,12 +101,8 @@ RSpec.describe User, type: :model do
 		end
 
 		it '.active_merchants' do
-<<<<<<< HEAD
 			actual = User.active_merchants
 			expect(actual).to eq([@merchant_1, @merchant_2])
-=======
-			expect(User.active_merchants).to eq([@merchant_1, @merchant_2] || [@merchant_2, @merchant_1])
->>>>>>> 38f1dbc9556144867a0bcb79df3c5a78f788a7d9
 		end
 		
 		it '.all_merchants' do 
