@@ -53,6 +53,8 @@ class ItemsController < ApplicationController
     redirect_to dashboard_items_path
   end
 
+  # refactor -- private method to find item and make this a before action
+
   private
 
   def item_params

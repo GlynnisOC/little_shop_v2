@@ -95,7 +95,7 @@ class User < ApplicationRecord
 			User.find(top_user_id.unique_id) if top_user_id != nil
 	end
 
-	def top_user_by_items
+	def top_user_by_items # refactor to return user object instead of user_id to minimize ruby calls on line 100 select all user info
 		top_user_hash = Hash.new(0)
 		top_user_id = User.select('orders.user_id AS unique_id', 'SUM(order_items.quantity) AS unique_items')
 		.joins(orders: :items)
