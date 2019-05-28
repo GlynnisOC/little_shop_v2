@@ -6,6 +6,9 @@ class Admin::MerchantsController < ApplicationController
 	def show
 		if current_admin?
 			@merchant = User.find(params[:id])
+			if @merchant.role == "default"
+				redirect_to admin_user_path(@merchant)
+			end
 		else 
 			@merchant = User.find(params[:id])
 			redirect_to dashboard_path 
