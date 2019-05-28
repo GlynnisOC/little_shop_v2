@@ -75,6 +75,25 @@ describe Item, type: :model do
 
 			expect(Item.bottom_5[5]).to eq(nil)
 		end
+
+		it '.disable_item' do
+			item = create(:item)
+			expect(item.active).to be_truthy
+			item.disable_item
+			item.reload
+			expect(item.active).to be_falsey
+		end
+
+		it '.enable_item' do
+			item = create(:item)
+			expect(item.active).to be_truthy
+			item.disable_item
+			item.reload
+			expect(item.active).to be_falsey
+			item.enable_item
+			item.reload
+			expect(item.active).to be_truthy
+		end
 	end
 
 	describe "instance methods" do
