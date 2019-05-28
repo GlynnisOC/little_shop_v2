@@ -14,6 +14,7 @@
 	<h2>Orders Info</h2>
 	<% @orders.each do |order| %>
 	<li>Order ID: <%= link_to order.id, dashboard_order_path(order) %></li>
+	<li>Date Ordered: <%= order.created_at %>
 	<% end %>
 </ul>
 

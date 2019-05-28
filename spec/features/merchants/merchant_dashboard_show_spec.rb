@@ -372,12 +372,12 @@ RSpec.describe 'As a registered merchant on the site' do
 			click_link(@order_2.id)
 			expect(current_path).to eq(dashboard_order_path(@order_2))
 
+			visit dashboard_path
+			expect(page).to have_content(@order_1.created_at)
+			expect(page).to have_content(@order_2.created_at)
 		end
 	end
 end
 
-# Each order listed includes the following information:
-# - the ID of the order, which is a link to the order show page ("/dashboard/orders/15")
-# - the date the order was made
 # - the total quantity of my items in the order
 # - the total value of my items for that order
