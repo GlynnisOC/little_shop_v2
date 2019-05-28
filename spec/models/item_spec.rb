@@ -59,7 +59,7 @@ describe Item, type: :model do
 
 			buyer_1 = create(:user)
       order_1 = create(:order, user: buyer_1)
-			
+
 			order_item_1 = item_1.order_items.create!(item: item_1, order: order_1, quantity: 10, price: 5.00, fulfilled: true)
 			order_item_2 = item_2.order_items.create!(item: item_1, order: order_1, quantity: 9, price: 5.00, fulfilled: true)
 			order_item_3 = item_3.order_items.create!(item: item_1, order: order_1, quantity: 8, price: 5.00, fulfilled: true)
@@ -74,6 +74,25 @@ describe Item, type: :model do
 			expect(Item.bottom_5[4].sum).to eq(10)
 
 			expect(Item.bottom_5[5]).to eq(nil)
+		end
+
+		it '.disable_item' do
+			item = create(:item)
+			expect(item.active).to be_truthy
+			item.disable_item
+			item.reload
+			expect(item.active).to be_falsey
+		end
+
+		it '.enable_item' do
+			item = create(:item)
+			expect(item.active).to be_truthy
+			item.disable_item
+			item.reload
+			expect(item.active).to be_falsey
+			item.enable_item
+			item.reload
+			expect(item.active).to be_truthy
 		end
 	end
 end

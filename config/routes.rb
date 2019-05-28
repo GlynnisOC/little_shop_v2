@@ -6,9 +6,10 @@ Rails.application.routes.draw do
 
 	namespace :dashboard do
 		resources :items, only: [:index, :new, :create, :edit]
-	end
+  end
 
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
+
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :show, :create, :edit]
   # patch 'dashboard/items/:id/edit', to: 'items#update'
   patch 'items/:id/edit', to: 'items#update'
+  post '/items/:id/disable', to: "items#disable", as: 'disable_item'
+  post '/items/:id/enable', to: "items#enable", as: 'enable_item'
 
   get '/profile', to: 'users#profile'
   get '/profile/edit', to: 'users#edit'
@@ -29,10 +32,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get  '/dashboard', to: "admins#dashboard"
-		post '/users/:id', to: "users#upgrade", as: 'upgrade_user' 
-		post '/merchants/:id/enable', to: "merchants#enable", as: 'enable_merchant' 
-		post '/merchants/:id/disable', to: "merchants#disable", as: 'disable_merchant' 
-		resources :users, only: [:index, :show] 
+		post '/users/:id', to: "users#upgrade", as: 'upgrade_user'
+		post '/merchants/:id/enable', to: "merchants#enable", as: 'enable_merchant'
+		post '/merchants/:id/disable', to: "merchants#disable", as: 'disable_merchant'
+		resources :users, only: [:index, :show]
 		resources :merchants, only: [:show, :index]
   end
 
