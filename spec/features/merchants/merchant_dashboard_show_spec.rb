@@ -18,7 +18,6 @@ RSpec.describe 'As a registered merchant on the site' do
 				expect(page).to have_content("Zip Code: #{merchant.zip}")
 			end
 		end
-	end
 
 	describe "When I visit my items page '/dashboard/items'" do
 		before :each do
@@ -129,6 +128,7 @@ RSpec.describe 'As a registered merchant on the site' do
 			fill_in "Password", with: "password"
 			click_button("Login")
 		end
+	end
 
 		it "I see a form where I can add information for a new item" do
 			visit new_dashboard_item_path
@@ -338,4 +338,36 @@ RSpec.describe 'As a registered merchant on the site' do
 			end
 		end
 	end
+
+	describe "if any users have pending orders containing items I sell" do
+		it "I see a list of these orders with the ID, date, quantity, and value" do
+			@merchant = User.create!(email: "merchant@email.com", password: "password", role: "merchant", name: "Murr Chante", address: "123 Sesame St", city: "Merchantsville", state: "MV", zip: 38511)
+			@user 		= User.create!(email: "user@email.com", password: "password", role: "default", name: "Yu Xer", address: "1600 Pennsylvania Ave", city: "Userton", state: "US", zip: 12345)
+			@user2 		= User.create!(email: "user2@email.com", password: "password", role: "default", name: "Yuzer", address: "1600 Pennsylvania Ave", city: "Userton", state: "US", zip: 12345)
+
+			@item_1 = @merchant.items.create!(name: "Item One", active: true, price: 1.00, description: "This is item one", image: "https://picsum.photos/200/300?image=1", inventory: 100)
+			@item_2 = @merchant.items.create!(name: "Item Two", active: true, price: 2.00, description: "This is item two", image: "https://picsum.photos/200/300?image=1", inventory: 200)
+			@item_3 = @merchant.items.create!(name: "Item Three", active: false, price: 3.00, description: "This is item three", image: "https://picsum.photos/200/300?image=1", inventory: 300)
+
+			@order_1 = Order.create!(status: 0, user_id: @user.id)
+			@order_2 = Order.create!(status: 0, user_id: @user2.id)
+
+			@order_item_1 = OrderItem.create!(item_id: @item_1.id, order_id: @order_1.id, quantity: 1, price: 1.00, fulfilled: false)
+			@order_item_2 = OrderItem.create!(item_id: @item_2.id, order_id: @order_2.id, quantity: 1, price: 1.00, fulfilled: false)
+
+			visit login_path
+
+			fill_in "Email", with:  "merchant@email.com"
+			fill_in "Password", with: "password"
+			click_button("Login")
+
+			expect(page).to have_content(@order1, @order2)
+		end
+	end
 end
+
+# Each order listed includes the following information:
+# - the ID of the order, which is a link to the order show page ("/dashboard/orders/15")
+# - the date the order was made
+# - the total quantity of my items in the order
+# - the total value of my items for that order
