@@ -61,6 +61,7 @@ RSpec.describe User, type: :model do
 			merchant.downgrade_to_user	
 			expect(merchant.role).to eq("default")
 		end
+
 		it '#enable_merchant' do
       inactive_merchant = create(:inactive_merchant) 
 			inactive_merchant.enable_merchant
@@ -73,6 +74,17 @@ RSpec.describe User, type: :model do
 			merchant.disable_merchant
 			merchant.reload
 			expect(merchant.active).to be_falsy
+		end
+		
+		it '#item_disable' do
+			merchant = create(:merchant)
+			item_1 = create(:item, user: merchant)
+			item_2 = create(:item, user: merchant)
+			merchant.item_disable
+			item_1.reload
+			item_2.reload
+			expect(item_1.active).to be_falsey
+			expect(item_2.active).to be_falsey
 		end
 	end
 

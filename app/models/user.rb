@@ -23,6 +23,7 @@ class User < ApplicationRecord
 	def downgrade_to_user
 		update(role: 0)
 	end
+
 	def upgrade_to_merchant
 		update(role: 1)
 	end
@@ -33,6 +34,10 @@ class User < ApplicationRecord
 
 	def disable_merchant
 		update(active: false)
+	end
+
+	def item_disable
+		items.update(active: false)
 	end
 
 	def self.email_taken(email)
