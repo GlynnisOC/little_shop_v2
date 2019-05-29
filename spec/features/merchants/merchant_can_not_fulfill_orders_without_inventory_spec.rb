@@ -12,10 +12,9 @@ RSpec.describe 'As a merchant on my dashboard order show page' do
 			@order_item_2 = create(:order_item, item: @item_2, order: @order, quantity: 3)
 				
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant)
-			binding.pry
 		end
 
-		it 'shows a big red notice, and there is no fulfill button' do
+		xit 'shows a big red notice, and there is no fulfill button' do
 			visit dashboard_order_path(@order)
 save_and_open_page
 		end
