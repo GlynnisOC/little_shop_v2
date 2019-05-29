@@ -21,16 +21,16 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    @user = User.find(params[:id])
-  end
-
   def profile
+    render file: "/public/404", status: 404 unless current_default?
+
     if params[:new_id] != nil
       @user = User.find(params[:new_id])
     else
-      @user = User.find(current_user.id)
-      flash[:logged_in] = "#{@user.name}, you're already logged in!"
+      if current_user != nil
+        @user = User.find(current_user.id)
+        flash[:logged_in] = "#{@user.name}, you're already logged in!"
+      end
     end
   end
 
@@ -57,11 +57,9 @@ class UsersController < ApplicationController
   def update_params
     if params[:user][:password] == "" && (params[:user][:email] == current_user.email)
       params.require(:user).permit(:name, :address, :city, :state, :zip)
-    elsif
+    else
       params[:user][:password] == "" && (params[:user][:email] != current_user.email)
       params.require(:user).permit(:name, :address, :city, :state, :zip, :email)
-    else
-      user_params
     end
   end
 end

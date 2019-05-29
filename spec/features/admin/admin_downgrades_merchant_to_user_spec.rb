@@ -15,9 +15,8 @@ RSpec.describe 'as an admin on a merchant show page' do
   	  fill_in "Password", with: @merchant.password
   	  click_button("Login")
 			visit admin_merchant_path(@merchant)
-			expect(current_path).to eq(dashboard_path)
+			expect(page).to have_content("The page you were looking for doesn't exist.")
 			expect(page).to_not have_link("Downgrade to User")
-			visit logout_path
 		end
 
 		it 'downgrades, displays a flash message, and redirects when clicked' do
@@ -31,7 +30,7 @@ RSpec.describe 'as an admin on a merchant show page' do
 			expect(current_path).to eq(admin_user_path(@merchant))
 		end
 
-		it 'no longer allows the user to log in as a merchant and disables their items' do 
+		it 'no longer allows the user to log in as a merchant and disables their items' do
 			visit login_path
   	  fill_in "Email", with: @admin.email
   	  fill_in "Password", with: @admin.password

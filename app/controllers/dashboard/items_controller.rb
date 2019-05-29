@@ -1,4 +1,4 @@
-class Dashboard::ItemsController < ApplicationController
+class Dashboard::ItemsController < Dashboard::BaseController
 
 	def index
 	end
@@ -10,5 +10,5 @@ class Dashboard::ItemsController < ApplicationController
 	def edit
 		@item = Item.find(params[:id])
 	end
-	
+
 end

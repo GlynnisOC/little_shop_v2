@@ -1,4 +1,10 @@
 class CartController < ApplicationController
+  before_action :require_visitor_or_default
+
+  def require_visitor_or_default
+    render file: "/public/404", status: 404 unless current_user == nil || current_user.default?
+  end
+
 
   def show
     @items_in_cart = cart.contents
@@ -29,7 +35,7 @@ class CartController < ApplicationController
     session[:cart] = session[:cart].reject{ |item_id, quantity| quantity <= 0 }
     redirect_to cart_path
   end
-	
+
 	def check_out
 		order = current_user.orders.create
 		cart.contents.each do |id, quant|

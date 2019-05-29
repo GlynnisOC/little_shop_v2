@@ -1,11 +1,7 @@
 class OrdersController < ApplicationController
 
   def index
-		if current_user != nil
-			@user = current_user
-		else
-    	@user = User.find(params[:user_id]) || current_user
-		end
+		@user = current_user if current_user != nil
   end
 
   def show

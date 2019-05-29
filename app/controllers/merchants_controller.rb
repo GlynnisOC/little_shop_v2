@@ -4,6 +4,8 @@ class MerchantsController < ApplicationController
   end
 
   def dashboard
+    render file: "/public/404", status: 404 unless current_merchant?
+
 		@merchant = User.find(current_user.id)
     flash[:logged_in]            = "#{@merchant.name}, you're already logged in!"
     @orders                      = Order.all

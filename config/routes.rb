@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     resources :orders, only: [:show]
-  end 
+  end
 
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
 
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   post '/orders/:id/ship', to: "orders#ship_packaged_order", as: 'ship_packaged_order'
   post '/orders/:id/cancel', to: "orders#cancel_pending_order", as: 'cancel_pending_order'
 
-  resources :users, only: [:index, :new, :create, :show, :edit]
+  resources :users, only: [:index, :new, :create, :edit]
 
   namespace :admin do
     get  '/dashboard', to: "admins#dashboard"

@@ -1,4 +1,4 @@
-class Dashboard::OrdersController < ApplicationController
+class Dashboard::OrdersController < Dashboard::BaseController
 
   def show
     @order = Order.find(params[:id])
@@ -14,8 +14,6 @@ class Dashboard::OrdersController < ApplicationController
 		@order_item = OrderItem.find(params[:id])
 		if @order_item.fulfill != false
 			flash[:fulfilled] = "#{@order_item.item.name} has been fulfilled"
-			redirect_to dashboard_order_path(@order)
-		else
 			redirect_to dashboard_order_path(@order)
 		end
 	end
