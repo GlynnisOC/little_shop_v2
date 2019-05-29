@@ -2,7 +2,9 @@
   Your cart is empty
 <% else %>
   <%= link_to "Empty Cart", empty_cart_path, method: :delete %>
-
+  <% if current_user == nil %>
+    <h5>You must <%= link_to "login", login_path %> or <%= link_to "register", new_user_path %> to complete the checkout process.</h5>
+  <% end %>
   <% grand_total ||= 0 %>
 
   <% @cart_items.each do |item| %>
@@ -19,8 +21,8 @@
       <%= button_to "Remove From Cart", change_amount_path(item_id: "#{item.id}", change_amount: "-#{cart.contents[item.id.to_s]}"), controller: "cart", action: "change_amount", method: :patch %>
 
     </section>
-
   <% end %>
 
+	<%= button_to "Check Out", check_out_path %>
   Grand Total: <%= number_to_currency(grand_total) %>
 <% end %>

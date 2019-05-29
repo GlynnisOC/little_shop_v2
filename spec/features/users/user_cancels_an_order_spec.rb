@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'As a default user on an order show page' do
 	describe 'If the order is still pending, I see a link to cancel the order' do
+
 		before :each do
 			@item_1 = create(:item, inventory: 100)
 			@item_2 = create(:item, inventory: 100)

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
 	namespace :dashboard do
 		resources :items, only: [:index, :new, :create, :edit]
+    resources :orders, only: :show
   end
 
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
@@ -48,4 +49,5 @@ Rails.application.routes.draw do
   post '/cart', to: 'cart#create', as: 'add_to_cart'
   delete '/cart', to: 'cart#empty_cart', as: 'empty_cart'
   patch '/cart', to: 'cart#change_amount', as: 'change_amount'
+	post '/cart/checkout', to: 'cart#check_out', as: 'check_out'
 end
