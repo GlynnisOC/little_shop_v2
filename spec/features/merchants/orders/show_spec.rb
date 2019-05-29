@@ -27,7 +27,7 @@ describe "As a merchant" do
 
       @order_item_2_3 = @item_3.order_items.create!(item: @item_3, order: @order_2, quantity: 2, price: 3.00, fulfilled: false)
       @order_item_2_4 = @item_4.order_items.create!(item: @item_4, order: @order_2, quantity: 2, price: 4.00, fulfilled: false)
-      
+
     end
 
     it "routes to the correct path" do
@@ -46,7 +46,7 @@ describe "As a merchant" do
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@order_item_1_1.price)
       expect(page).to have_content(@order_item_1_1.quantity)
-      
+
       expect(page).to have_content(@item_3.name)
       expect(page).to have_content(@order_item_1_3.price)
       expect(page).to have_content(@order_item_1_3.quantity)
