@@ -1,6 +1,7 @@
 class MerchantsController < ApplicationController
   def index
 		@active_merchants = User.active_merchants
+    @top_three_revenue = User.top_three_revenue
   end
 
   def dashboard

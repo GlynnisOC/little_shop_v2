@@ -142,4 +142,14 @@ class User < ApplicationRecord
 	def self.all_merchants
 		where(role: 1)
 	end
+
+	def self.top_three_revenue
+					joins(items: :order_items)
+					.where('order_items.fulfilled = ?', true)
+					.group(:id)
+					.select('sum(order_items.quantity * order_items.price) AS revenue, users.*')
+					.order('revenue DESC')
+					.limit(3)
+	end
+
 end
