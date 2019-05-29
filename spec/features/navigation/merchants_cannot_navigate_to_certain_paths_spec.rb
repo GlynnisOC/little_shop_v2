@@ -34,11 +34,11 @@ describe "User visits unauthorized paths" do
     end
 
     it "does not allow merchants to navigate to any /cart path" do
-      # merchant_1 = User.create!(email: "Bob@bob.bob", password: "password", role: 1, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
-			# allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_1)
+      merchant_1 = User.create!(email: "Bob@bob.bob", password: "password", role: 1, active: true, name: "Bob Bob", address: "123 Shady Lane", city: "Boulda", state: "CO", zip: "80303")
+			allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_1)
 
-      # visit cart_path
-      # expect(page).to have_content("The page you were looking for doesn't exist.")
+      visit cart_path
+      expect(page).to have_content("The page you were looking for doesn't exist.")
     end
   end
 end
