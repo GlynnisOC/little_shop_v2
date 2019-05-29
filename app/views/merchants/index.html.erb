@@ -1,3 +1,11 @@
+<section id="merchant-stats-box">
+	<ul id="top-three-revenue">
+		<% @top_three_revenue.each do |merchant| %>
+		<li> <%= merchant.name %> </li>
+		<% end %>
+	</ul>
+</section>
+
 <% @active_merchants.each do |merchant| %>
 	<ul id="merchant-<%= merchant.id %>-info" >
 	<% if current_admin? %>
@@ -9,4 +17,4 @@
 		<li><%= merchant.state %></li>
 		<li><%= merchant.created_at.strftime("%m-%d-%Y") %></li>
 	</ul>
-<% end %> 
+<% end %>
