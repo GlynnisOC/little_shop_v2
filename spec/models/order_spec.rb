@@ -41,6 +41,12 @@ RSpec.describe Order, type: :model do
 			expect(@order_1.total_value_in_order).to eq(15)
 		end
 
+		it "#status_changed_to_packaged" do
+			@order_1.status = 1
+			@order_1.reload
+			expect(@order_1.status_changed_to_packaged).to eq(true)
+		end
+
 		it "counts quantity of a specific item in the order" do
 			expect(@order_1.item_quantity(@item_1.id)).to eq(2)
 		end
