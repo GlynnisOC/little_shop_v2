@@ -26,11 +26,15 @@ class UsersController < ApplicationController
   end
 
   def profile
+    render file: "/public/404", status: 404 unless current_default?
+
     if params[:new_id] != nil
       @user = User.find(params[:new_id])
     else
-      @user = User.find(current_user.id)
-      flash[:logged_in] = "#{@user.name}, you're already logged in!"
+      if current_user != nil
+        @user = User.find(current_user.id)
+        flash[:logged_in] = "#{@user.name}, you're already logged in!"
+      end
     end
   end
 

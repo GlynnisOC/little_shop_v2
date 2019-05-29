@@ -1,4 +1,4 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < Admin::BaseController
 		def index
 			@all_reg_users = User.all_reg_users
 		end
@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
 				return not_found
 			end
 		end
-		
+
 		def upgrade
 			if current_admin?
 					user = User.find(params[:id])
