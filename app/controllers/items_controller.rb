@@ -14,7 +14,6 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    # binding.pry
     @item[:user_id] = current_user.id
     @item.save
     if @item.save == false
