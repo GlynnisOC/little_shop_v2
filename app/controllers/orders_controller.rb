@@ -14,4 +14,12 @@ class OrdersController < ApplicationController
     @order.ship_packaged_order
     redirect_to admin_dashboard_path
   end
+
+  def cancel_pending_order
+    @order = Order.find(params[:id])
+    @order.cancel_pending_order
+    redirect_to profile_path
+    flash[:order_cancelled] = "The order is now cancelled"
+
+  end
 end

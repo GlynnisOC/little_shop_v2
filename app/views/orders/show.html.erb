@@ -3,6 +3,10 @@ Order Created: <%= @order.created_at.strftime("%F") %>
 Order Updated: <%= @order.updated_at.strftime("%F") %>
 Order Status: <%= @order.status %>
 
+<% if @order.status == "pending" %>
+  <%= button_to "Cancel Order" %>
+<% end %>
+
 <% @items.each do |item| %>
   <section id="order-show-item-<%= item.id %>">
     Item Name: <%= item.name %>
