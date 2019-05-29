@@ -41,7 +41,7 @@ RSpec.describe OrderItem, type: :model do
 			actual = order_item_1.fulfill
 			order_item_1.reload
 			expect(order_item_1.fulfilled).to eq(true)
-			expect(fulfilled_order_item.fulfilled).to eq(true)
+			expect(fulfilled_order_item.fulfill).to eq(false)
 		end
 	end
 end
