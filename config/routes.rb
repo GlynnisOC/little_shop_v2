@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
 	namespace :dashboard do
 		resources :items, only: [:index, :new, :create, :edit]
+    resources :orders, only: :show
   end
 
   namespace :dashboard do
@@ -32,6 +33,9 @@ Rails.application.routes.draw do
   get 'profile/orders', to: "orders#index"
   get 'profile/orders/:id', to: "orders#show", as: 'order_show'
 
+  post '/orders/:id/ship', to: "orders#ship_packaged_order", as: 'ship_packaged_order'
+  post '/orders/:id/cancel', to: "orders#cancel_pending_order", as: 'cancel_pending_order'
+
   resources :users, only: [:index, :new, :create, :show, :edit]
 
   namespace :admin do
@@ -48,4 +52,5 @@ Rails.application.routes.draw do
   post '/cart', to: 'cart#create', as: 'add_to_cart'
   delete '/cart', to: 'cart#empty_cart', as: 'empty_cart'
   patch '/cart', to: 'cart#change_amount', as: 'change_amount'
+	post '/cart/checkout', to: 'cart#check_out', as: 'check_out'
 end

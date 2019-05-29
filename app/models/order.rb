@@ -18,7 +18,6 @@ class Order < ApplicationRecord
 	end
 
 	def total_items_in_order
-		binding.pry
 		order_items.sum(:quantity)
 	end
 
@@ -28,6 +27,21 @@ class Order < ApplicationRecord
 			sum += (order_item.quantity * order_item.price)
 		end
 		sum
+	end
+
+	def ship_packaged_order
+		update(status: "shipped")
+	end
+
+	def cancel_pending_order
+		update(status: "cancelled")
+
+		self.order_items.each do |order_item|
+			if order_item.fulfilled == true
+				order_item.item.update(inventory: order_item.item.inventory + order_item.quantity)
+			end
+			order_item.update(fulfilled: false)
+		end
 	end
 end
 # self.sum('order_items.quantity * items

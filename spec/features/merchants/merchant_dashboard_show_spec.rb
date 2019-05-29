@@ -131,6 +131,10 @@ RSpec.describe 'As a registered merchant on the site' do
 	end
 
 		it "I see a form where I can add information for a new item" do
+			merchant = User.create!(email: "jimbob@bob.bob", password: "password", role: "merchant", name: "jimbob", address: "321 blastoff st", city: "Big Greasy Easy", state: "LA", zip: 38511)
+
+			allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+
 			visit new_dashboard_item_path
 
 			fill_in 'Name', with: 'New Item'
@@ -142,7 +146,6 @@ RSpec.describe 'As a registered merchant on the site' do
 			click_button("Add Item")
 
 			new_item = Item.find_by(name: "New Item")
-
 			expect(current_path).to eq(dashboard_items_path)
 			expect(page).to have_content("Your new item has been saved")
 			expect(page).to have_content(new_item.name)
@@ -151,6 +154,9 @@ RSpec.describe 'As a registered merchant on the site' do
 		end
 
 		it "name and description fields can't be blank" do
+			merchant = User.create!(email: "jimbob@bob.bob", password: "password", role: "merchant", name: "jimbob", address: "321 blastoff st", city: "Big Greasy Easy", state: "LA", zip: 38511)
+
+			allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
 			visit new_dashboard_item_path
 
 			fill_in 'Price', with: -1.00
@@ -164,6 +170,9 @@ RSpec.describe 'As a registered merchant on the site' do
 		end
 
 		it "price can't be less than $0.00" do
+			merchant = User.create!(email: "jimbob@bob.bob", password: "password", role: "merchant", name: "jimbob", address: "321 blastoff st", city: "Big Greasy Easy", state: "LA", zip: 38511)
+
+			allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
 			visit new_dashboard_item_path
 
 			fill_in 'Name', with: "New Item"
@@ -180,6 +189,9 @@ RSpec.describe 'As a registered merchant on the site' do
 		end
 
 		it "quantity can't be less than 0" do
+			merchant = User.create!(email: "jimbob@bob.bob", password: "password", role: "merchant", name: "jimbob", address: "321 blastoff st", city: "Big Greasy Easy", state: "LA", zip: 38511)
+
+			allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
 			visit new_dashboard_item_path
 
 			fill_in 'Name', with: "New Item"
@@ -196,6 +208,9 @@ RSpec.describe 'As a registered merchant on the site' do
 		end
 
 		it "image can be left blank and if it is then a default image is given" do
+			merchant = User.create!(email: "jimbob@bob.bob", password: "password", role: "merchant", name: "jimbob", address: "321 blastoff st", city: "Big Greasy Easy", state: "LA", zip: 38511)
+
+			allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
 			visit new_dashboard_item_path
 
 			fill_in 'Name', with: "New Item"
@@ -377,13 +392,13 @@ RSpec.describe 'As a registered merchant on the site' do
 			expect(page).to have_content(@order_1.created_at)
 			expect(page).to have_content(@order_2.created_at)
 
-			# visit dashboard_path
-			# expect(page).to have_content(Order.total_items_in_order)
-			# expect(page).to have_content(Order.total_items_in_order)
-			#
-			# visit dashboard_path
-			# expect(page).to have_content(Order.total_value_in_order)
-			# expect(page).to have_content(Order.total_value_in_order)
+			visit dashboard_path
+			expect(page).to have_content(@order_1.total_items_in_order)
+			expect(page).to have_content(@order_2.total_items_in_order)
+
+			visit dashboard_path
+			expect(page).to have_content(@order_1.total_value_in_order)
+			expect(page).to have_content(@order_2.total_value_in_order)
 		end
 	end
 end
