@@ -353,7 +353,8 @@ RSpec.describe 'As a registered merchant on the site' do
 			@order_2 = Order.create!(status: 0, user_id: @user2.id)
 
 			@order_item_1 = OrderItem.create!(item_id: @item_1.id, order_id: @order_1.id, quantity: 1, price: 1.00, fulfilled: false)
-			@order_item_2 = OrderItem.create!(item_id: @item_2.id, order_id: @order_2.id, quantity: 1, price: 1.00, fulfilled: false)
+			@order_item_1a = OrderItem.create!(item_id: @item_2.id, order_id: @order_1.id, quantity: 10, price: 1.00, fulfilled: false)
+			@order_item_2 = OrderItem.create!(item_id: @item_2.id, order_id: @order_2.id, quantity: 2, price: 2.00, fulfilled: false)
 
 			visit login_path
 
@@ -375,9 +376,14 @@ RSpec.describe 'As a registered merchant on the site' do
 			visit dashboard_path
 			expect(page).to have_content(@order_1.created_at)
 			expect(page).to have_content(@order_2.created_at)
+
+			visit dashboard_path
+			expect(page).to have_content(@order_1.total_items_in_order)
+			expect(page).to have_content(@order_2.total_items_in_order)
+
+			visit dashboard_path
+			expect(page).to have_content(@order_1.total_value_in_order)
+			expect(page).to have_content(@order_2.total_value_in_order)
 		end
 	end
 end
-
-# - the total quantity of my items in the order
-# - the total value of my items for that order
