@@ -31,14 +31,6 @@ RSpec.describe Order, type: :model do
 			expect(@order_1.order_grand_total).to eq(15)
 		end
 
-		it "#total_items_in_order" do
-			expect(@order_1.total_items_in_order).to eq(3)
-		end
-
-		it "#total_value_in_order" do
-			expect(@order_1.total_value_in_order).to eq(0.15e2)
-		end
-
 		it "counts quantity of a specific item in the order" do
 			expect(@order_1.item_quantity(@item_1.id)).to eq(2)
 		end
@@ -53,5 +45,15 @@ RSpec.describe Order, type: :model do
 
 			expect(Order.status_sorted).to eq([order, order2, order3, order4])
 		end
-	end
+
+		it ".total_items_in_order" do
+			skip
+			expect(@order.total_items_in_order).to eq(2)
+		end
+
+		it ".total_value_in_order" do
+			skip
+			expect(@order.total_value_in_order).to eq()
+		end
+		end
 end
