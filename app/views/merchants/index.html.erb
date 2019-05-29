@@ -1,9 +1,16 @@
 <section id="merchant-stats-box">
 	<ul id="top-three-revenue">
 		<% @top_three_revenue.each do |merchant| %>
-		<li> <%= merchant.name %> </li>
+			<li> <%= merchant.name %> </li>
 		<% end %>
 	</ul>
+
+	<ul id="fastest-merchants">
+		<% @fastest_merchants.each do |merchant| %>
+			<li> <%= merchant.name %> </li>
+		<% end %>
+	</ul>
+
 </section>
 
 <% @active_merchants.each do |merchant| %>

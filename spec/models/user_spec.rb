@@ -259,6 +259,9 @@ describe "merchant index stats methods" do
 	it ".top_three_revenue" do
 		expect(User.top_three_revenue).to eq([@merchant_4, @merchant_3, @merchant_2])
 	end
-	 # User.joins(items: :order_items).where('order_items.fulfilled = ?', true).group(:id).select('order_items.price * order_items.quantity AS revenue, user.*')
+
+	it ".fastest_merchants" do
+		expect(User.fastest_merchants).to eq([@merchant_1, @merchant_2, @merchant_3])
+	end
 
 end
