@@ -20,7 +20,6 @@ describe "As a merchant" do
 
       @order_1 = @buyer_1.orders.create(status: 0)
       @order_2 = @buyer_2.orders.create(status: 0)
-      # @order_3 = @buyer_3.orders.create(status: 0)
 
       @order_item_1_1 = @item_1.order_items.create!(item: @item_1, order: @order_1, quantity: 11, price: 1.00, fulfilled: false)
       @order_item_1_2 = @item_2.order_items.create!(item: @item_2, order: @order_1, quantity: 22, price: 2.00, fulfilled: false)
@@ -28,10 +27,7 @@ describe "As a merchant" do
 
       @order_item_2_3 = @item_3.order_items.create!(item: @item_3, order: @order_2, quantity: 2, price: 3.00, fulfilled: false)
       @order_item_2_4 = @item_4.order_items.create!(item: @item_4, order: @order_2, quantity: 2, price: 4.00, fulfilled: false)
-      #
-      # @order_item_3_5 = @item_5.order_items.create!(item: @item_5, order: @order_3, quantity: 3, price: 5.00, fulfilled: false)
-      # @order_item_3_6 = @item_6.order_items.create!(item: @item_6, order: @order_3, quantity: 3, price: 6.00, fulfilled: false)
-
+      
     end
 
     it "routes to the correct path" do
