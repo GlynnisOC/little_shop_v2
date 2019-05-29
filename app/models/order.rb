@@ -44,7 +44,3 @@ class Order < ApplicationRecord
 		end
 	end
 end
-# self.sum('order_items.quantity * items
-# Order.select('SUM(order_items.quantity * items.price AS total_price)').joins(:order_items).joins(:items).where(id: self.id)
-# Order.select('SUM(order_items.quantity * items.price) AS total_price').joins(:items).where(id: self.id)
-# Order.select('SUM(order_items.quantity * order_items.price) AS total_price').joins(:order_items).where(id: self.id).group(:id)
