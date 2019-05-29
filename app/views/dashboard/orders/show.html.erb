@@ -8,8 +8,10 @@
   	<p>Item: <%= link_to order_item.item_name, item_path(order_item.item_id) %></p>
   	<p>Price: <%= order_item.price %></p>
   	<p>Order Quantity: <%= order_item.quantity %></p>
-		<% if !order_item.fulfilled? %>
+		<% if !order_item.fulfilled? && order_item.valid_fulfill? %>
 			<%= button_to "Fulfill Item", dashboard_order_fulfill_path(order_item), params: {order: @order.id} %>
+		<% elsif !order_item.fulfilled? && !order_item.valid_fulfill? %>
+			<h1 style="color:red;"> You don't have enough inventory to fulfill this item </h1>
 		<% else %>
 			<h3> This item has been fulfilled </h3>
 		<% end %>

@@ -12,7 +12,7 @@ class OrderItem < ApplicationRecord
 	def item_image
 		item.image
 	end
-	
+
 	def fulfill
 		if self.item.inventory >= self.quantity && !self.fulfilled?
 			self.item.inventory = self.item.inventory - self.quantity
@@ -22,5 +22,9 @@ class OrderItem < ApplicationRecord
 		else
 			false
 		end
+	end
+
+	def valid_fulfill?
+		quantity <= item.inventory
 	end
 end
