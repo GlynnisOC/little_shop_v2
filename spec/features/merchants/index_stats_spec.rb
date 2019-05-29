@@ -55,30 +55,55 @@ RSpec.describe "As a visitor on the merchant index page" do
         expect(page).to have_content(@merchant_4.name)
         expect(page).to have_content(@merchant_3.name)
         expect(page).to have_content(@merchant_2.name)
+
+        @merchants = User.top_three_revenue
+        expect(page).to have_content(@merchants[0].revenue)
+        expect(page).to have_content(@merchants[1].revenue)
+        expect(page).to have_content(@merchants[2].revenue)
       end
 
       within "#fastest-merchants" do
         expect(page).to have_content(@merchant_1.name)
         expect(page).to have_content(@merchant_2.name)
         expect(page).to have_content(@merchant_3.name)
+
+        @merchants = User.fastest_merchants
+        expect(page).to have_content(@merchants[0].speed)
+        expect(page).to have_content(@merchants[1].speed)
+        expect(page).to have_content(@merchants[2].speed)
       end
 
       within "#slowest-merchants" do
         expect(page).to have_content(@merchant_4.name)
         expect(page).to have_content(@merchant_3.name)
         expect(page).to have_content(@merchant_2.name)
+
+        @merchants = User.slowest_merchants
+        expect(page).to have_content(@merchants[0].speed)
+        expect(page).to have_content(@merchants[1].speed)
+        expect(page).to have_content(@merchants[2].speed)
       end
 
       within "#most-popular-states" do
         expect(page).to have_content(@buyer_4.state)
         expect(page).to have_content(@buyer_3.state)
         expect(page).to have_content(@buyer_2.state)
+
+        @buyers = User.most_popular_states
+        expect(page).to have_content(@buyers[0].order_count)
+        expect(page).to have_content(@buyers[1].order_count)
+        expect(page).to have_content(@buyers[2].order_count)
       end
 
       within "#most-popular-cities" do
         expect(page).to have_content(@buyer_4.city)
         expect(page).to have_content(@buyer_3.city)
         expect(page).to have_content(@buyer_2.city)
+
+        @buyers = User.most_popular_cities
+        expect(page).to have_content(@buyers[0].order_count)
+        expect(page).to have_content(@buyers[1].order_count)
+        expect(page).to have_content(@buyers[2].order_count)
       end
 
       within "#largest-orders" do
@@ -87,15 +112,8 @@ RSpec.describe "As a visitor on the merchant index page" do
         expect(page).to have_content(@order_item_4b.quantity)
       end
     end
-
   end
 end
 
-# As a visitor
-# When I visit the merchants index page, I see an area with statistics:
-# - top 3 merchants who have sold the most by price and quantity, and their revenue
-# - top 3 merchants who were fastest at fulfilling items in an order, and their times
-# - worst 3 merchants who were slowest at fulfilling items in an order, and their times
-# - top 3 states where any orders were shipped (by number of orders), and count of orders
-# - top 3 cities where any orders were shipped (by number of orders, also Springfield, MI should not be grouped with Springfield, CO), and the count of orders
-# - top 3 biggest orders by quantity of items shipped in an order, plus their quantities
+# - top 3 cities where any orders were shipped (by number of orders,
+# also Springfield, MI should not be grouped with Springfield, CO)
