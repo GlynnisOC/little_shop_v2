@@ -14,7 +14,19 @@ class Order < ApplicationRecord
 	end
 
 	def self.status_sorted
-		Order.order(:status)
+		order(:status)
+	end
+
+	def total_items_in_order
+		order_items.sum(:quantity)
+	end
+
+	def total_value_in_order
+		sum = 0
+		order_items.each do |order_item|
+			sum += (order_item.quantity * order_item.price)
+		end
+		sum
 	end
 
 	def ship_packaged_order

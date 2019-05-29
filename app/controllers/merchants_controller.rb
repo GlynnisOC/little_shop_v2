@@ -6,6 +6,9 @@ class MerchantsController < ApplicationController
   def dashboard
 		@merchant = User.find(current_user.id)
     flash[:logged_in]            = "#{@merchant.name}, you're already logged in!"
+    @orders                      = Order.all
+    @total_items_in_order        = @orders.find_by(params[:order_id]).total_items_in_order if params[:order_id] != nil
+    @total_value_in_order        = @orders.find_by(params[:order_id]).total_value_in_order if params[:order_id] != nil
     @top_five_items_sold         = @merchant.top_five_items_sold
     @all_items_sold              = @merchant.all_items_sold
     @total_starting_inventory    = @merchant.total_starting_inventory
