@@ -158,8 +158,10 @@ RSpec.describe 'As a registered merchant on the site' do
 
 			click_button("Add Item")
 
-			expect(current_path).to eq(new_dashboard_item_path)
-			expect(page).to have_content("New item information missing or invalid.")
+			expect(page).to have_content("Name can't be blank")
+			expect(page).to have_content("Description can't be blank")
+			expect(page).to have_content("Price must be greater than 0")
+			expect(page).to have_content("Inventory must be greater than or equal to 0")
 
 		end
 
@@ -174,8 +176,7 @@ RSpec.describe 'As a registered merchant on the site' do
 
 			click_button("Add Item")
 
-			expect(current_path).to eq(new_dashboard_item_path)
-			expect(page).to have_content("New item information missing or invalid.")
+			expect(page).to have_content("Price must be greater than 0")
 
 		end
 
@@ -190,8 +191,7 @@ RSpec.describe 'As a registered merchant on the site' do
 
 			click_button("Add Item")
 
-			expect(current_path).to eq(new_dashboard_item_path)
-			expect(page).to have_content("New item information missing or invalid.")
+			expect(page).to have_content("Inventory must be greater than or equal to 0")
 
 		end
 
