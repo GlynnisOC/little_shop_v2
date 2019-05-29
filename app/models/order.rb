@@ -26,7 +26,7 @@ class Order < ApplicationRecord
 
 		self.order_items.each do |order_item|
 			if order_item.fulfilled == true
-				order_item.item.inventory += order_item.quantity
+				order_item.item.update(inventory: order_item.item.inventory + order_item.quantity)
 			end
 			order_item.update(fulfilled: false)
 		end

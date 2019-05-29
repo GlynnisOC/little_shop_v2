@@ -19,7 +19,6 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.cancel_pending_order
     redirect_to profile_path
-    flash[:order_cancelled] = "The order is now cancelled"
-
+    flash[:order_cancelled] = "Order #{@order.id} is now cancelled"
   end
 end
