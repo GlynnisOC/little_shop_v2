@@ -10,9 +10,9 @@ RSpec.describe 'As a default user on an order show page' do
 			@order_item_1 = create(:order_item, order: @order, item: @item_1)	
 			@order_item_2 = create(:order_item, order: @order, item: @item_2)	
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
-			binding.pry
 		end
-		it 'toggles the order items to unfulfilled and the order to cancelled' do
+
+	xit 'toggles the order items to unfulfilled and the order to cancelled' do
 			visit order_path(@order)
 			click_link "Cancel Order"
 
