@@ -75,7 +75,7 @@ RSpec.describe "As a visitor on the merchant index page" do
         expect(page).to have_content(@buyer_2.state)
       end
 
-      within "#most-popular-city" do
+      within "#most-popular-cities" do
         expect(page).to have_content(@buyer_4.city)
         expect(page).to have_content(@buyer_3.city)
         expect(page).to have_content(@buyer_2.city)

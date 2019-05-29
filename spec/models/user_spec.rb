@@ -278,4 +278,14 @@ describe "merchant index stats methods" do
 		expect(User.most_popular_states[2].order_count).to eq(2)
 	end
 
+	it ".most_popular_cities" do
+		expect(User.most_popular_cities[0].city).to eq(@buyer_4.city)
+		expect(User.most_popular_cities[1].city).to eq(@buyer_3.city)
+		expect(User.most_popular_cities[2].city).to eq(@buyer_2.city)
+
+		expect(User.most_popular_cities[0].order_count).to eq(4)
+		expect(User.most_popular_cities[1].order_count).to eq(3)
+		expect(User.most_popular_cities[2].order_count).to eq(2)
+	end
+
 end

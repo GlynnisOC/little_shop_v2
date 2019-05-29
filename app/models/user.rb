@@ -180,4 +180,13 @@ class User < ApplicationRecord
 					.limit(3)
 	end
 
+	def self.most_popular_cities
+					 joins(orders: :items)
+					.group(:city)
+					.select('COUNT(orders.id) AS order_count, users.city')
+					.where('order_items.fulfilled = ?', true)
+					.order('order_count DESC')
+					.limit(3)
+	end
+
 end
