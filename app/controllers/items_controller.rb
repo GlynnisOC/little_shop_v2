@@ -16,12 +16,12 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item[:user_id] = current_user.id
     @item.save
-    if @item.save == false
-      redirect_to new_dashboard_item_path
-      flash[:message] = "New item information missing or invalid."
-    else
+
+    if @item.save
       redirect_to dashboard_items_path
       flash[:message] = "Your new item has been saved"
+    else
+      render 'dashboard/items/new'
     end
   end
 
