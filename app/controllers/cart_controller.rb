@@ -29,4 +29,19 @@ class CartController < ApplicationController
     session[:cart] = session[:cart].reject{ |item_id, quantity| quantity <= 0 }
     redirect_to cart_path
   end
+	
+	def check_out
+		order = current_user.orders.create
+		cart.contents.each do |id, quant|
+			item = Item.find(id)
+			order_item = OrderItem.new(quantity: quant, price: item.price)
+			order.order_items << order_item
+			item.order_items << order_item
+			order_item.save
+		end
+		order.save
+		flash[:check_out] = "Your order has been placed"
+		cart.contents.keys.each {|key| cart.contents.delete(key)}
+		redirect_to profile_orders_path
+	end
 end
