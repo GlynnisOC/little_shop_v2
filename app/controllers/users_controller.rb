@@ -21,10 +21,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    @user = User.find(params[:id])
-  end
-
   def profile
     render file: "/public/404", status: 404 unless current_default?
 
