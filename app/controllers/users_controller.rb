@@ -26,6 +26,10 @@ class UsersController < ApplicationController
   end
 
   def profile
+    if current_user != nil
+      render file: "/public/404", status: 404 unless current_user.default?
+    end
+
     if params[:new_id] != nil
       @user = User.find(params[:new_id])
     else
