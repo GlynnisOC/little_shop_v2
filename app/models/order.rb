@@ -20,4 +20,8 @@ class Order < ApplicationRecord
 	def ship_packaged_order
 		update(status: "shipped")
 	end
+
+	def cancel_pending_order
+		update(status: "cancelled")
+	end
 end

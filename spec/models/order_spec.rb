@@ -41,6 +41,12 @@ RSpec.describe Order, type: :model do
 			@order_3.ship_packaged_order
 			expect(@order_3.status).to eq("shipped")
 		end
+
+		it "can 'cancel' a pending order" do
+			expect(@order_1.status).to eq("pending")
+			@order_1.cancel_pending_order
+			expect(@order_1.status).to eq("cancelled")
+		end
 	end
 
 	describe "class methods" do
