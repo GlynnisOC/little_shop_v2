@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'As a merchant on a dashboard order show page' do
-	describe 'for each sufficienctly stocked item of mine in the order' do
+	describe 'for each sufficiently stocked item of mine in the order' do
 		before :each do
 			@merchant = create(:merchant)
 			@user = create(:user)
@@ -25,7 +25,7 @@ RSpec.describe 'As a merchant on a dashboard order show page' do
 
   	  within  "#my-order-item-#{@fulfilled_order_item.id}" do
 				expect(page).to_not have_button "Fulfill Order"
-				expect(page).to have_content("This item has been fulfilled")	
+				expect(page).to have_content("This item has been fulfilled")
 			end
 		end
 

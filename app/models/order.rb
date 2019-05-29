@@ -21,6 +21,15 @@ class Order < ApplicationRecord
 		order_items.sum(:quantity)
 	end
 
+	def status_changed_to_packaged
+		order_item_status = order_items.all? do |order_item|
+			order_item.fulfilled
+		end
+		if order_item_status == true
+			update(status: "packaged")
+		end
+	end
+
 	def total_value_in_order
 		sum = 0
 		order_items.each do |order_item|
