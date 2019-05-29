@@ -1,30 +1,50 @@
-<% if @cart_items == [] %>
-  Your cart is empty
-<% else %>
-  <%= link_to "Empty Cart", empty_cart_path, method: :delete %>
-  <% if current_user == nil %>
-    <h5>You must <%= link_to "login", login_path %> or <%= link_to "register", new_user_path %> to complete the checkout process.</h5>
-  <% else %>
-    <%= button_to "Check Out", check_out_path %>
-  <% end %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LittleShopV2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <% grand_total ||= 0 %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <% @cart_items.each do |item| %>
-    <section id="cart-item-<%= item.id %>">
-      Item Name: <%= item.name %>
-      <img class="small-image" src=<%= item.image %> alt=<%= item.name %>>
-      Merchant: <%= item.user.name %>
-      Item Price: <%= number_to_currency(item.price) %>
-      Desired Quantity: <%= cart.contents[item.id.to_s] %>
-      Subtotal Price: <%= number_to_currency(cart.contents[item.id.to_s] * item.price) %>
-      <% grand_total += cart.contents[item.id.to_s] * item.price %>
-      <%= button_to "Add One", change_amount_path(item_id: "#{item.id}", change_amount: "1"), controller: "cart", action: "change_amount", method: :patch %>
-      <%= button_to "Subtract One", change_amount_path(item_id: "#{item.id}", change_amount: "-1"), controller: "cart", action: "change_amount", method: :patch %>
-      <%= button_to "Remove From Cart", change_amount_path(item_id: "#{item.id}", change_amount: "-#{cart.contents[item.id.to_s]}"), controller: "cart", action: "change_amount", method: :patch %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
 
-    </section>
-  <% end %>
+  <body>
+    <% if @cart_items == [] %>
+      Your cart is empty
+    <% else %>
+      <%= link_to "Empty Cart", empty_cart_path, method: :delete %>
+      <% if current_user == nil %>
+        <h5>You must <%= link_to "login", login_path %> or <%= link_to "register", new_user_path %> to complete the checkout process.</h5>
+      <% else %>
+        <%= button_to "Check Out", check_out_path %>
+      <% end %>
 
-  Grand Total: <%= number_to_currency(grand_total) %>
-<% end %>
+      <% grand_total ||= 0 %>
+
+      <% @cart_items.each do |item| %>
+        <section id="cart-item-<%= item.id %>">
+          Item Name: <%= item.name %>
+          <img class="small-image" src=<%= item.image %> alt=<%= item.name %>>
+          Merchant: <%= item.user.name %>
+          Item Price: <%= number_to_currency(item.price) %>
+          Desired Quantity: <%= cart.contents[item.id.to_s] %>
+          Subtotal Price: <%= number_to_currency(cart.contents[item.id.to_s] * item.price) %>
+          <% grand_total += cart.contents[item.id.to_s] * item.price %>
+          <%= button_to "Add One", change_amount_path(item_id: "#{item.id}", change_amount: "1"), controller: "cart", action: "change_amount", method: :patch %>
+          <%= button_to "Subtract One", change_amount_path(item_id: "#{item.id}", change_amount: "-1"), controller: "cart", action: "change_amount", method: :patch %>
+          <%= button_to "Remove From Cart", change_amount_path(item_id: "#{item.id}", change_amount: "-#{cart.contents[item.id.to_s]}"), controller: "cart", action: "change_amount", method: :patch %>
+
+        </section>
+      <% end %>
+
+      Grand Total: <%= number_to_currency(grand_total) %>
+    <% end %>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

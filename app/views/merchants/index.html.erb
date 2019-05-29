@@ -1,51 +1,75 @@
-<section id="merchant-stats-box">
-	<ul id="top-three-revenue">
-		<% @top_three_revenue.each do |merchant| %>
-			<li> <%= merchant.name %> sold <%= number_to_currency(merchant.revenue) %> </li>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LittleShopV2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+
+		<% @active_merchants.each do |merchant| %>
+			<ul id="merchant-<%= merchant.id %>-info" >
+			<% if current_admin? %>
+				<li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+			<% else %>
+				<li><%= merchant.name %></li>
+			<% end %>
+				<li><%= merchant.city %></li>
+				<li><%= merchant.state %></li>
+				<li><%= merchant.created_at.strftime("%m-%d-%Y") %></li>
+			</ul>
 		<% end %>
-	</ul>
 
-	<ul id="fastest-merchants">
-		<% @fastest_merchants.each do |merchant| %>
-			<li><%= merchant.name %> fulfills orders in <%= merchant.speed %> days.</li>
-		<% end %>
-	</ul>
+		<section id="merchant-stats-box">
+			<ul id="top-three-revenue">
+				<% @top_three_revenue.each do |merchant| %>
+					<li> <%= merchant.name %> sold <%= number_to_currency(merchant.revenue) %> </li>
+				<% end %>
+			</ul>
 
-	<ul id="slowest-merchants">
-		<% @slowest_merchants.each do |merchant| %>
-			<li><%= merchant.name %> fulfills orders in <%= merchant.speed %> days.</li>
-		<% end %>
-	</ul>
+			<ul id="fastest-merchants">
+				<% @fastest_merchants.each do |merchant| %>
+					<li><%= merchant.name %> fulfills orders in <%= merchant.speed %> days.</li>
+				<% end %>
+			</ul>
 
-	<ul id="most-popular-states">
-		<% @most_popular_states.each do |user| %>
-			<li><%= user.state %> received <%= user.order_count %> orders. </li>
-		<% end %>
-	</ul>
+			<ul id="slowest-merchants">
+				<% @slowest_merchants.each do |merchant| %>
+					<li><%= merchant.name %> fulfills orders in <%= merchant.speed %> days.</li>
+				<% end %>
+			</ul>
 
-	<ul id="most-popular-cities">
-		<% @most_popular_cities.each do |user| %>
-			<li> <%= user.city %> </li>
-		<% end %>
-	</ul>
+			<ul id="most-popular-states">
+				<% @most_popular_states.each do |user| %>
+					<li><%= user.state %> received <%= user.order_count %> orders. </li>
+				<% end %>
+			</ul>
 
-	<ul id="largest-orders">
-		<% @largest_orders.each do |order| %>
-			<li> <%= order.quantity %> </li>
-		<% end %>
-	</ul>
+			<ul id="most-popular-cities">
+				<% @most_popular_cities.each do |user| %>
+					<li> <%= user.city %> </li>
+				<% end %>
+			</ul>
 
-</section>
+			<ul id="largest-orders">
+				<% @largest_orders.each do |order| %>
+					<li> <%= order.quantity %> </li>
+				<% end %>
+			</ul>
 
-<% @active_merchants.each do |merchant| %>
-	<ul id="merchant-<%= merchant.id %>-info" >
-	<% if current_admin? %>
-		<li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
-	<% else %>
-		<li><%= merchant.name %></li>
-	<% end %>
-		<li><%= merchant.city %></li>
-		<li><%= merchant.state %></li>
-		<li><%= merchant.created_at.strftime("%m-%d-%Y") %></li>
-	</ul>
-<% end %>
+		</section>
+
+
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
