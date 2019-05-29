@@ -23,7 +23,7 @@ RSpec.describe 'As a merchant on my dashboard order show page' do
 
 			within "#my-order-item-#{@order_item_2.id}" do
 				expect(page).to_not have_button("Fulfill Item")
-				expect(page).to_not have_content("You cannot fulfill this item")
+				expect(page).to have_content("You don't have enough inventory to fulfill this item")
 			end
 
 		end
