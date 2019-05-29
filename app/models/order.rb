@@ -13,9 +13,6 @@ class Order < ApplicationRecord
 		items.count { |item| item.id == item_id }
 	end
 
-	def self.status_sorted
-		order(:status)
-	end
 
 	def total_items_in_order
 		order_items.sum(:quantity)
@@ -43,4 +40,19 @@ class Order < ApplicationRecord
 			order_item.update(fulfilled: false)
 		end
 	end
+
+	# Class methods
+
+	def self.status_sorted
+		order(:status)
+	end
+
+	def self.largest_orders
+					 where('orders.status = 2 AND order_items.fulfilled = true')
+					.joins(:order_items).group(:id)
+					.select('SUM(order_items.quantity) AS quantity, orders.*')
+					.order('quantity DESC')
+					.limit(3)
+	end
+	
 end
