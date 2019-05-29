@@ -29,5 +29,19 @@ RSpec.describe OrderItem, type: :model do
 			expect(@order_item_1_1.item_image).to eq(@item_1.image)
 		end
 
+		it "#fulfill" do
+			merchant = create(:merchant)
+			user = create(:user)
+			order = create(:order, user: user)
+			item_1 = create(:item, user: merchant, inventory: 5)
+			item_2 = create(:item, user: merchant, inventory: 5)
+			order_item_1 = create(:order_item, item: item_1, order: order, quantity: 3)
+			fulfilled_order_item = create(:fulfilled_order_item, item: item_2, order: order, quantity: 3)
+			
+			actual = order_item_1.fulfill
+			order_item_1.reload
+			expect(order_item_1.fulfilled).to eq(true)
+			expect(fulfilled_order_item.fulfilled).to eq(true)
+		end
 	end
 end

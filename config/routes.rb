@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 	namespace :dashboard do
 		resources :items, only: [:index, :new, :create, :edit]
     resources :orders, only: :show
+		post '/orders/:id/fulfill', to: 'orders#fulfill', as: 'order_fulfill'
   end
 
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'

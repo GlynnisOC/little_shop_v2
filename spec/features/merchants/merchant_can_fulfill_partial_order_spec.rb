@@ -15,19 +15,23 @@ RSpec.describe 'As a merchant on a dashboard order show page' do
 		end
 
 		it 'has a button to fulfill the order that fulfills and updates the show page' do
-  	  within  "my-order-item-#{@order_item_1.id}" do
-				click_button "Fulfill Order"
-				expect(page).to have_content("#{@order_item_1} has been fulfilled")	
+  	  within  "#my-order-item-#{@order_item_1.id}" do
+				click_button "Fulfill Item"
 				expect(current_path).to eq(dashboard_order_path(@order))
 				@item_1.reload
 				expect(@item_1.inventory).to eq(2)
 				expect(page).to_not have_button "Fulfill Order"
 			end
 
-  	  within  "my-order-item-#{@fulfilled_order_item.id}" do
+  	  within  "#my-order-item-#{@fulfilled_order_item.id}" do
 				expect(page).to_not have_button "Fulfill Order"
 				expect(page).to have_content("This item has been fulfilled")	
 			end
+		end
+
+		it 'displays a flash message after an order_item has been fulfilled' do
+			click_button "Fulfill Item"
+			expect(page).to have_content("#{@order_item_1.item.name} has been fulfilled")
 		end
 	end
 end
