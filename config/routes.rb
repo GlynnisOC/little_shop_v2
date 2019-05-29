@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
 	namespace :dashboard do
 		resources :items, only: [:index, :new, :create, :edit]
+    resources :orders, only: :show
   end
 
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
