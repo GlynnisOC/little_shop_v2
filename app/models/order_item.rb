@@ -9,4 +9,8 @@ class OrderItem < ApplicationRecord
 		item.name
 	end
 
+	def item_image
+		item.image
+	end
+
 end
