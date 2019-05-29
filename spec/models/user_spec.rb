@@ -264,4 +264,8 @@ describe "merchant index stats methods" do
 		expect(User.fastest_merchants).to eq([@merchant_1, @merchant_2, @merchant_3])
 	end
 
+	it ".slowest_merchants" do
+		expect(User.slowest_merchants).to eq([@merchant_4, @merchant_3, @merchant_2])
+	end
+
 end

@@ -11,6 +11,12 @@
 		<% end %>
 	</ul>
 
+	<ul id="slowest-merchants">
+		<% @slowest_merchants.each do |merchant| %>
+			<li> <%= merchant.name %> </li>
+		<% end %>
+	</ul>
+
 </section>
 
 <% @active_merchants.each do |merchant| %>

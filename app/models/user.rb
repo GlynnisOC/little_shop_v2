@@ -160,5 +160,14 @@ class User < ApplicationRecord
 		.order('speed')
 		.limit(3)
 	end
+	
+	def self.slowest_merchants
+		joins(items: :order_items)
+		.where('order_items.fulfilled = ?', true)
+		.group(:id)
+		.select('sum(order_items.updated_at - order_items.created_at) AS speed, users.*')
+		.order('speed DESC')
+		.limit(3)
+	end
 
 end
