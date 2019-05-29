@@ -144,7 +144,7 @@ class User < ApplicationRecord
 	end
 
 	def self.top_three_revenue
-					joins(items: :order_items)
+				 	 joins(items: :order_items)
 					.where('order_items.fulfilled = ?', true)
 					.group(:id)
 					.select('sum(order_items.quantity * order_items.price) AS revenue, users.*')
@@ -152,22 +152,32 @@ class User < ApplicationRecord
 					.limit(3)
 	end
 
+	# potential refactor to dry code
 	def self.fastest_merchants
-		joins(items: :order_items)
-		.where('order_items.fulfilled = ?', true)
-		.group(:id)
-		.select('sum(order_items.updated_at - order_items.created_at) AS speed, users.*')
-		.order('speed')
-		.limit(3)
+				 	 joins(items: :order_items)
+					.where('order_items.fulfilled = ?', true)
+					.group(:id)
+					.select('sum(order_items.updated_at - order_items.created_at) AS speed, users.*')
+					.order('speed')
+					.limit(3)
 	end
-	
+
 	def self.slowest_merchants
-		joins(items: :order_items)
-		.where('order_items.fulfilled = ?', true)
-		.group(:id)
-		.select('sum(order_items.updated_at - order_items.created_at) AS speed, users.*')
-		.order('speed DESC')
-		.limit(3)
+					 joins(items: :order_items)
+					.where('order_items.fulfilled = ?', true)
+					.group(:id)
+					.select('sum(order_items.updated_at - order_items.created_at) AS speed, users.*')
+					.order('speed DESC')
+					.limit(3)
+	end
+
+	def self.most_popular_states
+					 joins(orders: :items)
+					.group(:state)
+					.select('COUNT(orders.id) AS order_count, users.state')
+					.where('order_items.fulfilled = ?', true)
+					.order('order_count DESC')
+					.limit(3)
 	end
 
 end

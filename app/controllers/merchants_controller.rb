@@ -4,6 +4,7 @@ class MerchantsController < ApplicationController
     @top_three_revenue = User.top_three_revenue
     @fastest_merchants = User.fastest_merchants
     @slowest_merchants = User.slowest_merchants
+    @most_popular_states = User.most_popular_states
   end
 
   def dashboard

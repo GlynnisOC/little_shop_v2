@@ -17,6 +17,12 @@
 		<% end %>
 	</ul>
 
+	<ul id="most-popular-states">
+		<% @most_popular_states.each do |user| %>
+			<li> <%= user.state %> </li>
+		<% end %>
+	</ul>
+
 </section>
 
 <% @active_merchants.each do |merchant| %>
