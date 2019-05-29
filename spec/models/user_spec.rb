@@ -222,19 +222,19 @@ describe "merchant index stats methods" do
 		@buyer_3 = User.create!(email: "buyer_3@email.com", 	password: "password", role: "default",  name: "buyer_name_3", address: "3000 Abc Street", city: "City_3", state: "CC", zip: 33333)
 		@buyer_4 = User.create!(email: "buyer_4@email.com", 	password: "password", role: "default",  name: "buyer_name_4", address: "4000 Abc Street", city: "City_4", state: "DD", zip: 44444)
 
-		@order_1a = create(:order, user: @buyer_1)
+		@order_1a = create(:shipped_order, user: @buyer_1)
 
-		@order_2a = create(:order, user: @buyer_2)
-		@order_2b = create(:order, user: @buyer_2)
+		@order_2a = create(:shipped_order, user: @buyer_2)
+		@order_2b = create(:shipped_order, user: @buyer_2)
 
-		@order_3a = create(:order, user: @buyer_3)
-		@order_3b = create(:order, user: @buyer_3)
-		@order_3c = create(:order, user: @buyer_3)
+		@order_3a = create(:shipped_order, user: @buyer_3)
+		@order_3b = create(:shipped_order, user: @buyer_3)
+		@order_3c = create(:shipped_order, user: @buyer_3)
 
-		@order_4a = create(:order, user: @buyer_4)
-		@order_4b = create(:order, user: @buyer_4)
-		@order_4c = create(:order, user: @buyer_4)
-		@order_4d = create(:order, user: @buyer_4)
+		@order_4a = create(:shipped_order, user: @buyer_4)
+		@order_4b = create(:shipped_order, user: @buyer_4)
+		@order_4c = create(:shipped_order, user: @buyer_4)
+		@order_4d = create(:shipped_order, user: @buyer_4)
 
 		@item_1 = @merchant_1.items.create!(name: "Item One",   active: true,  price: 1.00, description: "This is item one", 	 image: "https://picsum.photos/200/300?image=1", inventory: 100)
 		@item_2 = @merchant_2.items.create!(name: "Item Two", 	active: true,  price: 2.00, description: "This is item two", 	 image: "https://picsum.photos/200/300?image=1", inventory: 200)
