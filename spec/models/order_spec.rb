@@ -18,6 +18,7 @@ RSpec.describe Order, type: :model do
 
 			@order_1 = @user_1.orders.create!(status: "pending")
 			@order_2 = @user_1.orders.create!(status: "pending")
+			@order_3 = @user_1.orders.create!(status: "packaged")
 
 			@item_1.order_items.create!(item: @item_1, order: @order_1, quantity: 1, price: 5.00, fulfilled: true)
 			@item_1.order_items.create!(item: @item_1, order: @order_1, quantity: 1, price: 5.00, fulfilled: true)
@@ -33,6 +34,12 @@ RSpec.describe Order, type: :model do
 
 		it "counts quantity of a specific item in the order" do
 			expect(@order_1.item_quantity(@item_1.id)).to eq(2)
+		end
+
+		it "can 'ship' a packaged order" do
+			expect(@order_3.status).to eq("packaged")
+			@order_3.ship_packaged_order
+			expect(@order_3.status).to eq("shipped")
 		end
 	end
 
