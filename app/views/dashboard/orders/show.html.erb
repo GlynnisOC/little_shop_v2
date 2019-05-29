@@ -4,13 +4,17 @@
 <p>Address: <%= @customer.address %> </p>
 
 <% @my_order_items.each do |order_item| %>
-
-  <p>Item: <%= link_to order_item.item_name, item_path(order_item.item_id) %></p>
-  <p>Price: <%= order_item.price %></p>
-  <p>Order Quantity: <%= order_item.quantity %></p>
-
-  <div class="order-show-page-image">
-    <img class="thumbnail-image" src="<%= order_item.item_image %>"/>
-  </div>
-
+	<div id="my-order-item-<%= order_item.id %>">
+  	<p>Item: <%= link_to order_item.item_name, item_path(order_item.item_id) %></p>
+  	<p>Price: <%= order_item.price %></p>
+  	<p>Order Quantity: <%= order_item.quantity %></p>
+		<% if !order_item.fulfilled? %>
+			<%= button_to "Fulfill Item", dashboard_order_fulfill_path(order_item), params: {order: @order.id} %>
+		<% else %>
+			<h3> This item has been fulfilled </h3>
+		<% end %>
+  	<div class="order-show-page-image">
+  	  <img class="thumbnail-image" src="<%= order_item.item_image %>"/>
+  	</div>
+	</div>
 <% end %>
