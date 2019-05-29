@@ -1,4 +1,4 @@
-class Admin::MerchantsController < ApplicationController
+class Admin::MerchantsController < Admin::BaseController
 	def index
 			@all_merchants = User.all_merchants
 	end
@@ -9,9 +9,9 @@ class Admin::MerchantsController < ApplicationController
 			if @merchant.role == "default"
 				redirect_to admin_user_path(@merchant)
 			end
-		else 
+		else
 			@merchant = User.find(params[:id])
-			redirect_to dashboard_path 
+			redirect_to dashboard_path
 		end
 	end
 
@@ -28,12 +28,12 @@ class Admin::MerchantsController < ApplicationController
 		flash[:enabled] = "#{@merchant.name} is now disabled"
 		redirect_to admin_merchants_path
 	end
-	
+
 	def downgrade
 		downgraded_merchant = User.find(params[:id])
 		downgraded_merchant.item_disable
 		downgraded_merchant.downgrade_to_user
 		flash[:downgraded] = "#{downgraded_merchant.name} has been downgraded to a regular user"
 		redirect_to admin_user_path(downgraded_merchant)
-	end	
+	end
 end
