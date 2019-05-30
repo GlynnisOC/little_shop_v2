@@ -55,15 +55,15 @@ RSpec.describe User, type: :model do
 			user.reload
 			expect(user.role).to eq("merchant")
 		end
-			
+
 		it '#downgrade_to_user' do
 		  merchant = create(:merchant)
-			merchant.downgrade_to_user	
+			merchant.downgrade_to_user
 			expect(merchant.role).to eq("default")
 		end
 
 		it '#enable_merchant' do
-      inactive_merchant = create(:inactive_merchant) 
+      inactive_merchant = create(:inactive_merchant)
 			inactive_merchant.enable_merchant
 			inactive_merchant.reload
 			expect(inactive_merchant.active).to be_truthy
@@ -75,7 +75,7 @@ RSpec.describe User, type: :model do
 			merchant.reload
 			expect(merchant.active).to be_falsy
 		end
-		
+
 		it '#item_disable' do
 			merchant = create(:merchant)
 			item_1 = create(:item, user: merchant)
@@ -104,8 +104,8 @@ RSpec.describe User, type: :model do
 			actual = User.active_merchants
 			expect(actual).to eq([@merchant_1, @merchant_2])
 		end
-		
-		it '.all_merchants' do 
+
+		it '.all_merchants' do
 			expect(User.all_merchants).to eq([@merchant_1, @merchant_2, @inactive_merchant])
 		end
   end
@@ -208,4 +208,84 @@ describe 'merchant dashboard stats methods' do
 		expect(@merchant.top_three_users_by_spending.keys).to eq([@user_4.name, @user_1.name, @user_2.name])
 		expect(@merchant.top_three_users_by_spending.values).to eq([220, 35, 30])
 	end
+end
+
+describe "merchant index stats methods" do
+	before :each do
+		@merchant_1 = create(:merchant)
+		@merchant_2 = create(:merchant)
+		@merchant_3 = create(:merchant)
+		@merchant_4 = create(:merchant)
+
+		@buyer_1 = User.create!(email: "buyer_1@email.com", 	password: "password", role: "default",  name: "buyer_name_1", address: "1000 Abc Street", city: "City_1", state: "AA", zip: 11111)
+		@buyer_2 = User.create!(email: "buyer_2@email.com", 	password: "password", role: "default",  name: "buyer_name_2", address: "2000 Abc Street", city: "City_2", state: "BB", zip: 22222)
+		@buyer_3 = User.create!(email: "buyer_3@email.com", 	password: "password", role: "default",  name: "buyer_name_3", address: "3000 Abc Street", city: "City_3", state: "CC", zip: 33333)
+		@buyer_4 = User.create!(email: "buyer_4@email.com", 	password: "password", role: "default",  name: "buyer_name_4", address: "4000 Abc Street", city: "City_4", state: "DD", zip: 44444)
+
+		@order_1a = create(:shipped_order, user: @buyer_1)
+
+		@order_2a = create(:shipped_order, user: @buyer_2)
+		@order_2b = create(:shipped_order, user: @buyer_2)
+
+		@order_3a = create(:shipped_order, user: @buyer_3)
+		@order_3b = create(:shipped_order, user: @buyer_3)
+		@order_3c = create(:shipped_order, user: @buyer_3)
+
+		@order_4a = create(:shipped_order, user: @buyer_4)
+		@order_4b = create(:shipped_order, user: @buyer_4)
+		@order_4c = create(:shipped_order, user: @buyer_4)
+		@order_4d = create(:shipped_order, user: @buyer_4)
+
+		@item_1 = @merchant_1.items.create!(name: "Item One",   active: true,  price: 1.00, description: "This is item one", 	 image: "https://picsum.photos/200/300?image=1", inventory: 100)
+		@item_2 = @merchant_2.items.create!(name: "Item Two", 	active: true,  price: 2.00, description: "This is item two", 	 image: "https://picsum.photos/200/300?image=1", inventory: 200)
+		@item_3 = @merchant_3.items.create!(name: "Item Tres",  active: true,  price: 3.00, description: "This is item tres",  image: "https://picsum.photos/200/300?image=1", inventory: 300)
+		@item_4 = @merchant_4.items.create!(name: "Item Four", 	active: true,  price: 4.00, description: "This is item four",  image: "https://picsum.photos/200/300?image=1", inventory: 400)
+
+		@order_item_1a = @item_1.order_items.create!(item: @item_1, order: @order_1a, quantity: 1, price: 1.00, fulfilled: true, updated_at: 1.days.ago, created_at: 2.days.ago)
+
+		@order_item_2a = @item_2.order_items.create!(item: @item_2, order: @order_2a, quantity: 2, price: 2.00, fulfilled: true, updated_at: 1.days.ago, created_at: 3.days.ago)
+		@order_item_2b = @item_2.order_items.create!(item: @item_2, order: @order_2b, quantity: 2, price: 2.00, fulfilled: true, updated_at: 1.days.ago, created_at: 3.days.ago)
+
+		@order_item_3a = @item_3.order_items.create!(item: @item_3, order: @order_3a, quantity: 3, price: 3.00, fulfilled: true, updated_at: 1.days.ago, created_at: 4.days.ago)
+		@order_item_3b = @item_3.order_items.create!(item: @item_3, order: @order_3b, quantity: 3, price: 3.00, fulfilled: true, updated_at: 1.days.ago, created_at: 4.days.ago)
+		@order_item_3c = @item_3.order_items.create!(item: @item_3, order: @order_3c, quantity: 3, price: 3.00, fulfilled: true, updated_at: 1.days.ago, created_at: 4.days.ago)
+
+		@order_item_4a = @item_4.order_items.create!(item: @item_4, order: @order_4a, quantity: 4, price: 4.00, fulfilled: true, updated_at: 1.days.ago, created_at: 5.days.ago)
+		@order_item_4b = @item_4.order_items.create!(item: @item_4, order: @order_4b, quantity: 8, price: 4.00, fulfilled: true, updated_at: 1.days.ago, created_at: 5.days.ago)
+		@order_item_4c = @item_4.order_items.create!(item: @item_4, order: @order_4c, quantity: 9, price: 4.00, fulfilled: true, updated_at: 1.days.ago, created_at: 5.days.ago)
+		@order_item_4d = @item_4.order_items.create!(item: @item_4, order: @order_4d, quantity: 10, price: 4.00, fulfilled: true, updated_at: 1.days.ago, created_at: 5.days.ago)
+	end
+
+	it ".top_three_revenue" do
+		expect(User.top_three_revenue).to eq([@merchant_4, @merchant_3, @merchant_2])
+	end
+
+	it ".fastest_merchants" do
+		expect(User.fastest_merchants).to eq([@merchant_1, @merchant_2, @merchant_3])
+	end
+
+	it ".slowest_merchants" do
+		expect(User.slowest_merchants).to eq([@merchant_4, @merchant_3, @merchant_2])
+	end
+
+	it ".most_popular_states" do
+		expect(User.most_popular_states[0].state).to eq(@buyer_4.state)
+		expect(User.most_popular_states[1].state).to eq(@buyer_3.state)
+		expect(User.most_popular_states[2].state).to eq(@buyer_2.state)
+
+		expect(User.most_popular_states[0].order_count).to eq(4)
+		expect(User.most_popular_states[1].order_count).to eq(3)
+		expect(User.most_popular_states[2].order_count).to eq(2)
+	end
+
+	it ".most_popular_cities" do
+		expect(User.most_popular_cities[0].city).to eq(@buyer_4.city)
+		expect(User.most_popular_cities[1].city).to eq(@buyer_3.city)
+		expect(User.most_popular_cities[2].city).to eq(@buyer_2.city)
+
+		expect(User.most_popular_cities[0].order_count).to eq(4)
+		expect(User.most_popular_cities[1].order_count).to eq(3)
+		expect(User.most_popular_cities[2].order_count).to eq(2)
+	end
+
 end
