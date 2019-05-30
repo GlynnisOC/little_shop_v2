@@ -4,7 +4,10 @@
   <%= link_to "Empty Cart", empty_cart_path, method: :delete %>
   <% if current_user == nil %>
     <h5>You must <%= link_to "login", login_path %> or <%= link_to "register", new_user_path %> to complete the checkout process.</h5>
+  <% else %>
+    <%= button_to "Check Out", check_out_path %>
   <% end %>
+
   <% grand_total ||= 0 %>
 
   <% @cart_items.each do |item| %>
@@ -23,6 +26,5 @@
     </section>
   <% end %>
 
-	<%= button_to "Check Out", check_out_path %>
   Grand Total: <%= number_to_currency(grand_total) %>
 <% end %>
