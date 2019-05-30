@@ -15,34 +15,28 @@ Before beginning to play around in Little Shop of Seeds, please ensure you are u
 ```
 bundle install
 ```
-![image]
-(https://user-images.githubusercontent.com/46202598/58635354-e801e400-82aa-11e9-84c5-cb2556c4ffd9.png)
-![image]
-(https://user-images.githubusercontent.com/46202598/58635415-0ec01a80-82ab-11e9-94c1-e319cd79b5dd.png)
+![image](https://user-images.githubusercontent.com/46202598/58635354-e801e400-82aa-11e9-84c5-cb2556c4ffd9.png)
+![image](https://user-images.githubusercontent.com/46202598/58635415-0ec01a80-82ab-11e9-94c1-e319cd79b5dd.png)
 
 ```
 bundle update
 ```
-![image]
-(https://user-images.githubusercontent.com/46202598/58635480-3b743200-82ab-11e9-9a52-dc36ece468a8.png)
-![image]
-(https://user-images.githubusercontent.com/46202598/58635442-27c8cb80-82ab-11e9-8365-e33484533eff.png)
+![image](https://user-images.githubusercontent.com/46202598/58635480-3b743200-82ab-11e9-9a52-dc36ece468a8.png)
+![image](https://user-images.githubusercontent.com/46202598/58635442-27c8cb80-82ab-11e9-8365-e33484533eff.png)
 
 Once all gems have been installed and updated, you will want to then run the following command to begin to work with the databases:
 
 ```
 rails db:{create,migrate,seed}
 ```
-![image]
-(https://user-images.githubusercontent.com/46202598/58635729-d66d0c00-82ab-11e9-8ccf-225c8337f318.png)
+![image](https://user-images.githubusercontent.com/46202598/58635729-d66d0c00-82ab-11e9-8ccf-225c8337f318.png)
 
 In order to test and begin adding new methods that could be included in Little Shop of Seeds, you will want to include
 
 ```
 require 'rails_helper'
 ```
-![image]
-(https://user-images.githubusercontent.com/46202598/58635779-f56b9e00-82ab-11e9-9111-8105e16a2d14.png)
+![image](https://user-images.githubusercontent.com/46202598/58635779-f56b9e00-82ab-11e9-9111-8105e16a2d14.png)
 
 
 At the top of every spec file. As this project was tested using rspec, all tests files need to end in spec.rb in order to ensure these files will be run with the test suite and your new methods are tested accurately. In order to run your tests, simply enter rspec in your command line/terminal and wait for the little green dots to start your test-driven development with Little Shop of Seeds!
