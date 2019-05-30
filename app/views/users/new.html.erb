@@ -1,29 +1,50 @@
-<%= form_for @user do |f| %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LittleShopV2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <%= f.label :address, "Street Address" %>
-  <%= f.text_field :address %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
 
-  <%= f.label :city %>
-  <%= f.text_field :city %>
+  <body>
 
-  <%= f.label :state %>
-  <%= f.text_field :state %>
+    <%= form_for @user do |f| %>
 
-  <%= f.label :zip, "Zip Code" %>
-  <%= f.text_field :zip %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
 
-  <%= f.label :email, "Email Address" %>
-  <%= f.text_field :email %>
+      <%= f.label :address, "Street Address" %>
+      <%= f.text_field :address %>
 
-  <%= f.label :password, "Password" %>
-  <%= f.password_field :password %>
+      <%= f.label :city %>
+      <%= f.text_field :city %>
 
-  <%= f.label :password, "Confirm Password" %>
-  <%= f.password_field :password_confirmation %>
+      <%= f.label :state %>
+      <%= f.text_field :state %>
 
-  <%= f.submit "Register as a User" %>
+      <%= f.label :zip, "Zip Code" %>
+      <%= f.text_field :zip %>
 
-<% end %>
+      <%= f.label :email, "Email Address" %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password, "Password" %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password, "Confirm Password" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Register as a User" %>
+
+    <% end %>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,33 +1,54 @@
-<%= form_for @item do |f| %>
-  <%= hidden_field :user_id, :value => current_user.id %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LittleShopV2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <% if @item.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <ul>
-      <% @item.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+
+    <%= form_for @item do |f| %>
+      <%= hidden_field :user_id, :value => current_user.id %>
+
+      <% if @item.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+        <ul>
+          <% @item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
       <% end %>
-    </ul>
-  </div>
-  <% end %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
 
-  <%= f.label :description %>
-  <%= f.text_field :description %>
+      <%= f.label :description %>
+      <%= f.text_field :description %>
 
-  <%= f.label :image %>
-  <%= f.text_field :image, value: "" %>
+      <%= f.label :image %>
+      <%= f.text_field :image, value: "" %>
 
-  <%= f.label :price %>
-  <%= f.number_field :price, step: :any %>
+      <%= f.label :price %>
+      <%= f.number_field :price, step: :any %>
 
-  <%= f.label :inventory, "Available Inventory" %>
-  <%= f.number_field :inventory %>
+      <%= f.label :inventory, "Available Inventory" %>
+      <%= f.number_field :inventory %>
 
-  <%= f.submit "Add Item" %>
+      <%= f.submit "Add Item" %>
 
-<% end %>
+    <% end %>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
