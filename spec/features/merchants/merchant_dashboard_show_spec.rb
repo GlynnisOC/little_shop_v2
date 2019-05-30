@@ -128,7 +128,6 @@ RSpec.describe 'As a registered merchant on the site' do
 			fill_in "Password", with: "password"
 			click_button("Login")
 		end
-	end
 
 		it "I see a form where I can add information for a new item" do
 			merchant = User.create!(email: "jimbob@bob.bob", password: "password", role: "merchant", name: "jimbob", address: "321 blastoff st", city: "Big Greasy Easy", state: "LA", zip: 38511)
@@ -230,6 +229,8 @@ RSpec.describe 'As a registered merchant on the site' do
 
 		end
 	end
+end
+	
 
 	describe "I see statistics when I visit the merchant dashboard" do
 		before :each do

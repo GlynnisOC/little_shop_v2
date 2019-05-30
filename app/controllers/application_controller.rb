@@ -19,10 +19,6 @@ class ApplicationController < ActionController::Base
 		!current_user.nil? && current_user.admin?
 	end
 
-	def current_visitor?
-		current_user.nil?
-	end
-
 	def current_default?
 		!current_user.nil? && current_user.default?
 	end
@@ -44,8 +40,4 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !current_user.nil?
   end
-
-	def not_found
-  	raise ActionController::RoutingError.new('Not Found')
-	end
 end

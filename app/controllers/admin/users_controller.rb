@@ -6,11 +6,7 @@ class Admin::UsersController < Admin::BaseController
 		def show
 			if current_admin?
 				@user = User.find(params[:id])
-				if @user.role == "merchant"
-					redirect_to admin_merchant_path(@user)
-				end
-			else
-				return not_found
+				redirect_to admin_merchant_path(@user) if @user.role == "merchant"
 			end
 		end
 
