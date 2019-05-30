@@ -381,3 +381,28 @@ require 'factory_bot_rails'
 @cancelled_order_30 = FactoryBot.create(:order, user: @user_7)
 
 @cancelled_order_31 = FactoryBot.create(:order, user: @user_7)
+
+
+@order_item_1 = FactoryBot.create(:fulfilled_order_item, item: @item_1 , order: @shipped_order_1 )
+
+@order_item_2 = FactoryBot.create(:fulfilled_order_item, item: @item_2 , order: @shipped_order_2 )
+
+@order_item_3 = FactoryBot.create(:fulfilled_order_item, item: @item_2 , order: @shipped_order_3 )
+
+@order_item_4 = FactoryBot.create(:fulfilled_order_item, item: @item_3 , order: @shipped_order_4 )
+
+@order_item_5 = FactoryBot.create(:fulfilled_order_item, item: @item_4 , order: @shipped_order_5 )
+
+@order_item_6 = FactoryBot.create(:fulfilled_order_item, item: @item_5 , order: @shipped_order_6 )
+
+@order_item_7 = FactoryBot.create(:fulfilled_order_item, item: @item_6 , order: @shipped_order_7 )
+
+@order_item_8 = FactoryBot.create(:fulfilled_order_item, item: @item_7 , order: @shipped_order_8 )
+
+@order_item_9 = FactoryBot.create(:fulfilled_order_item, item: @item_8 , order: @shipped_order_9 )
+
+@order_item_10 = FactoryBot.create(:fulfilled_order_item, item: @item_9 , order: @shipped_order_10 )
+
+@order_item_11 = FactoryBot.create(:fulfilled_order_item, item: @item_10 , order: @shipped_order_11 )
+
+@order_item_12 = FactoryBot.create(:fulfilled_order_item, item: @item_10 , order: @shipped_order_12 )
