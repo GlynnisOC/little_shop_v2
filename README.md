@@ -17,6 +17,7 @@ bundle install
 ```
 <a><img src="https://user-images.githubusercontent.com/46202598/58635354-e801e400-82aa-11e9-84c5-cb2556c4ffd9.png" alt="bundle" width="400" ></a>
 
+
 <a><img src="https://user-images.githubusercontent.com/46202598/58635415-0ec01a80-82ab-11e9-94c1-e319cd79b5dd.png" alt="bundle installed" width="400" ></a>
 
 ```
@@ -24,6 +25,8 @@ bundle update
 ```
 
 <a><img src="https://user-images.githubusercontent.com/46202598/58635480-3b743200-82ab-11e9-9a52-dc36ece468a8.png" alt="bundle update" width="400" ></a>
+
+
 <a><img src="https://user-images.githubusercontent.com/46202598/58635442-27c8cb80-82ab-11e9-8365-e33484533eff.png" alt="bundle updated" width="400" ></a>
 
 
