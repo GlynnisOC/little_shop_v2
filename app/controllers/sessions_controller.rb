@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
       redirect_to profile_path
     end
   end
+
   def new
   end
 
@@ -29,4 +30,4 @@ class SessionsController < ApplicationController
   end
 end
 
-# refactor method to redirect based on user role 
+# refactor method to redirect based on user role
