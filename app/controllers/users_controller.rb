@@ -57,11 +57,9 @@ class UsersController < ApplicationController
   def update_params
     if params[:user][:password] == "" && (params[:user][:email] == current_user.email)
       params.require(:user).permit(:name, :address, :city, :state, :zip)
-    elsif
+    else
       params[:user][:password] == "" && (params[:user][:email] != current_user.email)
       params.require(:user).permit(:name, :address, :city, :state, :zip, :email)
-    else
-      user_params
     end
   end
 end
