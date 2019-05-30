@@ -15,7 +15,7 @@ Before beginning to play around in Little Shop of Seeds, please ensure you are u
 ```
 bundle install
 ```
-![image](https://user-images.githubusercontent.com/46202598/58635354-e801e400-82aa-11e9-84c5-cb2556c4ffd9.png | width=700 | width=700)
+![image](https://user-images.githubusercontent.com/46202598/58635354-e801e400-82aa-11e9-84c5-cb2556c4ffd9.png | width=700)
 ![image](https://user-images.githubusercontent.com/46202598/58635415-0ec01a80-82ab-11e9-94c1-e319cd79b5dd.png | width=700)
 
 ```
