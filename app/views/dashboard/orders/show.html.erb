@@ -1,22 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LittleShopV2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-<h1>Order ID: <%= @order.id %></h1>
-<h3>Customer: <%= @customer.name %> </h3>
-<p>Address: <%= @customer.address %> </p>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<% @my_order_items.each do |order_item| %>
-	<div id="my-order-item-<%= order_item.id %>">
-  	<p>Item: <%= link_to order_item.item_name, item_path(order_item.item_id) %></p>
-  	<p>Price: <%= order_item.price %></p>
-  	<p>Order Quantity: <%= order_item.quantity %></p>
-		<% if !order_item.fulfilled? && order_item.valid_fulfill? %>
-			<%= button_to "Fulfill Item", dashboard_order_fulfill_path(order_item), params: {order: @order.id} %>
-		<% elsif !order_item.fulfilled? && !order_item.valid_fulfill? %>
-			<h1 style="color:red;"> You don't have enough inventory to fulfill this item </h1>
-		<% else %>
-			<h3> This item has been fulfilled </h3>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+
+		<h1>Order ID: <%= @order.id %></h1>
+		<h3>Customer: <%= @customer.name %> </h3>
+		<p>Address: <%= @customer.address %> </p>
+
+		<% @my_order_items.each do |order_item| %>
+			<div id="my-order-item-<%= order_item.id %>">
+		  	<p>Item: <%= link_to order_item.item_name, item_path(order_item.item_id) %></p>
+		  	<p>Price: <%= order_item.price %></p>
+		  	<p>Order Quantity: <%= order_item.quantity %></p>
+				<% if !order_item.fulfilled? && order_item.valid_fulfill? %>
+					<%= button_to "Fulfill Item", dashboard_order_fulfill_path(order_item), params: {order: @order.id} %>
+				<% elsif !order_item.fulfilled? && !order_item.valid_fulfill? %>
+					<h1 style="color:red;"> You don't have enough inventory to fulfill this item </h1>
+				<% else %>
+					<h3> This item has been fulfilled </h3>
+				<% end %>
+		  	<div class="order-show-page-image">
+		  	  <img class="thumbnail-image" src="<%= order_item.item_image %>"/>
+		  	</div>
+			</div>
 		<% end %>
-  	<div class="order-show-page-image">
-  	  <img class="thumbnail-image" src="<%= order_item.item_image %>"/>
-  	</div>
-	</div>
-<% end %>
+
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

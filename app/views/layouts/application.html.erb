@@ -5,53 +5,63 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
+    <nav class="navbar fixed-top">
+      <%= link_to "Home", root_path, class: "navbar-brand" %>
+      <%= link_to "Items", items_path, class: "nav-link" %>
+      <%= link_to "Merchants", merchants_path, class: "nav-link" %>
 
-    <%= link_to "Home", root_path %>
-    <%= link_to "Items", items_path %>
-    <%= link_to "Merchants", merchants_path %>
+      <% if current_user == nil %>
+        <section id="visitor-nav-cart">
+          <% if @item != nil %>
+            <%= button_to "Add to Cart", add_to_cart_path(item_id: @item.id), class: "nav-link" %>
+          <% end %>
+          <%= link_to "Cart: #{cart.total_count}", cart_path, class: "nav-link" %>
+        </section>
+        <%= link_to "Login", login_path, class: "nav-link" %>
+        <%= link_to "Register", new_user_path, class: "nav-link" %>
+      <% end %>
 
-    <% if current_user == nil %>
-      <section id="visitor-nav-cart">
-        <% if @item != nil %>
-          <%= button_to "Add to Cart", add_to_cart_path(item_id: @item.id) %>
-        <% end %>
-        <%= link_to "Cart", cart_path %>: <%= cart.total_count %>
-      </section>
-      <%= link_to "Login", login_path %>
-      <%= link_to "Register", new_user_path %>
-    <% end %>
+      <% if current_user && current_user.default? %>
+        <section id="user-nav-cart">
+          <% if @item != nil %>
+            <%= button_to "Add to Cart", add_to_cart_path(item_id: @item.id), class: "nav-link" %>
+          <% end %>
+          <%= link_to "Cart", cart_path, class: "nav-link" %>: <%= cart.total_count %>
+        </section>
+        <%= link_to "My Profile", ("/profile"), class: "nav-link" %>
+        <p>Logged in as <%= current_user.name %></p>
+        <%= link_to "Logout", logout_path, class: "nav-link" %>
+      <% end %>
 
-    <% if current_user && current_user.default? %>
-      <section id="user-nav-cart">
-        <% if @item != nil %>
-          <%= button_to "Add to Cart", add_to_cart_path(item_id: @item.id) %>
-        <% end %>
-        <%= link_to "Cart", cart_path %>: <%= cart.total_count %>
-      </section>
-      <%= link_to "My Profile", ("/profile") %>
-      <p>Logged in as <%= current_user.name %></p>
-      <%= link_to "Logout", logout_path %>
-    <% end %>
+      <% if current_user && current_user.merchant? %>
+        <%= link_to "Merchant Dashboard", dashboard_path, class: "nav-link" %>
+        <%= link_to "Logout", logout_path, class: "nav-link" %>
+      <% end %>
 
-    <% if current_user && current_user.merchant? %>
-      <%= link_to "Merchant Dashboard", dashboard_path %>
-      <%= link_to "Logout", logout_path %>
-    <% end %>
+      <% if current_user && current_user.admin? %>
+        <%= link_to "Admin Dashboard", admin_dashboard_path, class: "nav-link" %>
+        <%= link_to "Users", admin_users_path, class: "nav-link" %>
+        <%= link_to "Logout", logout_path, class: "nav-link" %>
+      <% end %>
+    </nav>
 
-    <% if current_user && current_user.admin? %>
-      <%= link_to "Admin Dashboard", admin_dashboard_path %>
-      <%= link_to "Users", admin_users_path %>
-      <%= link_to "Logout", logout_path %>
-    <% end %>
-    <% flash.each do |key, value| %>
-      <%= value %>
-    <% end %>
+      <% flash.each do |key, value| %>
+        <%= value %>
+      <% end %>
 
-    <%= yield %>
+      <%= yield %>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
