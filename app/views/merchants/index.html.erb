@@ -1,3 +1,42 @@
+<section id="merchant-stats-box">
+	<ul id="top-three-revenue">
+		<% @top_three_revenue.each do |merchant| %>
+			<li> <%= merchant.name %> sold <%= number_to_currency(merchant.revenue) %> </li>
+		<% end %>
+	</ul>
+
+	<ul id="fastest-merchants">
+		<% @fastest_merchants.each do |merchant| %>
+			<li><%= merchant.name %> fulfills orders in <%= merchant.speed %> days.</li>
+		<% end %>
+	</ul>
+
+	<ul id="slowest-merchants">
+		<% @slowest_merchants.each do |merchant| %>
+			<li><%= merchant.name %> fulfills orders in <%= merchant.speed %> days.</li>
+		<% end %>
+	</ul>
+
+	<ul id="most-popular-states">
+		<% @most_popular_states.each do |user| %>
+			<li><%= user.state %> received <%= user.order_count %> orders. </li>
+		<% end %>
+	</ul>
+
+	<ul id="most-popular-cities">
+		<% @most_popular_cities.each do |user| %>
+			<li> <%= user.city %> </li>
+		<% end %>
+	</ul>
+
+	<ul id="largest-orders">
+		<% @largest_orders.each do |order| %>
+			<li> <%= order.quantity %> </li>
+		<% end %>
+	</ul>
+
+</section>
+
 <% @active_merchants.each do |merchant| %>
 	<ul id="merchant-<%= merchant.id %>-info" >
 	<% if current_admin? %>
@@ -9,4 +48,4 @@
 		<li><%= merchant.state %></li>
 		<li><%= merchant.created_at.strftime("%m-%d-%Y") %></li>
 	</ul>
-<% end %> 
+<% end %>

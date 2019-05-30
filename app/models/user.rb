@@ -8,12 +8,10 @@ class User < ApplicationRecord
 													:password_digest,
 													:email,
 													:role,
-#													:active,
 													:address,
 													:city,
 													:state,
 													:zip
-
 
 	validates_uniqueness_of :email
 
@@ -42,7 +40,6 @@ class User < ApplicationRecord
 	def self.email_taken(email)
 		where(email: email) != []
 	end
-
 
 	def top_five_items_sold
 		items.select(:name, 'SUM(order_items.quantity) AS item_quantity')
@@ -142,4 +139,52 @@ class User < ApplicationRecord
 	def self.all_merchants
 		where(role: 1)
 	end
+
+	def self.top_three_revenue
+				 	 joins(items: :order_items)
+					.where('order_items.fulfilled = ?', true)
+					.group(:id)
+					.select('sum(order_items.quantity * order_items.price) AS revenue, users.*')
+					.order('revenue DESC')
+					.limit(3)
+	end
+
+	# potential refactor to dry code
+	def self.fastest_merchants
+				 	 joins(items: :order_items)
+					.where('order_items.fulfilled = ?', true)
+					.group(:id)
+					.select('avg(order_items.updated_at - order_items.created_at) AS speed, users.*')
+					.order('speed')
+					.limit(3)
+	end
+
+	def self.slowest_merchants
+					 joins(items: :order_items)
+					.where('order_items.fulfilled = ?', true)
+					.group(:id)
+					.select('avg(order_items.updated_at - order_items.created_at) AS speed, users.*')
+					.order('speed DESC')
+					.limit(3)
+	end
+
+	def self.most_popular_states
+					 joins(orders: :items)
+					.group(:state)
+					.select('COUNT(orders.id) AS order_count, users.state')
+					.where('order_items.fulfilled = true AND orders.status = 2')
+					.order('order_count DESC')
+					.limit(3)
+	end
+
+	def self.most_popular_cities
+					 joins(orders: :items)
+					.group(:city)
+					.group(:state)
+					.select('COUNT(orders.id) AS order_count, users.city')
+					.where('order_items.fulfilled = true AND orders.status = 2')
+					.order('order_count DESC')
+					.limit(3)
+	end
+
 end
