@@ -22,3 +22,8 @@
 .navbar {
   margin-bottom: 300px
 }
+
+.card {
+  display: flex;
+flex-wrap: wrap;
+}
